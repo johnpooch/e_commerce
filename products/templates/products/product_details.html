@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-10 col-md-9">
+            {% if product.image %}
+                <img src="{{MEDIA_URL}}{{ product.image }}">
+            {% endif %}
+            <h3>{{ product.title }}</h3>
+            <div class="row">
+                <div class="col-xs-9">
+                    <p>{{ product.description }}</p>
+                    
+                    <p><span class="boldtext">Manufacturer:</span> {{product.manufacturer}}</p>
+                    <p><span class="boldtext">Year:</span> {{product.year}}</p>
+                    <p><span class="boldtext">Type:</span> {{product.type}}</p>
+                    <p><span class="boldtext">Price:</span> {{product.price}}</p>
+                    <p><span class="boldtext">Published on:</span> {{ product.published_date }} </p>
+                    
+                    <a href="{% url 'all_products' %}" class="btn btn-default">Back to all products</a>
+                    
+                    <hr>
+                    
+                    <div class="col-xs-9">
+                        {% for image in product_images %}
+                            <img src="{{MEDIA_URL}}{{ image.image }}">
+                        {% endfor %}
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from home import urls as home_urls
+from products import urls as products_urls
+from django.views.static import serve
+from django.conf import settings
 
 urlpatterns = [
     path('', include(home_urls)),
     path('admin/', admin.site.urls),
+    path('products/', include(products_urls)),
+    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT})
 ]
