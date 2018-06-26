@@ -17,7 +17,7 @@
                 
                 <form method="POST" action="/products/add_to_cart">
                     {% csrf_token %}
-                    <input type="hidden" name="product" value=product.id/>
+                    <input type="hidden" name="product_id" value='{{product.id}}'/>
                     <button type="submit" class="btn btn-info">Add to Cart</button>
                 </form>
                 

@@ -12,7 +12,7 @@ def product_details(request, pk):
     return render(request, "products/product_details.html", {'product': product, 'product_images': product_images,})
     
 def add_to_cart(request):
-    product_to_add = request.POST["product"]
+    product_to_add = get_object_or_404(Product, pk=request.POST["product_id"])
     return HttpResponse("You have added " + product_to_add.name + " to cart")
     
     
