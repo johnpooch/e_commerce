@@ -29,7 +29,7 @@ class Product(models.Model):
     type =  models.CharField(max_length=10, choices=guitar_types, null=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    image = models.ImageField(upload_to='images')
+    image = models.FileField(upload_to='images')
     published_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
     
     def __str__(self):
@@ -39,4 +39,4 @@ class Product(models.Model):
     # This is to allow for multiple images 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='product_images', on_delete='PROTECT')
-    image = models.ImageField()
+    image = models.FileField(upload_to='images')
