@@ -11,6 +11,36 @@ def product_details(request, pk):
     product_images = ProductImage.objects.filter(product=pk)
     return render(request, "products/product_details.html", {'product': product, 'product_images': product_images,})
     
+def get_acoustic(request):
+    products = Product.objects.filter(type="ACOUSTIC")
+    return render(request, "products/acoustic.html", {'products': products})
+    
+def get_electric(request):
+    products = Product.objects.filter(type="ELECTRIC")
+    return render(request, "products/electric.html", {'products': products})
+    
+def get_bass(request):
+    products = Product.objects.filter(type="BASS")
+    return render(request, "products/bass.html", {'products': products})
+    
+def get_amps(request):
+    products = Product.objects.filter(type="AMPLIFIER")
+    return render(request, "products/amps.html", {'products': products})
+    
+def get_effects(request):
+    products = Product.objects.filter(type="EFFECTS")
+    return render(request, "products/effects.html", {'products': products})
+    
+def get_pickups(request):
+    products = Product.objects.filter(type="PICKUP")
+    return render(request, "products/pickups.html", {'products': products})
+    
+def get_audio(request):
+    products = Product.objects.filter(type="AUDIO")
+    return render(request, "products/audio.html", {'products': products})
+    
+    
+    
 def add_to_cart(request):
     product_to_add = get_object_or_404(Product, pk=request.POST["product_id"])
     return HttpResponse("You have added " + product_to_add.name + " to cart")
