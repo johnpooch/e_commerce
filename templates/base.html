@@ -46,7 +46,8 @@
                 </div>
             </div>
         {% endif %}
-    
+        
+        
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
@@ -67,10 +68,10 @@
                 
                 {% if products.has_previous %}
                 
-                    <a class="pagination-action" href="?page=1">
+                    <a class="pagination-action" href="?page=1&q={{ request.GET.q }}">
                         <i class="fa fa-angle-double-left"></i>
                     </a>
-                    <a class="pagination-action" href="?page={{ products.previous_page_number }}">
+                    <a class="pagination-action" href="?page={{ products.previous_page_number }}&q={{ request.GET.q }}">
                         <i class="fa fa-angle-left"></i>
                     </a>
                     
@@ -80,11 +81,11 @@
                 
                     {% if products.number == num %}
                         
-                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}'">{{ num }}</span>
+                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}&q={{ request.GET.q }}'">{{ num }}</span>
                         
                     {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
                 
-                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}'">{{ num }}</span>
+                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}&q={{ request.GET.q }}'">{{ num }}</span>
                         
                     {% endif %} 
                     
@@ -92,10 +93,10 @@
                 
                 {% if products.has_next %}
                 
-                    <a class="pagination-action" href="?page={{ products.next_page_number }}">
+                    <a class="pagination-action" href="?page={{ products.next_page_number }}&q={{ request.GET.q }}">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a class="pagination-action" href="?page={{ products.paginator.num_pages }}">
+                    <a class="pagination-action" href="?page={{ products.paginator.num_pages }}&q={{ request.GET.q }}">
                         <i class="fa fa-angle-double-right"></i>
                     </a>
                     

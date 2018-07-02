@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from django.http import HttpResponse
 from .models import Product, ProductImage
 from django.core.paginator import Paginator
+from .filter import ProductFilter
 
 def paginate(request, products):
     paginator = Paginator(products, 5)
@@ -12,16 +14,21 @@ def paginate(request, products):
 
 def all_products(request):
     products = Product.objects.all()
-    return render(request, "products/all_products.html", {'products': products})
-
-def product_details(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    product_images = ProductImage.objects.filter(product=pk)
-    return render(request, "products/product_details.html", {'product': product, 'product_images': product_images,})
+    product_filter = ProductFilter(request.GET, queryset = products)
+    return render(request, "products/all_products.html", {'products': products, 'filter': product_filter})
     
 def get_acoustic(request):
     products = Product.objects.filter(type="ACOUSTIC")
+    query = request.GET.get("q")
+    if query:
+        print(query)
+        products = products.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query) |
+            Q(year__icontains=query)
+            ).distinct() # avoids duplicate items
     paginator, page, products = paginate(request, products)
+    
     return render(request, "products/acoustic.html", {'products': products})
     
 def get_electric(request):
@@ -53,6 +60,11 @@ def get_audio(request):
     products = Product.objects.filter(type="AUDIO")
     paginator, page, products = paginate(request, products)
     return render(request, "products/audio.html", {'products': products})
+    
+def product_details(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    product_images = ProductImage.objects.filter(product=pk)
+    return render(request, "products/product_details.html", {'product': product, 'product_images': product_images,})
     
 def add_to_cart(request):
     product_to_add = get_object_or_404(Product, pk=request.POST["product_id"])
