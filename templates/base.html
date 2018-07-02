@@ -10,66 +10,104 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cerulean/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-    <script src=""></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pager.css' %}">
+
 </head>
 <body>
-<div class="container">
-   <div class="masthead">
-       <ul class="nav nav-pills pull-right">
-            <li><a href="{% url 'get_index' %}">Home</a></li>
-            <li><a href="{% url 'acoustic' %}">Acoustic</a></li>
-            <li><a href="{% url 'electric' %}">Electric</a></li>
-            <li><a href="{% url 'bass' %}">Bass</a></li>
-            <li><a href="{% url 'amps' %}">Amps</a></li>
-            <li><a href="{% url 'effects' %}">Effects</a></li>
-            <li><a href="{% url 'pickups' %}">Pickups</a></li>
-            <li><a href="{% url 'audio' %}">Audio</a></li>
-            <li><a href="{% url 'blog' %}">Blog</a></li>
-            <li><a href="{% url 'about' %}">About us</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-            <li><a href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>
-            <li><a href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>
-            <li><a href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>
-        </ul>
-       <h1><span class="fui-settings-16 muted">Someneck</span></h1>
-   </div>
-   <hr>
-    {% if messages %}
-        <div class="alert alert-success">
-            <div class="messages">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-
-
-
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                {% block sidebar %}
-                {% endblock sidebar %}
+    
+    <div class="container">
+       <div class="masthead">
+           <ul class="nav nav-pills pull-right">
+                <li><a href="{% url 'get_index' %}">Home</a></li>
+                <li><a href="{% url 'acoustic' %}">Acoustic</a></li>
+                <li><a href="{% url 'electric' %}">Electric</a></li>
+                <li><a href="{% url 'bass' %}">Bass</a></li>
+                <li><a href="{% url 'amps' %}">Amps</a></li>
+                <li><a href="{% url 'effects' %}">Effects</a></li>
+                <li><a href="{% url 'pickups' %}">Pickups</a></li>
+                <li><a href="{% url 'audio' %}">Audio</a></li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'about' %}">About us</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>
+                <li><a href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>
+                <li><a href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>
             </ul>
+           <h1><span class="fui-settings-16 muted">Someneck</span></h1>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div class="content">
-                
-                
-                
-                {% block content %}
-                {% endblock content%}
+       <hr>
+        {% if messages %}
+            <div class="alert alert-success">
+                <div class="messages">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
             </div>
+        {% endif %}
+    
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    {% block sidebar %}
+                    {% endblock sidebar %}
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="content">
+                    {% block content %}
+                    {% endblock content%}
+                </div>
+            </div>
+        </div>
+        
+        {% if products %}
+            <div class="pagination">
+                
+                {% if products.has_previous %}
+                
+                    <a class="pagination-action" href="?page=1">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+                    <a class="pagination-action" href="?page={{ products.previous_page_number }}">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    
+                {% endif %}
+                
+                {% for num in products.paginator.page_range %}
+                
+                    {% if products.number == num %}
+                        
+                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}'">{{ num }}</span>
+                        
+                    {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                
+                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}'">{{ num }}</span>
+                        
+                    {% endif %} 
+                    
+                {% endfor %}
+                
+                {% if products.has_next %}
+                
+                    <a class="pagination-action" href="?page={{ products.next_page_number }}">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a class="pagination-action" href="?page={{ products.paginator.num_pages }}">
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                    
+                {% endif %}
+                
+            </div>
+        {% endif %}
+        
+        <div class="footer">
+           <p>Made By Bootcampers and Django </p>
         </div>
     </div>
-
-   <hr>
-   <div class="footer">
-       <p>Made By Bootcampers and Django </p>
-   </div>
-</div>
 </body>
 
 </html>
