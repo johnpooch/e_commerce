@@ -11,14 +11,7 @@ def paginate(request, products):
     products = paginator.get_page(page)
     return paginator, page, products
     
-
-def all_products(request):
-    products = Product.objects.all()
-    product_filter = ProductFilter(request.GET, queryset = products)
-    return render(request, "products/all_products.html", {'products': products, 'filter': product_filter})
-    
-def get_acoustic(request):
-    products = Product.objects.filter(type="ACOUSTIC")
+def search(request, products):
     query = request.GET.get("q")
     if query:
         print(query)
@@ -27,37 +20,53 @@ def get_acoustic(request):
             Q(description__icontains=query) |
             Q(year__icontains=query)
             ).distinct() # avoids duplicate items
-    paginator, page, products = paginate(request, products)
+    return products
+
+def all_products(request):
+    products = Product.objects.all()
+    products = search(request, products)
+    product_filter = ProductFilter(request.GET, queryset = products)
+    return render(request, "products/all_products.html", {'products': products, 'filter': product_filter})
     
+def get_acoustic(request):
+    products = Product.objects.filter(type="ACOUSTIC")
+    products = search(request, products)
+    paginator, page, products = paginate(request, products)
     return render(request, "products/acoustic.html", {'products': products})
     
 def get_electric(request):
     products = Product.objects.filter(type="ELECTRIC")
+    products = search(request, products)
     paginator, page, products = paginate(request, products)
     return render(request, "products/electric.html", {'products': products})
     
 def get_bass(request):
     products = Product.objects.filter(type="BASS")
+    products = search(request, products)
     paginator, page, products = paginate(request, products)
     return render(request, "products/bass.html", {'products': products})
     
 def get_amps(request):
     products = Product.objects.filter(type="AMPLIFIER")
+    products = search(request, products)
     paginator, page, products = paginate(request, products)
     return render(request, "products/amps.html", {'products': products})
     
 def get_effects(request):
     products = Product.objects.filter(type="EFFECTS")
+    products = search(request, products)
     paginator, page, products = paginate(request, products)
     return render(request, "products/effects.html", {'products': products})
     
 def get_pickups(request):
     products = Product.objects.filter(type="PICKUP")
+    products = search(request, products)
     paginator, page, products = paginate(request, products)
     return render(request, "products/pickups.html", {'products': products})
     
 def get_audio(request):
     products = Product.objects.filter(type="AUDIO")
+    products = search(request, products)
     paginator, page, products = paginate(request, products)
     return render(request, "products/audio.html", {'products': products})
     

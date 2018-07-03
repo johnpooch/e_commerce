@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method='GET' action=''>
+    <input type='hidden submit' name='q' placeholder='Search products' value="{{ request.GET.q }}"/>
+    <!--<input type="submit" value="Search"/>-->
+</form>
+
+    {% block products %}
+    {% endblock %}
+
+<div class="pagination">
+    {% if products.has_previous %}
+        <a class="pagination-action" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            <i class="fa fa-angle-double-left"></i>
+        </a>
+        <a class="pagination-action" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            <i class="fa fa-angle-left"></i>
+        </a>
+    {% endif %}
+    {% for num in products.paginator.page_range %}
+        {% if products.number == num %}
+            <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
+        {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+            <span class="pagination-number" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
+        {% endif %} 
+    {% endfor %}
+    {% if products.has_next %}
+        <a class="pagination-action" href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            <i class="fa fa-angle-right"></i>
+        </a>
+        <a class="pagination-action" href="?page={{ products.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+    {% endif %}
+</div>
+
+{% endblock %}

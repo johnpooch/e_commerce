@@ -17,6 +17,10 @@
 </head>
 <body>
     
+    {% if user.is_authenticated %}
+        <span>{{ user.username }}</span>
+    {% endif %}
+    
     <div class="container">
        <div class="masthead">
            <ul class="nav nav-pills pull-right">
@@ -37,6 +41,20 @@
             </ul>
            <h1><span class="fui-settings-16 muted">Someneck</span></h1>
         </div>
+        
+        <div id="navbar" class="navbar-collapse collapse">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li><a href="/accounts/profile">Profile</a></li>
+                    <li><a href="/accounts/logout">Log Out</a></li> 
+                    {% else %}
+                    <li><a href="/accounts/register">Register</a></li> 
+                    <li><a href="/accounts/login">Log In</a></li> 
+                    {% endif %}
+                    </ul>
+            </div>
+        
        <hr>
         {% if messages %}
             <div class="alert alert-success">
@@ -57,12 +75,6 @@
                 </ul>
             </div>
             
-            {% if products %}
-                <form method='GET' action=''>
-                    <input type='hidden submit' name='q' placeholder='Search products' value="{{ request.GET.q }}"/>
-                    <!--<input type="submit" value="Search"/>-->
-                </form>
-            {% endif %}
                 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="content">
@@ -71,48 +83,6 @@
                 </div>
             </div>
         </div>
-        
-        {% if products %}
-            <div class="pagination">
-                
-                {% if products.has_previous %}
-                
-                    <a class="pagination-action" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                        <i class="fa fa-angle-double-left"></i>
-                    </a>
-                    <a class="pagination-action" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    
-                {% endif %}
-                
-                {% for num in products.paginator.page_range %}
-                
-                    {% if products.number == num %}
-                        
-                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
-                        
-                    {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
-                
-                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
-                        
-                    {% endif %} 
-                    
-                {% endfor %}
-                
-                {% if products.has_next %}
-                
-                    <a class="pagination-action" href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                    <a class="pagination-action" href="?page={{ products.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                        <i class="fa fa-angle-double-right"></i>
-                    </a>
-                    
-                {% endif %}
-                
-            </div>
-        {% endif %}
         
         <div class="footer">
            <p>Footer</p>
