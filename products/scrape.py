@@ -16,6 +16,8 @@ collection_urls = {
     "audio": 'https://www.someneckguitars.com/collections/audio',
     }
     
+featured_urls = set()
+    
 def scrape_urls_from_collection_page(url, type):
     
     number_of_pages = "1"
@@ -38,10 +40,14 @@ def scrape_urls_from_collection_page(url, type):
         soup = bs.BeautifulSoup(sauce, 'lxml')
         
         cut_off = soup.find("div", class_="pagination")
-        anchors = cut_off.find_all_previous("a", class_="product-img-wrapper")
+        non_featured_anchors = cut_off.find_all_previous("a", class_="product-img-wrapper")
+        featured_anchors = cut_off.find_all_next("a", class_="product-img-wrapper")
         
-        for anchor in reversed(anchors):
+        for anchor in reversed(non_featured_anchors):
             urls.append(("https://www.someneckguitars.com" + anchor['href'], type))
+          
+        for anchor in reversed(featured_anchors):
+            featured_urls.add("https://www.someneckguitars.com" + anchor['href'])  
             
         current_page = current_page + 1
     
@@ -56,6 +62,12 @@ def scrape_product_from_url(url_tuple):
     # default values
     product_year = 0
     product_description = "No description available"
+    
+    if url in featured_urls:
+        product_featured = True
+        print("featured product found")
+    else:
+        product_featured = False
     
     sauce = urlopen(url).read()
     soup = bs.BeautifulSoup(sauce, 'lxml')
@@ -95,6 +107,7 @@ def scrape_product_from_url(url_tuple):
         description = product_description,
         price = product_price_amount,
         image = product_main_image,
+        featured = product_featured
         )
     p.save()
     

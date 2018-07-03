@@ -12,9 +12,8 @@ def paginate(request, products):
     return paginator, page, products
     
 def search(request, products):
-    query = request.GET.get("q")
+    query = request.GET.get("search-query")
     if query:
-        print(query)
         products = products.filter(
             Q(name__icontains=query) |
             Q(description__icontains=query) |
@@ -22,17 +21,27 @@ def search(request, products):
             ).distinct() # avoids duplicate items
     return products
 
+def filter_by_brand(request, products):
+    query = request.GET.get("brand-query")
+    if query:
+        products = products.filter(
+            Q(manufacturer=query.upper())
+            )
+    return products
+
 def all_products(request):
     products = Product.objects.all()
     products = search(request, products)
     product_filter = ProductFilter(request.GET, queryset = products)
-    return render(request, "products/all_products.html", {'products': products, 'filter': product_filter})
+    return render(request, "products/all_products.html", {'products': products})
     
 def get_acoustic(request):
     products = Product.objects.filter(type="ACOUSTIC")
+    brands = Product.objects.filter(type="ACOUSTIC").order_by().values('manufacturer').distinct()
     products = search(request, products)
+    products = filter_by_brand(request, products)
     paginator, page, products = paginate(request, products)
-    return render(request, "products/acoustic.html", {'products': products})
+    return render(request, "products/acoustic.html", {'products': products, "brands": brands})
     
 def get_electric(request):
     products = Product.objects.filter(type="ELECTRIC")
