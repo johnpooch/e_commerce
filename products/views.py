@@ -70,7 +70,8 @@ def get_products_by_type(request, type):
 def product_details(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product_images = ProductImage.objects.filter(product=pk)
-    return render(request, "products/product_details.html", {'product': product, 'product_images': product_images,})
+    num_images = len(product_images)
+    return render(request, "products/product_details.html", {'product': product, 'product_images': product_images, 'range': range(num_images)})
     
 def add_to_cart(request):
     product_to_add = get_object_or_404(Product, pk=request.POST["product_id"])
