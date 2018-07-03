@@ -1,8 +1,33 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
+{% load static from staticfiles %}
 {% block content %}
-
-<h3>About us</h3>
-
-
+    {% for about in about %}
+        <div class="row">
+            <div class="col-sm-10 col-md-9">
+                {% if about.image %}
+                    <img class="img-blogpost" src="{{MEDIA_URL}}{{ about.image }}">
+                {% endif %}
+                <h3>{{ about.about_title }}</h3>
+                <div class="row">
+                    <div class="col-xs-9">
+                        <p>{{ about.about_content }}</p>
+                    </div>
+                </div>
+                
+                <h3>{{ about.address_title }}</h3>
+                <div class="row">
+                    <div class="col-xs-9">
+                        <p>{{ about.address_content }}</p>
+                    </div>
+                </div>
+                
+                <h3>{{ about.contact_title }}</h3>
+                <div class="row">
+                    <div class="col-xs-9">
+                        <p>{{ about.contact_content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

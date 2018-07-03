@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/pager.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 
 </head>
 <body>
@@ -55,6 +56,14 @@
                     {% endblock sidebar %}
                 </ul>
             </div>
+            
+            {% if products %}
+                <form method='GET' action=''>
+                    <input type='hidden submit' name='q' placeholder='Search products' value="{{ request.GET.q }}"/>
+                    <!--<input type="submit" value="Search"/>-->
+                </form>
+            {% endif %}
+                
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="content">
                     {% block content %}
@@ -68,10 +77,10 @@
                 
                 {% if products.has_previous %}
                 
-                    <a class="pagination-action" href="?page=1&q={{ request.GET.q }}">
+                    <a class="pagination-action" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                         <i class="fa fa-angle-double-left"></i>
                     </a>
-                    <a class="pagination-action" href="?page={{ products.previous_page_number }}&q={{ request.GET.q }}">
+                    <a class="pagination-action" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                         <i class="fa fa-angle-left"></i>
                     </a>
                     
@@ -81,11 +90,11 @@
                 
                     {% if products.number == num %}
                         
-                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}&q={{ request.GET.q }}'">{{ num }}</span>
+                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
                         
                     {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
                 
-                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}&q={{ request.GET.q }}'">{{ num }}</span>
+                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
                         
                     {% endif %} 
                     
@@ -93,10 +102,10 @@
                 
                 {% if products.has_next %}
                 
-                    <a class="pagination-action" href="?page={{ products.next_page_number }}&q={{ request.GET.q }}">
+                    <a class="pagination-action" href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a class="pagination-action" href="?page={{ products.paginator.num_pages }}&q={{ request.GET.q }}">
+                    <a class="pagination-action" href="?page={{ products.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                         <i class="fa fa-angle-double-right"></i>
                     </a>
                     
@@ -106,7 +115,7 @@
         {% endif %}
         
         <div class="footer">
-           <p>Made By Bootcampers and Django </p>
+           <p>Footer</p>
         </div>
     </div>
 </body>
