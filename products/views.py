@@ -3,10 +3,9 @@ from django.db.models import Q
 from django.http import HttpResponse
 from .models import Product, ProductImage
 from django.core.paginator import Paginator
-from .filter import ProductFilter
 
 def paginate(request, products):
-    paginator = Paginator(products, 5)
+    paginator = Paginator(products, 12)
     page = request.GET.get('page')
     products = paginator.get_page(page)
     return paginator, page, products
@@ -34,11 +33,11 @@ def sort_products(request, products):
     
     # newest to oldest
     if query == "1":
-        products = products.order_by('-year')
+        products = products.filter(~Q(year=0)).order_by('-year')
         
     # oldest to newest
     if query == "2":
-        products = products.order_by('year')
+        products = products.filter(~Q(year=0)).order_by('year')
         
     # A-Z
     if query == "3":

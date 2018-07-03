@@ -12,11 +12,19 @@
                 <div class="col-xs-9">
                     <p>{{ product.description }}</p>
                     
-                    <p><span class="boldtext">Manufacturer:</span> {{product.manufacturer}}</p>
-                    <p><span class="boldtext">Year:</span> {{product.year}}</p>
-                    <p><span class="boldtext">Type:</span> {{product.type}}</p>
-                    <p><span class="boldtext">Price:</span> {{product.price}}</p>
-                    <p><span class="boldtext">Published on:</span> {{ product.published_date }} </p>
+                    <p><span class="boldtext">Manufacturer:</span> {{ product.manufacturer|title }}</p>
+                    
+                    {% if product.year != 0 %}
+                        <p><span class="boldtext">Year:</span> {{ product.year }}</p>
+                    {% endif %}
+                    <p><span class="boldtext">Type:</span> {{ product.type|title }}</p>
+                    
+                    {% if product.price != 0 %}
+                        <p><span class="boldtext">Price:</span> € {{ product.price }}</p>
+                    {% else %}
+                        <p><span class="boldtext"></span>Call us for pricing</p>
+                    {% endif %}
+                    
                     
                     <hr>
                     
