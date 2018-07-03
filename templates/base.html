@@ -40,13 +40,15 @@
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
                 <li><a href="{% url 'get_index' %}">Home</a></li>
-                <li><a href="{% url 'acoustic' %}">Acoustic</a></li>
-                <li><a href="{% url 'electric' %}">Electric</a></li>
-                <li><a href="{% url 'bass' %}">Bass</a></li>
-                <li><a href="{% url 'amps' %}">Amps</a></li>
-                <li><a href="{% url 'effects' %}">Effects</a></li>
-                <li><a href="{% url 'pickups' %}">Pickups</a></li>
-                <li><a href="{% url 'audio' %}">Audio</a></li>
+                
+                <li><a href="{% url 'products_by_type' 'acoustic' %}">Acoustic</a></li>
+                <li><a href="{% url 'products_by_type' 'electric' %}">Electric</a></li>
+                <li><a href="{% url 'products_by_type' 'bass' %}">Bass</a></li>
+                <li><a href="{% url 'products_by_type' 'amplifier' %}">Amps</a></li>
+                <li><a href="{% url 'products_by_type' 'effects' %}">Effects</a></li>
+                <li><a href="{% url 'products_by_type' 'pickup' %}">Pickups</a></li>
+                <li><a href="{% url 'products_by_type' 'audio' %}">Audio</a></li>
+
                 <li><a href="{% url 'blog' %}">Blog</a></li>
                 <li><a href="{% url 'repair' %}">Repair</a></li>
                 <li><a href="{% url 'about' %}">About us</a></li>

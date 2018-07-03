@@ -5,12 +5,10 @@
     <input type='hidden submit' name='search-query' placeholder='Search products' value="{{ request.GET.q }}"/>
 </form>
 
-<label for="sort-select">Sort by </label>
-
 
 <form method='GET' action=''>
     <label for="sort-select">Sort by </label>
-    <select name="filter-query" id="sort-select" onchange="this.form.submit()">
+    <select name="sort-query" id="sort-select" onchange="this.form.submit()">
         <option value="1">Newest to oldest</option>
         <option value="2">Oldest to Newest</option>
         <option value="3" selected>A-Z</option>
@@ -25,7 +23,7 @@
     <label for="brand-select">Filter by brand </label>
     <select name="brand-query" id="brand-select" onchange="this.form.submit()">
         {% for brand in brands %}
-            <option value={{ brand.manufacturer|title }}>{{ brand.manufacturer|title }}</option>
+            <option value={{ brand.manufacturer }}>{{ brand.manufacturer|title }}</option>
         {% endfor %}
     </select>
 </form>

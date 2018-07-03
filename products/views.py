@@ -25,59 +25,48 @@ def filter_by_brand(request, products):
     query = request.GET.get("brand-query")
     if query:
         products = products.filter(
-            Q(manufacturer=query.upper())
+            Q(manufacturer=query)
             )
     return products
-
-def all_products(request):
-    products = Product.objects.all()
-    products = search(request, products)
-    product_filter = ProductFilter(request.GET, queryset = products)
-    return render(request, "products/all_products.html", {'products': products})
     
-def get_acoustic(request):
-    products = Product.objects.filter(type="ACOUSTIC")
-    brands = Product.objects.filter(type="ACOUSTIC").order_by().values('manufacturer').distinct()
+def sort_products(request, products):
+    query = request.GET.get("sort-query")
+    
+    # newest to oldest
+    if query == "1":
+        products = products.order_by('-year')
+        
+    # oldest to newest
+    if query == "2":
+        products = products.order_by('year')
+        
+    # A-Z
+    if query == "3":
+        products = products.order_by('name')
+        
+    # Z-A
+    if query == "4":
+        products = products.order_by('-name')
+        
+    # Price (high to low)
+    if query == "5":
+        products = products.order_by('-price')
+        
+    # Price (low to high)
+    if query == "6":
+        products = products.order_by('price')
+        
+    return products
+    
+def get_products_by_type(request, type):
+    products = Product.objects.filter(type=type.upper())
+    products = sort_products(request, products)
+    brands = Product.objects.filter(type=type.upper()).order_by().values('manufacturer').distinct()
     products = search(request, products)
     products = filter_by_brand(request, products)
     paginator, page, products = paginate(request, products)
-    return render(request, "products/acoustic.html", {'products': products, "brands": brands})
+    return render(request, "products/products_by_type.html", {'products': products, "brands": brands, "type": type.title()})
     
-def get_electric(request):
-    products = Product.objects.filter(type="ELECTRIC")
-    products = search(request, products)
-    paginator, page, products = paginate(request, products)
-    return render(request, "products/electric.html", {'products': products})
-    
-def get_bass(request):
-    products = Product.objects.filter(type="BASS")
-    products = search(request, products)
-    paginator, page, products = paginate(request, products)
-    return render(request, "products/bass.html", {'products': products})
-    
-def get_amps(request):
-    products = Product.objects.filter(type="AMPLIFIER")
-    products = search(request, products)
-    paginator, page, products = paginate(request, products)
-    return render(request, "products/amps.html", {'products': products})
-    
-def get_effects(request):
-    products = Product.objects.filter(type="EFFECTS")
-    products = search(request, products)
-    paginator, page, products = paginate(request, products)
-    return render(request, "products/effects.html", {'products': products})
-    
-def get_pickups(request):
-    products = Product.objects.filter(type="PICKUP")
-    products = search(request, products)
-    paginator, page, products = paginate(request, products)
-    return render(request, "products/pickups.html", {'products': products})
-    
-def get_audio(request):
-    products = Product.objects.filter(type="AUDIO")
-    products = search(request, products)
-    paginator, page, products = paginate(request, products)
-    return render(request, "products/audio.html", {'products': products})
     
 def product_details(request, pk):
     product = get_object_or_404(Product, pk=pk)
