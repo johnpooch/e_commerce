@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block content %}
+
+    {% for repair in repair %}
+        <div class="row">
+            <div class="col-sm-10 col-md-9">
+                {% if repair.image %}
+                    <img class="repair-image" src="{{MEDIA_URL}}{{ repair.image }}">
+                {% endif %}
+                <h3>{{ repair.title }}</h3>
+                <div class="row">
+                    <div class="col-xs-9">
+                        <p>{{ repair.content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

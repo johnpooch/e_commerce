@@ -13,17 +13,32 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/pager.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/repair.css' %}">
 
 </head>
 <body>
     
-    {% if user.is_authenticated %}
-        <span>{{ user.username }}</span>
-    {% endif %}
+    
     
     <div class="container">
-       <div class="masthead">
-           <ul class="nav nav-pills pull-right">
+        
+        <div id="navbar" class="navbar-collapse collapse">
+                
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li><a href='#'>{{ user.username }}</a></li>
+                <li><a href="/accounts/profile">Profile</a></li>
+                <li><a href="/accounts/logout">Log Out</a></li> 
+                {% else %}
+                <li><a href="/accounts/register">Register</a></li> 
+                <li><a href="/accounts/login">Log In</a></li> 
+                {% endif %}
+            </ul>
+        </div>
+        
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
                 <li><a href="{% url 'get_index' %}">Home</a></li>
                 <li><a href="{% url 'acoustic' %}">Acoustic</a></li>
                 <li><a href="{% url 'electric' %}">Electric</a></li>
@@ -33,27 +48,16 @@
                 <li><a href="{% url 'pickups' %}">Pickups</a></li>
                 <li><a href="{% url 'audio' %}">Audio</a></li>
                 <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'repair' %}">Repair</a></li>
                 <li><a href="{% url 'about' %}">About us</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>
                 <li><a href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>
                 <li><a href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>
             </ul>
-           <h1><span class="fui-settings-16 muted">Someneck</span></h1>
+            <h1><span class="fui-settings-16 muted">Someneck</span></h1>
         </div>
         
-        <div id="navbar" class="navbar-collapse collapse">
-                
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                    <li><a href="/accounts/profile">Profile</a></li>
-                    <li><a href="/accounts/logout">Log Out</a></li> 
-                    {% else %}
-                    <li><a href="/accounts/register">Register</a></li> 
-                    <li><a href="/accounts/login">Log In</a></li> 
-                    {% endif %}
-                    </ul>
-            </div>
         
        <hr>
         {% if messages %}
