@@ -1,45 +1,74 @@
-{% extends 'products_base.html' %}
+{% extends 'base.html' %} 
 
 {% block products %}
+<div class="search-row">
+    <form id="filter-form" method='GET' action=''>
+        <input type='hidden submit' name='searchquery' placeholder='Search products' value="{{ request.GET.searchquery }}" />
+    </form>
+</div>
 
-<h3>{{ type }}</h3>
-
-    {% if not products %}
-        <div class="row">
-            <div class="col-sm-10 col-md-9">
-                <span>There are no products which match your search.</span>
-            </div>
-        </div>
-    {% endif %}
-
-    <div products-body>
-        <h1 class="type-header one"><span>{{ products.0.type }} /
+<div products-body>
+    <h1 class="type-header one"><span>{{ products.0.type }} /
         {% if brandquery %}
             {{ brandquery }}
         {% else %}
             ALL
         {% endif %}
             </span>
-        </h1>
+    </h1>
 
-        <div class="row">
-            {% for product in products %}
-            <div class="col-sm-3 column-align">
-                {% if product.image %}
-                    <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a>
-                {% endif %}
-                <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a>
-                {% if product.price != 0 %}
-                    <p><span class="boldtext price-text">€ {{ product.price }}</span</p>
-                {% else %}
-                    <p><span class="boldtext"></span>Call us for pricing</p>
-                {% endif %}
+    <div class="filter-search-div"></div>
+        <div class="row filter-row">
+            
+            <!--SORT-->
+            
+            <div class="col-sm-6 sort-col">
+                <label for="sort-select">Sort by </label>
+                <select form="filter-form" name="sortquery" id="sort-select" onchange="this.form.submit()">
+                        <option value="1" {% if request.GET.sortquery == '1' %} selected {% endif %}>Newest to oldest</option>
+                        <option value="2" {% if request.GET.sortquery == '2' %} selected {% endif %}>Oldest to Newest</option>
+                        <option value="3" {% if request.GET.sortquery == '3' %} selected {% endif %}>A-Z</option>
+                        <option value="4" {% if request.GET.sortquery == '4' %} selected {% endif %}>Z-A</option>
+                        <option value="5" {% if request.GET.sortquery == '5' %} selected {% endif %}>Price (high to low)</option>
+                        <option value="6" {% if request.GET.sortquery == '6' %} selected {% endif %}>Price (low to high)</option>
+                    </select>
             </div>
-            <hr>
-            {% endfor %}
+            
+            <!--FILTER BY BRAND-->
+            
+            <div class="col-sm-6 filter-brand-col">
+                <label for="brand-select">Filter by brand </label>
+                <select form="filter-form" name="brandquery" id="brand-select" onchange="this.form.submit()">
+                        <option value=''>All</option>
+                    {% for brand in brands %}
+                        <option value={{ brand.manufacturer }} {% if brand.manufacturer == brandquery %} selected {% endif %} >{{ brand.manufacturer|title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     </div>
-    
-    
+
+    {% if not products %}
+    <div class="row">
+        <div class="col-sm-10 col-md-9">
+            <span>There are no products which match your search.</span>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-sm-3 column-align">
+            {% if product.image %}
+            <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a> {% endif %}
+            <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
+            <p><span class="boldtext price-text">€ {{ product.price }}</span</p>
+                {% else %}
+                    <p><span class="boldtext"></span>Call us for pricing</p>
+            {% endif %}
+        </div>
+        <hr> {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

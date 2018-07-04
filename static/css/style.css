@@ -1,6 +1,15 @@
-.background-div {
+.content-background-div {
   background: #1F1F1F;
   color: #FFFFFF;
+}
+
+.featured-background-div {
+  background: #000;
+  color: #FFFFFF;
+}
+
+.paginator-div {
+  text-align:center;
 }
 
 .container {

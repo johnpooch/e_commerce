@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 {% load static from staticfiles %}
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Someneck Clone</title>
@@ -19,81 +19,150 @@
     <link rel="stylesheet" href="{% static 'css/products.css' %}">
 
 </head>
-<body>
-    
-    <div class="background-div">
-        <div class="container">
-        
-        <div id="navbar" class="navbar-collapse collapse">
-                
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                <li><a href='#'>{{ user.username }}</a></li>
-                <li><a href="/accounts/profile">Profile</a></li>
-                <li><a href="/accounts/logout">Log Out</a></li> 
-                {% else %}
-                <li><a href="/accounts/register">Register</a></li> 
-                <li><a href="/accounts/login">Log In</a></li> 
-                {% endif %}
-            </ul>
-        </div>
-        
-        <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li><a href="{% url 'get_index' %}">Home</a></li>
-                
-                <li><a href="{% url 'products_by_type' 'acoustic' %}">Acoustic</a></li>
-                <li><a href="{% url 'products_by_type' 'electric' %}">Electric</a></li>
-                <li><a href="{% url 'products_by_type' 'bass' %}">Bass</a></li>
-                <li><a href="{% url 'products_by_type' 'amplifier' %}">Amps</a></li>
-                <li><a href="{% url 'products_by_type' 'effects' %}">Effects</a></li>
-                <li><a href="{% url 'products_by_type' 'pickup' %}">Pickups</a></li>
-                <li><a href="{% url 'products_by_type' 'audio' %}">Audio</a></li>
 
-                <li><a href="{% url 'blog' %}">Blog</a></li>
-                <li><a href="{% url 'repair' %}">Repair</a></li>
-                <li><a href="{% url 'about' %}">About us</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li><a href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>
-                <li><a href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>
-                <li><a href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>
-            </ul>
-            <h1><span class="fui-settings-16 muted">Someneck</span></h1>
-        </div>
-        
-        
-       <hr>
-        {% if messages %}
-            <div class="alert alert-success">
-                <div class="messages">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </div>
-            </div>
-        {% endif %}
-        
-        
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    {% block sidebar %}
-                    {% endblock sidebar %}
+<body>
+
+    <!--DIV CONTAINING EVERYTHING AS FAR AS FEATURED PRODUCTS-->
+    <div class="content-background-div">
+        <div class="container">
+            
+            <!--ACCOUNTS NAVBAR-->
+            <div id="navbar" class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li><a href='#'>{{ user.username }}</a></li>
+                    <li><a href="/accounts/profile">Profile</a></li>
+                    <li><a href="/accounts/logout">Log Out</a></li>
+                    {% else %}
+                    <li><a href="/accounts/register">Register</a></li>
+                    <li><a href="/accounts/login">Log In</a></li>
+                    {% endif %}
                 </ul>
             </div>
-            <div class="content">
-                {% block content %}
-                {% endblock content%}
+
+            <!--WEBSITE NAVBAR-->
+            <div class="masthead">
+                <ul class="nav nav-pills pull-right">
+                    <li><a href="{% url 'get_index' %}">Home</a></li>
+
+                    <li><a href="{% url 'products_by_type' 'acoustic' %}">Acoustic</a></li>
+                    <li><a href="{% url 'products_by_type' 'electric' %}">Electric</a></li>
+                    <li><a href="{% url 'products_by_type' 'bass' %}">Bass</a></li>
+                    <li><a href="{% url 'products_by_type' 'amplifier' %}">Amps</a></li>
+                    <li><a href="{% url 'products_by_type' 'effects' %}">Effects</a></li>
+                    <li><a href="{% url 'products_by_type' 'pickup' %}">Pickups</a></li>
+                    <li><a href="{% url 'products_by_type' 'audio' %}">Audio</a></li>
+
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'repair' %}">Repair</a></li>
+                    <li><a href="{% url 'about' %}">About us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>
+                    <li><a href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>
+                    <li><a href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+                <h1><span class="fui-settings-16 muted">Someneck</span></h1>
+            </div>
+
+
+            <hr> {% if messages %}
+            <div class="alert alert-success">
+                <div class="messages">
+                    {% for message in messages %} {{ message }} {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        {% block sidebar %} {% endblock sidebar %}
+                    </ul>
+                </div>
+                <div class="content">
+                    {% block content %}
+                    {% endblock content%}
+                </div>
             </div>
         </div>
-        
-        <div class="footer">
-           <p>Footer</p>
-        </div>
-    </div>
-    </div>
-    
-    
-</body>
 
+        <!--PRODUCTS-->
+        <div class="container">
+            
+            {% block products %}
+            {% endblock %}
+            
+            <hr> 
+            
+            <!--PAGINATOR-->
+            <div class="paginator-div">
+                {% if products.paginator.num_pages > 1 %}
+                    <div class="pagination">
+                        {% if products.has_previous %}
+                        <a class="pagination-action" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                            <i class="fa fa-angle-double-left"></i>
+                        </a>
+                        <a class="pagination-action" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                            <i class="fa fa-angle-left"></i>
+                        </a> 
+                        {% endif %} 
+                    {% for num in products.paginator.page_range %} 
+                
+                        {% if products.number == num %}
+                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span> 
+                        
+                        {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
+                        {% endif %}
+                    {% endfor %}
+                
+                    {% if products.has_next %}
+                        <a class="pagination-action" href="?page={{ products.next_page_number }}
+                            {% if request.GET.q %}
+                                &q={{ request.GET.q }}
+                            {% endif %}">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                        <a class="pagination-action" href="?page={{ products.paginator.num_pages }}
+                            {% if request.GET.q %}
+                                &q={{ request.GET.q }}
+                            {% endif %}">
+                            <i class="fa fa-angle-double-right"></i>
+                        </a> 
+                    {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!--FEATURED PRODUCTS-->
+
+        <div class="featured-background-div">
+            
+            <div class="container">
+                <div class="featured-products-body">
+                    <h1 class="type-header one"><span>Featured Products</span></h1>
+    
+                    <div class="row">
+                        {% for product in featured_products %}
+                        <div class="col-sm-3 column-align">
+                            {% if product.image %}
+                            <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a> {% endif %}
+                            <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
+                            <p><span class="boldtext"></span>€ {{ product.price }}</p>
+                            {% else %}
+                            <p><span class="boldtext"></span>Call us for pricing</p>
+                            {% endif %}
+                        </div>
+                        <hr> {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Footer</p>
+        </div>
+</body>
 </html>

@@ -2,8 +2,28 @@
     text-align: center;
 }
 
+.featured-products-body {
+    background: #000;
+}
+
 .product-col {
     width: 100%;
+}
+
+.filter-search-div {
+    text-align: center;
+}
+
+.search-row {
+    text-align: right;
+}
+
+.sort-col {
+    text-align: right;
+}
+
+.filter-brand-col {
+    text-align: left;
 }
 
 .product-name {
@@ -35,7 +55,7 @@
 .type-header.one:before {
     content: "";
     display: block;
-    border-top: solid 1px white;
+    border-top: solid 1px #3C3C3C;
     width: 100%;
     height: 1px;
     position: absolute;
@@ -44,7 +64,7 @@
 }
 
 .type-header.one span {
-    background: #1F1F1F;
+    background: inherit;
     padding: 0 20px;
     position: relative;
     z-index: 5;
