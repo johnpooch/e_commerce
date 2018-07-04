@@ -11,25 +11,19 @@ def paginate(request, products):
     return paginator, page, products
     
 def search(request, products):
-    query = request.GET.get("q")
+    query = request.GET.get("searchquery")
     if query:
         products = products.filter(
             Q(name__icontains=query) |
             Q(description__icontains=query) |
             Q(year__icontains=query)
             ).distinct() # avoids duplicate items
-    return products
-
-def filter_by_brand(request, products):
     query = request.GET.get("brandquery")
     if query:
         products = products.filter(
             Q(manufacturer=query)
             )
-    return products
-    
-def sort_products(request, products):
-    query = request.GET.get("sort-query")
+    query = request.GET.get("sortquery")
     
     # newest to oldest
     if query == "1":
@@ -54,15 +48,21 @@ def sort_products(request, products):
     # Price (low to high)
     if query == "6":
         products = products.order_by('price')
+    return products
+
+def filter_by_brand(request, products):
+    
+    return products
+    
+def sort_products(request, products):
+    
         
     return products
     
 def get_products_by_type(request, type):
     products = Product.objects.filter(type=type.upper())
-    products = sort_products(request, products)
     brands = Product.objects.filter(type=type.upper()).order_by().values('manufacturer').distinct()
     products = search(request, products)
-    products = filter_by_brand(request, products)
     brandquery = request.GET.get("brandquery")
     paginator, page, products = paginate(request, products)
     return render(request, "products/products_by_type.html", {'products': products, "brands": brands, "type": type.title(), "brandquery": brandquery})

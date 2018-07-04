@@ -1,84 +1,69 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <form method='GET' action=''>
-    <input type='hidden submit' name='q' placeholder='Search products' value="{{ request.GET.q }}"/>
+    <div class="row">
+        <input type='hidden submit' name='searchquery' placeholder='Search products' value="{{ request.GET.searchquery }}" />
+    </div>
+    <div class="row">
+        <label for="sort-select">Sort by </label>
+        <select name="sortquery" id="sort-select" onchange="this.form.submit()">
+                <option value="1" {% if request.GET.sortquery == '1' %} selected {% endif %}>Newest to oldest</option>
+                <option value="2" {% if request.GET.sortquery == '2' %} selected {% endif %}>Oldest to Newest</option>
+                <option value="3" {% if request.GET.sortquery == '3' %} selected {% endif %}>A-Z</option>
+                <option value="4" {% if request.GET.sortquery == '4' %} selected {% endif %}>Z-A</option>
+                <option value="5" {% if request.GET.sortquery == '5' %} selected {% endif %}>Price (high to low)</option>
+                <option value="6" {% if request.GET.sortquery == '6' %} selected {% endif %}>Price (low to high)</option>
+            </select>
+    </div>
+    <div class="row">
+        <label for="brand-select">Filter by brand </label>
+        <select name="brandquery" id="brand-select" onchange="this.form.submit()">
+                <option value=''>All</option>
+            {% for brand in brands %}
+                <option value={{ brand.manufacturer }} {% if brand.manufacturer == brandquery %} selected {% endif %} >{{ brand.manufacturer|title }}</option>
+            {% endfor %}
+        </select>
+    </div>
 </form>
 
 
-<form method='GET' action=''>
-    <label for="sort-select">Sort by </label>
-    <select name="sort-query" id="sort-select" onchange="this.form.submit()">
-        <option value="1">Newest to oldest</option>
-        <option value="2">Oldest to Newest</option>
-        <option value="3" selected>A-Z</option>
-        <option value="4">Z-A</option>
-        <option value="5">Price (high to low)</option>
-        <option value="6">Price (low to high)</option>
-    </select>
-</form>
+{% block products %} {% endblock %}
 
-
-<form method='GET' action=''>
-    <label for="brand-select">Filter by brand </label>
-    <select name="brandquery" id="brand-select" onchange="this.form.submit()">
-            <option value=''>All</option>
-        {% for brand in brands %}
-            <option value={{ brand.manufacturer }} {% if brand.manufacturer == brandquery %} selected {% endif %} >{{ brand.manufacturer|title }}</option>
-        {% endfor %}
-    </select>
-</form>
-
-    {% block products %}
-    {% endblock %}
-
-<hr>
-
-{% if products.paginator.num_pages > 1 %}
-    <div class="pagination">
-        {% if products.has_previous %}
-            <a class="pagination-action" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+<hr> {% if products.paginator.num_pages > 1 %}
+<div class="pagination">
+    {% if products.has_previous %}
+    <a class="pagination-action" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                 <i class="fa fa-angle-double-left"></i>
             </a>
-            <a class="pagination-action" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+    <a class="pagination-action" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                 <i class="fa fa-angle-left"></i>
-            </a>
-        {% endif %}
-        {% for num in products.paginator.page_range %}
-            {% if products.number == num %}
-                <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
-            {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
-                <span class="pagination-number" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
-            {% endif %} 
-        {% endfor %}
-        {% if products.has_next %}
-            <a class="pagination-action" href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            </a> {% endif %} {% for num in products.paginator.page_range %} {% if products.number == num %}
+    <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span> {% elif num > products.number|add:'-3' and num
+    < products.number|add: '3' %}
+        <span class="pagination-number" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
+        {% endif %} {% endfor %} {% if products.has_next %}
+        <a class="pagination-action" href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                 <i class="fa fa-angle-right"></i>
             </a>
-            <a class="pagination-action" href="?page={{ products.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+        <a class="pagination-action" href="?page={{ products.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
                 <i class="fa fa-angle-double-right"></i>
-            </a>
-        {% endif %}
-    </div>
+            </a> {% endif %}
+</div>
 {% endif %}
 
 <h3>Featured Products</h3>
 
-    <div class="row">
-        {% for product in featured_products %}
-        <div class="col-sm-3 column-align">
-            {% if product.image %}
-                <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a>
-            {% endif %}
-            <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a>
-            {% if product.price != 0 %}
-                <p><span class="boldtext"></span>€ {{ product.price }}</p>
-            {% else %}
-                <p><span class="boldtext"></span>Call us for pricing</p>
-            {% endif %}
-        </div>
-        <hr>
-        {% endfor %}
+<div class="row">
+    {% for product in featured_products %}
+    <div class="col-sm-3 column-align">
+        {% if product.image %}
+        <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a> {% endif %}
+        <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
+        <p><span class="boldtext"></span>€ {{ product.price }}</p>
+        {% else %}
+        <p><span class="boldtext"></span>Call us for pricing</p>
+        {% endif %}
     </div>
+    <hr> {% endfor %}
+</div>
 
 {% endblock %}
