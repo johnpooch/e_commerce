@@ -63,8 +63,9 @@ def get_products_by_type(request, type):
     brands = Product.objects.filter(type=type.upper()).order_by().values('manufacturer').distinct()
     products = search(request, products)
     products = filter_by_brand(request, products)
+    brandquery = request.GET.get("brandquery")
     paginator, page, products = paginate(request, products)
-    return render(request, "products/products_by_type.html", {'products': products, "brands": brands, "type": type.title()})
+    return render(request, "products/products_by_type.html", {'products': products, "brands": brands, "type": type.title(), "brandquery": brandquery})
     
     
 def product_details(request, pk):

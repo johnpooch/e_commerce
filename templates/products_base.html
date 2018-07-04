@@ -22,12 +22,12 @@
 <form method='GET' action=''>
     <label for="brand-select">Filter by brand </label>
     <select name="brandquery" id="brand-select" onchange="this.form.submit()">
+            <option value=''>All</option>
         {% for brand in brands %}
-            <option value={{ brand.manufacturer }}>{{ brand.manufacturer|title }}</option>
+            <option value={{ brand.manufacturer }} {% if brand.manufacturer == brandquery %} selected {% endif %} >{{ brand.manufacturer|title }}</option>
         {% endfor %}
     </select>
 </form>
-
 
     {% block products %}
     {% endblock %}

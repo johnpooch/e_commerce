@@ -12,22 +12,34 @@
         </div>
     {% endif %}
 
-    <div class="row">
-        {% for product in products %}
-        <div class="col-sm-3 column-align">
-            {% if product.image %}
-                <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a>
-            {% endif %}
-            <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a>
-            {% if product.price != 0 %}
-                <p><span class="boldtext"></span>€ {{ product.price }}</p>
-            {% else %}
-                <p><span class="boldtext"></span>Call us for pricing</p>
-            {% endif %}
+    <div products-body>
+        <h1 class="type-header one"><span>{{ products.0.type }} /
+        {% if brandquery %}
+            {{ brandquery }}
+        {% else %}
+            ALL
+        {% endif %}
+            </span>
+        </h1>
+
+        <div class="row">
+            {% for product in products %}
+            <div class="col-sm-3 column-align">
+                {% if product.image %}
+                    <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a>
+                {% endif %}
+                <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a>
+                {% if product.price != 0 %}
+                    <p><span class="boldtext price-text">€ {{ product.price }}</span</p>
+                {% else %}
+                    <p><span class="boldtext"></span>Call us for pricing</p>
+                {% endif %}
+            </div>
+            <hr>
+            {% endfor %}
         </div>
-        <hr>
-        {% endfor %}
     </div>
+    
     
 
 {% endblock %}

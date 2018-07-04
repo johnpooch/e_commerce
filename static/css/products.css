@@ -1,3 +1,7 @@
+.products-body {
+    text-align: center;
+}
+
 .product-col {
     width: 100%;
 }
@@ -7,6 +11,42 @@
     text-decoration: none;
 }
 
+.price-text {
+    color: #FFFFFF;
+}
+
+.type-header {
+    text-align: center;
+}
+
 .column-align {
     text-align: center;
 }
+
+.type-header {
+    position: relative;
+    margin-top: 20px;
+}
+
+.type-header.one {
+    margin-top: 0;
+}
+
+.type-header.one:before {
+    content: "";
+    display: block;
+    border-top: solid 1px white;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+
+.type-header.one span {
+    background: #1F1F1F;
+    padding: 0 20px;
+    position: relative;
+    z-index: 5;
+}
+
