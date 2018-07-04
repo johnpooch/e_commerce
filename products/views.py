@@ -11,7 +11,7 @@ def paginate(request, products):
     return paginator, page, products
     
 def search(request, products):
-    query = request.GET.get("search-query")
+    query = request.GET.get("q")
     if query:
         products = products.filter(
             Q(name__icontains=query) |
@@ -21,7 +21,7 @@ def search(request, products):
     return products
 
 def filter_by_brand(request, products):
-    query = request.GET.get("brand-query")
+    query = request.GET.get("brandquery")
     if query:
         products = products.filter(
             Q(manufacturer=query)
