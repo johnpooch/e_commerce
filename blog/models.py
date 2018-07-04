@@ -14,7 +14,7 @@ class Post(models.Model):
     tag = models.CharField(max_length=30, blank=True, null=True)
     image = models.ImageField(upload_to="images", blank=True, null=True)
     author = models.ForeignKey(User, related_name='posts', null=False, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(User, related_name='liked_posts')
+    likes = models.ManyToManyField(User, related_name='liked_posts', null=True)
     
     def __str__(self):
         return self.title

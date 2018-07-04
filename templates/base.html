@@ -27,45 +27,63 @@
         <div class="container no-margin-top">
             
             <!--ACCOUNTS NAVBAR-->
-            <div id="navbar" class="navbar-collapse collapse">
+            
+            <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
+                
+            <!--    <div class="nav-align-right">-->
+            <!--        <ul class="nav nav-pills pull-right mr-auto">-->
 
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                    <li><a href='#'>{{ user.username }}</a></li>
-                    <li><a href="/accounts/profile">Profile</a></li>
-                    <li><a href="/accounts/logout">Log Out</a></li>
-                    {% else %}
-                    <li><a href="/accounts/register">Register</a></li>
-                    <li><a href="/accounts/login">Log In</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+            <!--            {% if user.is_authenticated %}-->
+            <!--            <li><a class="navtab" href='#'>{{ user.username }}</a></li>-->
+            <!--            <li><a class="navtab" href="/accounts/profile">Profile</a></li>-->
+            <!--            <li><a class="navtab" href="/accounts/logout">Log Out</a></li>-->
+            <!--            {% else %}-->
+            <!--            <li><a class="navtab" href="/accounts/register">Register</a></li>-->
+            <!--            <li><a class="navtab" href="/accounts/login">Log In</a></li>-->
+            <!--            {% endif %}-->
+            <!--        </ul>-->
+            <!--    </div>    -->
+            <!--</nav>-->
+            
+            <!--BLOG-ABOUT NAVBAR-->
+            <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
+                
+            <!--    <div class="nav-align-right"></div>-->
+                
+            <!--    <div class="nav-align-right">-->
+            <!--        <ul class="nav nav-pills pull-right mr-auto">-->
+    
+            <!--            <li><a class="navtab" href="{% url 'blog' %}">Blog</a></li>-->
+            <!--            <li><a class="navtab" href="{% url 'repair' %}">Repair</a></li>-->
+            <!--            <li><a class="navtab" href="{% url 'about' %}">About</a></li>-->
+            <!--            <li><a class="navtab" href="{% url 'contact' %}">Contact</a></li>-->
+            <!--            <li><a class="navtab" href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>-->
+            <!--            <li><a class="navtab" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>-->
+            <!--            <li><a class="navtab" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>-->
+            <!--        </ul>-->
+            <!--    </div>-->
+            <!--</nav>-->
 
-            <!--WEBSITE NAVBAR-->
-            <div class="masthead">
-                <ul class="nav nav-pills pull-right">
-                    <li><a href="{% url 'get_index' %}">Home</a></li>
+            <div class="logo-align-center"><a href="{% url 'get_index' %}"><img src="{{MEDIA_URL}}images/someneck_logo_u84vyRV.png" class="logo"></img></a></div>
+            <hr>
 
-                    <li><a href="{% url 'products_by_type' 'acoustic' %}">Acoustic</a></li>
-                    <li><a href="{% url 'products_by_type' 'electric' %}">Electric</a></li>
-                    <li><a href="{% url 'products_by_type' 'bass' %}">Bass</a></li>
-                    <li><a href="{% url 'products_by_type' 'amplifier' %}">Amps</a></li>
-                    <li><a href="{% url 'products_by_type' 'effects' %}">Effects</a></li>
-                    <li><a href="{% url 'products_by_type' 'pickup' %}">Pickups</a></li>
-                    <li><a href="{% url 'products_by_type' 'audio' %}">Audio</a></li>
-
-                    <li><a href="{% url 'blog' %}">Blog</a></li>
-                    <li><a href="{% url 'repair' %}">Repair</a></li>
-                    <li><a href="{% url 'about' %}">About us</a></li>
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <li><a href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>
-                    <li><a href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>
-                    <li><a href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>
-                </ul>
-                <h1><span class="fui-settings-16 muted">Someneck</span></h1>
-            </div>
-
-
+            <!--PRODUCTS NAVBAR-->
+            <nav class="navbar navbar-default">
+                <div class="container text-center">
+                    <div id="navbar" class="navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'acoustic' %}">ACOUSTIC</a></li>
+                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'electric' %}">ELECTRIC</a></li>
+                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'bass' %}">BASS</a></li>
+                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'amplifier' %}">AMPS</a></li>
+                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'effects' %}">EFFECTS</a></li>
+                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'pickup' %}">PICKUPS</a></li>
+                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'audio' %}">AUDIO</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
             <hr> {% if messages %}
             <div class="alert alert-success">
                 <div class="messages">

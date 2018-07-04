@@ -25,21 +25,21 @@ def search(request, products):
             )
     query = request.GET.get("sortquery")
     
-    # newest to oldest
-    if query == "1":
-        products = products.filter(~Q(year=0)).order_by('-year')
-        
-    # oldest to newest
-    if query == "2":
-        products = products.filter(~Q(year=0)).order_by('year')
-        
     # A-Z
-    if query == "3":
+    if query == "1":
         products = products.order_by('name')
         
     # Z-A
-    if query == "4":
+    if query == "2":
         products = products.order_by('-name')
+    
+    # newest to oldest
+    if query == "3":
+        products = products.filter(~Q(year=0)).order_by('-year')
+        
+    # oldest to newest
+    if query == "4":
+        products = products.filter(~Q(year=0)).order_by('year')
         
     # Price (high to low)
     if query == "5":

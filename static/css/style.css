@@ -1,3 +1,68 @@
+@font-face {
+    font-family: LeagueGothic;
+    src: url('../fonts/LeagueGothic-Regular.otf');
+}
+
+body {
+  font-family: LeagueGothic;
+  letter-spacing: .1rem;
+}
+
+.logo-align-center {
+  padding-top: 8vh;
+  text-align: center;
+}
+
+.navbar .navbar-header,
+.navbar-collapse {
+    float:none;
+    display:inline-block;
+    vertical-align: top;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar {
+  width: 100%;
+}
+
+.navbar-nav {
+    display: inline;
+}
+
+.navbar-li {
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse  {
+        display: block;
+    }
+}
+
+.nav-top-margin {
+  padding-top: 5vh;
+}
+
+.navtab {
+  color: #FFF;
+    text-decoration: none;
+    padding-left: 20px;
+    font-size: 1.2rem;
+}
+.navtab:hover { 
+  color: #EA1920;
+  text-decoration: none;
+}
+
+.navtab-li {
+  padding-left: 20px;
+}
+
+.navbar-center {
+  width: 800px;
+}
+
 .content-background-div {
   background: #1F1F1F;
   color: #FFFFFF;
@@ -24,4 +89,8 @@
 
 .no-margin-top {
   margin-top: 0px;
+}
+
+.logo {
+  width: 50%;
 }

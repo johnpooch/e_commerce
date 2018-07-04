@@ -6,17 +6,13 @@
     background: #000;
 }
 
-
-.search-icon {
-    
-}
-
 .product-col {
     width: 100%;
 }
 
 .filter-search-div {
     text-align: center;
+    
 }
 
 .search-row {
@@ -25,6 +21,7 @@
 
 .sort-col {
     text-align: right;
+    padding-bottom: 5vh;
 }
 
 .filter-brand-col {
@@ -51,6 +48,8 @@
 .type-header {
     position: relative;
     margin-top: 20px;
+    font-size: 2.2rem;
+    padding-bottom: 5vh;
 }
 
 .type-header.one {
@@ -97,3 +96,6 @@
     z-index: 5;
 }
 
+.align-products-left {
+    text-align: left;
+}

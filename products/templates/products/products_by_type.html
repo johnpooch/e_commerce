@@ -26,14 +26,17 @@
             <div class="col-sm-6 sort-col">
                 <label for="sort-select">Sort by </label>
                 <select form="filter-form" name="sortquery" id="sort-select" onchange="this.form.submit()">
-                        <option value="1" {% if request.GET.sortquery == '1' %} selected {% endif %}>Newest to oldest</option>
-                        <option value="2" {% if request.GET.sortquery == '2' %} selected {% endif %}>Oldest to Newest</option>
-                        <option value="3" {% if request.GET.sortquery == '3' %} selected {% endif %}>A-Z</option>
-                        <option value="4" {% if request.GET.sortquery == '4' %} selected {% endif %}>Z-A</option>
+                        <option value="1" {% if request.GET.sortquery == '1' %} selected {% endif %}>A-Z</option>
+                        <option value="2" {% if request.GET.sortquery == '2' %} selected {% endif %}>Z-A</option>
+                        <option value="3" {% if request.GET.sortquery == '3' %} selected {% endif %}>Newest to oldest</option>
+                        <option value="4" {% if request.GET.sortquery == '4' %} selected {% endif %}>Oldest to Newest</option>
                         <option value="5" {% if request.GET.sortquery == '5' %} selected {% endif %}>Price (high to low)</option>
                         <option value="6" {% if request.GET.sortquery == '6' %} selected {% endif %}>Price (low to high)</option>
                     </select>
             </div>
+            
+            
+            
             
             <!--FILTER BY BRAND-->
             
@@ -41,6 +44,7 @@
                 <label for="brand-select">Filter by brand </label>
                 <select form="filter-form" name="brandquery" id="brand-select" onchange="this.form.submit()">
                         <option value=''>All</option>
+                        {& autoescape on %}
                     {% for brand in brands %}
                         <option value={{ brand.manufacturer }} {% if brand.manufacturer == brandquery %} selected {% endif %} >{{ brand.manufacturer|title }}</option>
                     {% endfor %}
@@ -48,6 +52,9 @@
             </div>
         </div>
     </div>
+
+
+
 
     {% if not products %}
     <div class="row">
@@ -57,7 +64,7 @@
     </div>
     {% endif %}
 
-    <div class="row">
+    <div class="row align-products-left">
         {% for product in products %}
         <div class="col-sm-3 column-align">
             {% if product.image %}
