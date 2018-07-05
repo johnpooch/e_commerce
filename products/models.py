@@ -2,14 +2,12 @@ from django.db import models
 from django.utils import timezone
 import datetime
 from django.db.models import Avg
-from .choices import manufacturers, types
+from .choices import manufacturers, types, year_choices
+
+
 
 # Create your models here.
 class Product(models.Model):
-    
-    year_choices = []
-    for r in range(1800, (datetime.datetime.now().year+1)):
-        year_choices.append((r,r))
     
     name = models.CharField(max_length=254, default='')
     manufacturer = models.CharField(max_length=50, choices=manufacturers, null=True)
