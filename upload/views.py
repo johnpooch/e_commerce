@@ -46,9 +46,17 @@ def upload(request):
                 p.price+'\n'+
                 p.featured)
 
-            return redirect('get_index')
+            # SAVE MODEL HERE SO THAT IT CAN BE ACCESSED IN SOCIAL_MEDIA VIEW
+
+            return redirect('social_media')
 
     print("form is not valid")
     return render(request, 'upload/upload.html', {
         'form': form_class,
     })
+
+def social_media(request):
+    
+    # ACCESS LAST MODEL WHICH SHOULD BE THE GUITAR.
+    
+    return render(request, 'upload/social_media.html')
