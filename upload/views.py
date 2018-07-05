@@ -4,45 +4,51 @@ from django.core.mail import EmailMessage, send_mail
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib import messages, auth
-from .forms import ContactForm
+from .forms import UploadForm
+from products.models import Product
+from django.core.files.storage import FileSystemStorage
 
 def upload(request):
-    form_class = ContactForm
+    form_class = UploadForm
 
     if request.method == 'POST':
-        form = form_class(data=request.POST)
+        form = form_class(request.POST, request.FILES)
 
         if form.is_valid():
-            contact_name = request.POST.get('contact_name', '')
-            contact_email = request.POST.get('contact_email', '')
-            form_content = request.POST.get('content', '')
-
-            template=get_template('contact_template.txt')
-            context = {
-                'contact_name': contact_name,
-                'contact_email': contact_email,
-                'form_content': form_content,
-            }
-            content = template.render(context)
             
-            subject = 'Thanks for getting in touch!'
-            message = 'Thank you for contacting Urban Surf. We will get back to you as soon as we can'
-            from_email = settings.EMAIL_HOST_USER
-            to_email = [contact_email]
+            print("form is valid")
+            
+            product_name = request.POST.get('product_name', '')
+            product_manufacturer = request.POST.get('product_manufacturer', '')
+            product_year = request.POST.get('product_year', '')
+            product_type = request.POST.get('product_type', '')
+            product_description = request.POST.get('product_description', '')
+            product_price = request.POST.get('product_price', '')
+            product_image = request.FILES['product_image']
+            product_featured = request.POST.get('product_featured', '')
+            
+            p = Product(
+                name = request.POST.get('product_name', ''),
+                manufacturer = request.POST.get('product_manufacturer', '').upper(),
+                year = request.POST.get('product_year', ''),
+                type =  request.POST.get('product_type', '').upper(),
+                description = request.POST.get('product_description', ''),
+                price = request.POST.get('product_price', ''),
+                image = request.POST.get('product_image', ''),
+                featured = request.POST.get('product_featured', '')
+                )
+                
+            print(p.name+'\n'+
+                p.manufacturer+'\n'+
+                p.year+'\n'+
+                p.type+'\n'+
+                p.description+'\n'+
+                p.price+'\n'+
+                p.featured)
 
-            send_mail(subject,message,from_email,to_email,fail_silently=True)
-
-            email = EmailMessage(
-                "New contact form message",
-                content,
-                "Your website" +'',
-                [''],
-                headers = {'Reply-To': contact_email }
-            )
-            email.send()
-            messages.success(request, 'We have recieved your email & will get back to you as soon as possible!')
             return redirect('get_index')
 
-    return render(request, 'contact.html', {
+    print("form is not valid")
+    return render(request, 'upload/upload.html', {
         'form': form_class,
     })
