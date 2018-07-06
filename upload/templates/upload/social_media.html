@@ -1,11 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% load bootstrap_tags %}
 
 {% block content %}
 <div class="row">
-        <div class="col-sm-12 contactform">
-            <h1> Social Media </h1>
-        </div>
+    <div class="col-sm-12 contactform">
+        <h1> Facebook caption form </h1>
+        <form role="form" action="{% url 'social_media' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+            {{ form | as_bootstrap }}
+            <input type="hidden" name="product_id" value= {{ product.id }}/>
+            <button class="btn btn-lg btn-success" type="submit">Submit</button>
+        </form>
+    </div>
 </div>
+
 
 {% endblock %}

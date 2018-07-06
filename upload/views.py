@@ -4,28 +4,22 @@ from django.core.mail import EmailMessage, send_mail
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib import messages, auth
-from .forms import UploadForm
+from .forms import UploadForm, SocialMediaForm
+from .post_to_social import twitter_post_status, facebook_post_status
+
 from products.models import Product
 from django.core.files.storage import FileSystemStorage
 
 def upload(request):
-    form_class = UploadForm
 
+    form = UploadForm(request.POST, request.FILES)
+    
     if request.method == 'POST':
-        form = form_class(request.POST, request.FILES)
+        
 
         if form.is_valid():
             
             print("form is valid")
-            
-            product_name = request.POST.get('product_name', '')
-            product_manufacturer = request.POST.get('product_manufacturer', '')
-            product_year = request.POST.get('product_year', '')
-            product_type = request.POST.get('product_type', '')
-            product_description = request.POST.get('product_description', '')
-            product_price = request.POST.get('product_price', '')
-            product_image = request.FILES['product_image']
-            product_featured = request.POST.get('product_featured', '')
             
             p = Product(
                 name = request.POST.get('product_name', ''),
@@ -34,7 +28,7 @@ def upload(request):
                 type =  request.POST.get('product_type', '').upper(),
                 description = request.POST.get('product_description', ''),
                 price = request.POST.get('product_price', ''),
-                image = request.POST.get('product_image', ''),
+                image = request.FILES['product_image'],
                 featured = request.POST.get('product_featured', '')
                 )
                 
@@ -45,18 +39,72 @@ def upload(request):
                 p.description+'\n'+
                 p.price+'\n'+
                 p.featured)
+                
+            if p.featured:
+                p.featured = True
+            else:
+                p.featured = False
 
-            # SAVE MODEL HERE SO THAT IT CAN BE ACCESSED IN SOCIAL_MEDIA VIEW
+            p.save()
+            
+            # for url in gallery_images:
+            #     pi = ProductImage(
+            #         product = p,
+            #         image = url,
+            #         )
+            #     pi.save()
 
             return redirect('social_media')
 
     print("form is not valid")
     return render(request, 'upload/upload.html', {
-        'form': form_class,
+        'form': form
     })
 
 def social_media(request):
+
+    product = Product.objects.all().order_by('-id')[0]
+    form = SocialMediaForm(request.POST)
     
-    # ACCESS LAST MODEL WHICH SHOULD BE THE GUITAR.
-    
+    if request.method == 'POST':
+
+        
+        if form.is_valid():
+            print("form is valid")
+            
+            facebook_caption = request.POST.get('facebook_caption')
+            twitter_caption = request.POST.get('twitter_caption')
+            post_to_facebook = request.POST.get('post_to_facebook')
+            post_to_twitter = request.POST.get('post_to_twitter')
+            product_id = request.POST.get('product_id')
+            
+            if post_to_facebook:
+                post_to_facebook = True
+            else:
+                post_to_facebook = False
+                
+            if post_to_twitter:
+                post_to_twitter = True
+            else:
+                post_to_twitter = False
+            
+            print(facebook_caption + '\n')
+            print(twitter_caption + '\n')
+            print(post_to_facebook)
+            print(post_to_twitter)
+            
+            product_url = "http://e-commerce-johnpooch.c9users.io:8080/products/1204/" + product_id
+            
+            if post_to_twitter:
+                twitter_post_status(twitter_caption, product.image.url, product_url)
+                
+            if post_to_facebook:
+                facebook_post_status(facebook_caption, product_url)
+            
+            return redirect('get_index')
+
+    print("form is not valid")
+    return render(request, 'upload/social_media.html', {
+        'form': form, 'product': product,
+    })
     return render(request, 'upload/social_media.html')

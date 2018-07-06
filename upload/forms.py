@@ -3,6 +3,7 @@ from products.choices import *
 from products.models import Product
 from django.utils import timezone
 import datetime
+from django.forms import TextInput
 
 class UploadForm(forms.Form):
     product_name = forms.CharField(required=True)
@@ -13,7 +14,6 @@ class UploadForm(forms.Form):
     product_price = forms.DecimalField(max_digits=6, decimal_places=2, widget=forms.NumberInput())
     product_image = forms.ImageField(required=True)
     product_featured = forms.BooleanField(required=False)
-
 
     def __init__(self, *args, **kwargs):
         super(UploadForm, self).__init__(*args, **kwargs)
@@ -27,3 +27,20 @@ class UploadForm(forms.Form):
         self.fields['product_price'].label = "Product price:"
         self.fields['product_image'].label = "Image:"
         self.fields['product_featured'].label = "Featured product:"
+        
+        
+class SocialMediaForm(forms.Form):
+    
+    facebook_caption = forms.CharField(required=False, widget=forms.Textarea)
+    post_to_facebook = forms.BooleanField(required=False)
+    twitter_caption = forms.CharField(required=False, widget=forms.Textarea) # MAX LENGTH
+    post_to_twitter = forms.BooleanField(required=False)
+    
+
+    def __init__(self, *args, **kwargs):
+        super(SocialMediaForm, self).__init__(*args, **kwargs)
+        self.fields['facebook_caption'].label = "Facebook caption:"
+        self.fields['twitter_caption'].label = "Twitter caption:"
+        self.fields['post_to_facebook'].label = "Post to Facebook:"
+        self.fields['post_to_twitter'].label = "Post to Twitter:"
+        
