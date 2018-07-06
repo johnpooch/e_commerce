@@ -1,8 +1,21 @@
 import bs4 as bs
 from urllib.request import urlopen
+from urllib import parse
 import string
 
 from .models import Product, ProductImage
+
+import requests
+import tempfile
+from PIL import Image
+from django.core import files
+
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
+
+import requests
+
+
 
 import re
 
@@ -17,6 +30,25 @@ collection_urls = {
     }
     
 featured_urls = set()
+
+def save_image_from_url(field, url):
+
+    r = requests.get(url)
+
+    if r.status_code == requests.codes.ok:
+
+        img_temp = NamedTemporaryFile(delete = True)
+        img_temp.write(r.content)
+        img_temp.flush()
+
+        img_filename = parse.urlsplit(url).path[1:]
+        field.save(img_filename, File(img_temp), save = True)
+
+        return True
+
+    return False
+
+
     
 def scrape_urls_from_collection_page(url, type):
     
@@ -76,7 +108,7 @@ def scrape_product_from_url(url_tuple):
     product_name = title['content']
     
     image = soup.find("meta",  property="og:image")
-    product_main_image = image['content']
+    image_url = image['content']
     
     if soup.find("meta",  property="og:description"):
         description = soup.find("meta",  property="og:description")
@@ -106,16 +138,19 @@ def scrape_product_from_url(url_tuple):
         type =  type.upper(),
         description = product_description,
         price = product_price_amount,
-        image = product_main_image,
+        # image = product_image,
         featured = product_featured
         )
+        
+    save_image_from_url(p.image, image_url)
+        
     p.save()
     
     for url in gallery_images:
         pi = ProductImage(
             product = p,
-            image = url,
             )
+        save_image_from_url(pi.image, url)
         pi.save()
     
 

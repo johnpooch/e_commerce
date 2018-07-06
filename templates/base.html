@@ -64,7 +64,7 @@
             <!--    </div>-->
             <!--</nav>-->
 
-            <div class="logo-align-center"><a href="{% url 'get_index' %}"><img src="{{MEDIA_URL}}images/someneck_logo_u84vyRV.png" class="logo"></img></a></div>
+            <div class="logo-align-center"><a href="{% url 'get_index' %}"><img src="{{MEDIA_URL}}images/someneck_logo.png" class="logo"></img></a></div>
             <hr>
 
             <!--PRODUCTS NAVBAR-->
@@ -167,7 +167,7 @@
                         {% for product in featured_products %}
                         <div class="col-sm-3 column-align">
                             {% if product.image %}
-                            <a href="{% url 'product_details' product.id %}"><img src="{{ product.image }}" class ="product-col"></a> {% endif %}
+                            <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
                             <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
                             <p><span class="boldtext"></span>€ {{ product.price }}</p>
                             {% else %}
