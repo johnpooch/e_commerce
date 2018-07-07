@@ -61,7 +61,7 @@
 
     <div class="row align-products-left">
         {% for product in products %}
-        <div class="col-sm-3 column-align">
+        <div class="col-sm-3 column-align grow">
             {% if product.image %}
             <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
             <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
@@ -137,7 +137,7 @@
 
             <div class="row">
                 {% for product in featured_products %}
-                <div class="col-sm-3 column-align">
+                <div class="col-sm-3 column-align grow">
                     {% if product.image %}
                     <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
                     <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
