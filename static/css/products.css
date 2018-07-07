@@ -1,3 +1,7 @@
+a:hover {
+    text-decoration: none;
+}
+
 .products-body {
     text-align: center;
 }
@@ -30,6 +34,14 @@
 
 .product-name {
     color: #EA1920;
+    text-decoration: none;
+}
+
+.product-name:hover {
+    text-decoration: none;
+}
+
+.product-link:hover {
     text-decoration: none;
 }
 

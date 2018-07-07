@@ -7,34 +7,31 @@ from django.contrib import messages, auth
 from django.forms import modelformset_factory, formset_factory
 from .forms import UploadForm, ImagesForm, ImageFormset, SocialMediaForm
 from .post_to_social import twitter_post_status, facebook_post_status
-
-
 from products.models import Product, ProductImage
 from django.core.files.storage import FileSystemStorage
+
+# DO ALL OF THESE IMPORTS NEED TO BE HERE?
 
 def upload(request):
 
 
     formset = ImageFormset(queryset=ProductImage.objects.none()) 
     form = UploadForm(request.POST, request.FILES)
-    
-    # formset = ImageFormSet(data)
 
-        
     if request.method == 'POST':
-        
         formset = ImageFormset(request.POST, request.FILES)
-        
         if form.is_valid() and formset.is_valid():
             form.save()
+            
+            # is this hacky?
             product = Product.objects.all().order_by('-id')[0]
+            
             for form in formset.cleaned_data:
                 image= form['image']
-                photo = ProductImage (image = image, product = product)
-                photo.save()
+                pi = ProductImage (image = image, product = product)
+                pi.save()
             
             return redirect('social_media')
-            
         # invalid form response?
     return render(request, 'upload/upload.html', {
         'form': form, 

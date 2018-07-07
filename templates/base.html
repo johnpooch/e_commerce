@@ -123,74 +123,8 @@
             
             {% block products %}
             {% endblock %}
+        
             
-            <hr> 
-            
-            <!--PAGINATOR-->
-            <div class="paginator-div">
-                {% if products.paginator.num_pages > 1 %}
-                    <div class="pagination">
-                        {% if products.has_previous %}
-                        <a class="pagination-action" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                            <i class="fa fa-angle-double-left"></i>
-                        </a>
-                        <a class="pagination-action" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                            <i class="fa fa-angle-left"></i>
-                        </a> 
-                        {% endif %} 
-                    {% for num in products.paginator.page_range %} 
-                
-                        {% if products.number == num %}
-                        <span class="pagination-number pagination-current" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span> 
-                        
-                        {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
-                        <span class="pagination-number" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">{{ num }}</span>
-                        {% endif %}
-                    {% endfor %}
-                
-                    {% if products.has_next %}
-                        <a class="pagination-action" href="?page={{ products.next_page_number }}
-                            {% if request.GET.q %}
-                                &q={{ request.GET.q }}
-                            {% endif %}">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                        <a class="pagination-action" href="?page={{ products.paginator.num_pages }}
-                            {% if request.GET.q %}
-                                &q={{ request.GET.q }}
-                            {% endif %}">
-                            <i class="fa fa-angle-double-right"></i>
-                        </a> 
-                    {% endif %}
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-
-        <!--FEATURED PRODUCTS-->
-
-        <div class="featured-background-div">
-            
-            <div class="container no-margin-top">
-                <div class="featured-products-body">
-                    <h1 class="type-header two"><span>Featured Products</span></h1>
-    
-                    <div class="row">
-                        {% for product in featured_products %}
-                        <div class="col-sm-3 column-align">
-                            {% if product.image %}
-                            <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
-                            <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
-                            <p><span class="boldtext"></span>€ {{ product.price }}</p>
-                            {% else %}
-                            <p><span class="boldtext"></span>Call us for pricing</p>
-                            {% endif %}
-                        </div>
-                        <hr> {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="footer">
             <p>Footer</p>
         </div>

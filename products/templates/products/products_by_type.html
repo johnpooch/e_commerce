@@ -35,10 +35,7 @@
                         <option value="6" {% if request.GET.sortquery == '6' %} selected {% endif %}>Price (low to high)</option>
                     </select>
             </div>
-            
-            
-            
-            
+
             <!--FILTER BY BRAND-->
             
             <div class="col-sm-6 filter-brand-col">
@@ -53,9 +50,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     {% if not products %}
     <div class="row">
@@ -76,7 +70,85 @@
                     <p><span class="boldtext"></span>Call us for pricing</p>
             {% endif %}
         </div>
-        <hr> {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+<!--PAGINATOR-->
+    <div class="paginator-div">
+        {% if products.paginator.num_pages > 1 %}
+            <div class="pagination">
+                <span class="pagination-span">
+                    {% if products.has_previous %}
+                    <a class="pagination-action pagination-border" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                        <i class="fa fa-angle-double-left"></i>  First
+                    </a>
+                </span>
+                <span class="pagination-span">
+                    <a class="pagination-action pagination-border" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                        <i class="fa fa-angle-left"></i>  Previous
+                    </a> 
+                </span>
+                
+                {% endif %} 
+                
+            {% for num in products.paginator.page_range %} 
+        
+                {% if products.number == num %}
+                <span class="pagination-action pagination-number pagination-current pagination-border" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">  {{ num }}  </span> 
+                
+                {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                <span class="pagination-action pagination-number pagination-border" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">  {{ num }}  </span>
+                {% endif %}
+            {% endfor %}
+        
+            {% if products.has_next %}
+               
+                <span class="pagination-span">
+                    <a class="pagination-action pagination-border" href="?page={{ products.next_page_number }}
+                        {% if request.GET.q %}
+                            &q={{ request.GET.q }}
+                        {% endif %}">
+                        Next  <i class="fa fa-angle-right"></i>
+                    </a>
+                </span> 
+                <span class="pagination-span">
+                    <a class="pagination-action pagination-border" href="?page={{ products.paginator.num_pages }}
+                        {% if request.GET.q %}
+                            &q={{ request.GET.q }}
+                        {% endif %}">
+                        Last  <i class="fa fa-angle-double-right"></i>
+                    </a> 
+                </span>
+                
+            {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!--FEATURED PRODUCTS-->
+
+<div class="featured-background-div">
+    
+    <div class="container no-margin-top">
+        <div class="featured-products-body">
+            <h1 class="type-header two"><span>Featured Products</span></h1>
+
+            <div class="row">
+                {% for product in featured_products %}
+                <div class="col-sm-3 column-align">
+                    {% if product.image %}
+                    <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
+                    <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
+                    <p><span class="boldtext"></span>€ {{ product.price }}</p>
+                    {% else %}
+                    <p><span class="boldtext"></span>Call us for pricing</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 
