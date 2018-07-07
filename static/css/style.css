@@ -8,6 +8,21 @@ body {
   letter-spacing: .1rem;
 }
 
+select {
+  border: 1px solid #ed1d24;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  padding: 10px 40px 10px 10px;
+  background-color: transparent;
+  color: #fff;
+
+  font: 400 11px system-ui;
+  font-size: 100%;
+  background-image: url(https://cdn.shopify.com/s/files/1/0081/3152/t/5/assets/bg-dropdown.png?1729334);
+  background-position: 100% center;
+  background-repeat: no-repeat;
+}
+
 .logo-align-center {
   padding-top: 8vh;
   text-align: center;

@@ -21,6 +21,7 @@
 
 .pagination-number {
     width: 50px;
+    cursor: pointer;
 }
 
 .pagination-number:hover, .pagination-current {

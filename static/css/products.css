@@ -35,6 +35,9 @@ a:hover {
 .product-name {
     color: #EA1920;
     text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-size: 22px;
 }
 
 .product-name:hover {
