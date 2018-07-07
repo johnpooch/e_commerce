@@ -1,15 +1,47 @@
 from django import forms
 from products.choices import *
-from products.models import Product
+from products.models import Product, ProductImage
 from django.utils import timezone
 import datetime
 from django.forms import TextInput
+from django.forms import modelformset_factory
 
 class UploadForm(forms.ModelForm):
     class Meta:
         model = Product
         exclude = ['published_date']
-
+        
+class ImagesForm(forms.ModelForm):
+    image = forms.ImageField(label='')
+    class Meta:
+        model = ProductImage
+        fields = ['image']
+        label = ''
+        widgets={
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Upload gallery image here'
+                }
+            )
+        }
+        
+ImageFormset = modelformset_factory(
+    ProductImage,
+    fields=('image', ),
+    labels = '',
+    extra=1,
+    widgets={
+        'image': forms.FileInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Upload gallery image here'
+            }
+        )
+    },
+)
+        
+        
+        
+        
         
         
 class SocialMediaForm(forms.Form):

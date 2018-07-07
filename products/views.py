@@ -23,31 +23,40 @@ def search(request, products):
         products = products.filter(
             Q(manufacturer=query)
             )
+    else:
+        products = products.order_by('-published_date')
+        print("hello")
+            
     query = request.GET.get("sortquery")
     
-    # A-Z
+    
     if query == "1":
+        products = products.order_by('name')
+    
+    # A-Z
+    elif query == "1":
         products = products.order_by('name')
         
     # Z-A
-    if query == "2":
+    elif query == "2":
         products = products.order_by('-name')
     
     # newest to oldest
-    if query == "3":
+    elif query == "3":
         products = products.filter(~Q(year=0)).order_by('-year')
         
     # oldest to newest
-    if query == "4":
+    elif query == "4":
         products = products.filter(~Q(year=0)).order_by('year')
         
     # Price (high to low)
-    if query == "5":
+    elif query == "5":
         products = products.order_by('-price')
         
     # Price (low to high)
-    if query == "6":
+    elif query == "6":
         products = products.order_by('price')
+        
     return products
 
 def filter_by_brand(request, products):
@@ -60,7 +69,7 @@ def sort_products(request, products):
     return products
     
 def get_products_by_type(request, type):
-    products = Product.objects.filter(type=type.upper())
+    products = Product.objects.filter(type=type.upper()).order_by('published_date')
     brands = Product.objects.filter(type=type.upper()).order_by().values('manufacturer').distinct()
     products = search(request, products)
     brandquery = request.GET.get("brandquery")

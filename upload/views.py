@@ -4,23 +4,41 @@ from django.core.mail import EmailMessage, send_mail
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib import messages, auth
-from .forms import UploadForm, SocialMediaForm
+from django.forms import modelformset_factory, formset_factory
+from .forms import UploadForm, ImagesForm, ImageFormset, SocialMediaForm
 from .post_to_social import twitter_post_status, facebook_post_status
 
-from products.models import Product
+
+from products.models import Product, ProductImage
 from django.core.files.storage import FileSystemStorage
 
 def upload(request):
 
+
+    formset = ImageFormset(queryset=ProductImage.objects.none()) 
     form = UploadForm(request.POST, request.FILES)
+    
+    # formset = ImageFormSet(data)
+
+        
     if request.method == 'POST':
-        if form.is_valid():
+        
+        formset = ImageFormset(request.POST, request.FILES)
+        
+        if form.is_valid() and formset.is_valid():
             form.save()
+            product = Product.objects.all().order_by('-id')[0]
+            for form in formset.cleaned_data:
+                image= form['image']
+                photo = ProductImage (image = image, product = product)
+                photo.save()
+            
             return redirect('social_media')
             
         # invalid form response?
     return render(request, 'upload/upload.html', {
-        'form': form
+        'form': form, 
+        'formset': formset,
     })
 
 def social_media(request):
@@ -31,6 +49,7 @@ def social_media(request):
         
         if form.is_valid():
             
+            # should be a function
             post_to_facebook = request.POST.get('post_to_facebook')
             post_to_twitter = request.POST.get('post_to_twitter')
             
