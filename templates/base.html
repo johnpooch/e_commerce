@@ -12,6 +12,8 @@
     
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -30,51 +32,36 @@
 
 <body>
 
-    <!--DIV CONTAINING EVERYTHING AS FAR AS FEATURED PRODUCTS-->
-    <div class="content-background-div">
-        <div class="container no-margin-top">
+
+    <!--Background Image-->
+    <section class="guitar-shop background-image">
+        
+        <!--<a class="navbar-logo" href="#" style="background-image: url({{MEDIA_URL}}images/someneck_logo.png)"></a>-->
+        
+        <!--Top Navbar - Contact Details, Social Media Icons, My Account-->
+        <nav id="top-navbar" class="navbar navbar-expand-md">
             
-            <!--TOP NAVBAR-->
-            <nav class="navbar navbar-expand-md border-btm">
-                
-                <!--CONTACT DETAILS-->
-                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <span>Phone Number</span>
-                        </li>
-                        <li class="nav-item">
-                            <span>Email Address</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!--ICONS, MYACCOUNT, CART-->
-                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                    <ul class="navbar-nav ml-auto">
-                        
-                        <li>
-                            <a class="nav-item" href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a>
-                        </li>
-                        
-                        <li>
-                            <a class="nav-item" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a>
-                        </li>
-                        
-                        <li>
-                            <a class="nav-item" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        
-                        <li class="nav-item border-lft">
-                            <a class="nav-link" href="#">MY ACCOUNT <i class="fa fa-chevron-down"></i></a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <!--Social Media Icons, My Account, Cart-->
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="icon">
+                        <a class="nav-item" href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a>
+                    </li>
+                    <li class="icon">
+                        <a class="nav-item" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a>
+                    </li>
+                    <li class="icon">
+                        <a class="nav-item" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li class="nav-item border-lft">
+                        <a id="my-account" class="nav-link" href="#">MY ACCOUNT <i class="fa fa-chevron-down"></i></a>
+                    </li>
+                    <li class="icon" id="cart-li">
+                        <a id="cart" href="#"><i class="fa fa-shopping-cart"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
                         <!--            {% if user.is_authenticated %}-->
                         <!--<li><a class="navtab" href='#'>{{ user.username }}</a></li>-->
                         <!--<li><a class="navtab" href="/accounts/profile">Profile</a></li>-->
@@ -84,24 +71,32 @@
                         <!--<li><a class="navtab" href="/accounts/login">Log In</a></li>-->
                         <!--{% endif %}-->
             
-            
-            
-            <!--PRODUCTS NAVBAR-->
-            <nav class="navbar navbar-expand-md">
-                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                    <ul class="navbar-nav mr-auto">
-                        <li><a class="nav-item" href="{% url 'get_index' %}"><img src="{{MEDIA_URL}}images/someneck_logo.png" class="logo"></img></a></li>
-                        <li><a class="nav-item" href="{% url 'products_by_type' 'acoustic' %}">ACOUSTIC</a></li>
-                        <li><a class="nav-item" href="{% url 'products_by_type' 'electric' %}">ELECTRIC</a></li>
-                        <li><a class="nav-item" href="{% url 'products_by_type' 'bass' %}">BASS</a></li>
-                        <li><a class="nav-item" href="{% url 'products_by_type' 'amplifier' %}">AMPS</a></li>
-                        <li><a class="nav-item" href="{% url 'products_by_type' 'effects' %}">EFFECTS</a></li>
-                        <li><a class="nav-item" href="{% url 'products_by_type' 'pickup' %}">PICKUPS</a></li>
-                        <li><a class="nav-item" href="{% url 'products_by_type' 'audio' %}">AUDIO</a></li>
-                    </ul>
-            </nav>
-
-
+        <!--PRODUCTS NAVBAR-->
+        <nav id="bottom-navbar" class="navbar navbar-expand-md">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    
+                    <li style="padding: 0px"><a class="nav-item" href="{% url 'get_index' %}"><img src="{{MEDIA_URL}}images/someneck_logo.png" class="logo"></img></a></li>
+                    <li><a class="nav-item first" href="{% url 'products_by_type' 'acoustic' %}">ACOUSTIC</a></li>
+                    <li><a class="nav-item" href="{% url 'products_by_type' 'electric' %}">ELECTRIC</a></li>
+                    <li><a class="nav-item" href="{% url 'products_by_type' 'bass' %}">BASS</a></li>
+                    <li><a class="nav-item" href="{% url 'products_by_type' 'amplifier' %}">AMPS</a></li>
+                    <li><a class="nav-item" href="{% url 'products_by_type' 'effects' %}">EFFECTS</a></li>
+                    <li><a class="nav-item" href="{% url 'products_by_type' 'pickup' %}">PICKUPS</a></li>
+                    <li><a class="nav-item" href="{% url 'products_by_type' 'audio' %}">AUDIO</a></li>
+                    
+                    <!--<li><a class="nav-sub-item" href="{% url 'blog' %}">Blog</a></li>-->
+                    <!--<li><a class="nav-sub-item" href="{% url 'repair' %}">Repair</a></li>-->
+                    <!--<li><a class="nav-sub-item" href="{% url 'about' %}">About</a></li>-->
+                    <!--<li><a class="nav-sub-item" href="{% url 'contact' %}">Contact</a></li>-->
+                </ul>
+            </div>
+        </nav>
+        
+        
+    </section>
+        
+        <div class="container no-margin-top">
             
             
             <!--BLOG-ABOUT NAVBAR-->
@@ -112,19 +107,12 @@
             <!--    <div class="nav-align-right">-->
             <!--        <ul class="nav nav-pills pull-right mr-auto">-->
     
-            <!--            <li><a class="navtab" href="{% url 'blog' %}">Blog</a></li>-->
-            <!--            <li><a class="navtab" href="{% url 'repair' %}">Repair</a></li>-->
-            <!--            <li><a class="navtab" href="{% url 'about' %}">About</a></li>-->
-            <!--            <li><a class="navtab" href="{% url 'contact' %}">Contact</a></li>-->
-            <!--            <li><a class="navtab" href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a></li>-->
+            <!--            
             <!--            <li><a class="navtab" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>-->
             <!--            <li><a class="navtab" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>-->
             <!--        </ul>-->
             <!--    </div>-->
             <!--</nav>-->
-
-
-            
 
 
 
