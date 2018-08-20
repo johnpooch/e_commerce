@@ -29,7 +29,6 @@ def search(request, products):
             
     query = request.GET.get("sortquery")
     
-    
     if query == "1":
         products = products.order_by('name')
     
@@ -60,12 +59,8 @@ def search(request, products):
     return products
 
 def filter_by_brand(request, products):
-    
     return products
-    
 def sort_products(request, products):
-    
-        
     return products
     
 def get_products_by_type(request, type):
@@ -75,7 +70,6 @@ def get_products_by_type(request, type):
     brandquery = request.GET.get("brandquery")
     paginator, page, products = paginate(request, products)
     return render(request, "products/products_by_type.html", {'products': products, "brands": brands, "type": type.title(), "brandquery": brandquery})
-    
     
 def product_details(request, pk):
     product = get_object_or_404(Product, pk=pk)

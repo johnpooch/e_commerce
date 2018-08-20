@@ -4,8 +4,6 @@ import datetime
 from django.db.models import Avg
 from .choices import manufacturers, types, year_choices
 
-
-
 # Create your models here.
 class Product(models.Model):
     

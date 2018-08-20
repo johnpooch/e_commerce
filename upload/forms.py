@@ -39,11 +39,6 @@ ImageFormset = modelformset_factory(
     },
 )
         
-        
-        
-        
-        
-        
 class SocialMediaForm(forms.Form):
     
     facebook_caption = forms.CharField(required=False, widget=forms.Textarea)

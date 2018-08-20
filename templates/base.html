@@ -34,24 +34,75 @@
     <div class="content-background-div">
         <div class="container no-margin-top">
             
-            <!--ACCOUNTS NAVBAR-->
-            
-            <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
+            <!--TOP NAVBAR-->
+            <nav class="navbar navbar-expand-md border-btm">
                 
-            <!--    <div class="nav-align-right">-->
-            <!--        <ul class="nav nav-pills pull-right mr-auto">-->
+                <!--CONTACT DETAILS-->
+                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <span>Phone Number</span>
+                        </li>
+                        <li class="nav-item">
+                            <span>Email Address</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!--ICONS, MYACCOUNT, CART-->
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
+                        
+                        <li>
+                            <a class="nav-item" href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a>
+                        </li>
+                        
+                        <li>
+                            <a class="nav-item" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a>
+                        </li>
+                        
+                        <li>
+                            <a class="nav-item" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        
+                        <li class="nav-item border-lft">
+                            <a class="nav-link" href="#">MY ACCOUNT <i class="fa fa-chevron-down"></i></a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+                        <!--            {% if user.is_authenticated %}-->
+                        <!--<li><a class="navtab" href='#'>{{ user.username }}</a></li>-->
+                        <!--<li><a class="navtab" href="/accounts/profile">Profile</a></li>-->
+                        <!--<li><a class="navtab" href="/accounts/logout">Log Out</a></li>-->
+                        <!--{% else %}-->
+                        <!--<li><a class="navtab" href="/accounts/register">Register</a></li>-->
+                        <!--<li><a class="navtab" href="/accounts/login">Log In</a></li>-->
+                        <!--{% endif %}-->
+            
+            
+            
+            <!--PRODUCTS NAVBAR-->
+            <nav class="navbar navbar-expand-md">
+                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                    <ul class="navbar-nav mr-auto">
+                        <li><a class="nav-item" href="{% url 'get_index' %}"><img src="{{MEDIA_URL}}images/someneck_logo.png" class="logo"></img></a></li>
+                        <li><a class="nav-item" href="{% url 'products_by_type' 'acoustic' %}">ACOUSTIC</a></li>
+                        <li><a class="nav-item" href="{% url 'products_by_type' 'electric' %}">ELECTRIC</a></li>
+                        <li><a class="nav-item" href="{% url 'products_by_type' 'bass' %}">BASS</a></li>
+                        <li><a class="nav-item" href="{% url 'products_by_type' 'amplifier' %}">AMPS</a></li>
+                        <li><a class="nav-item" href="{% url 'products_by_type' 'effects' %}">EFFECTS</a></li>
+                        <li><a class="nav-item" href="{% url 'products_by_type' 'pickup' %}">PICKUPS</a></li>
+                        <li><a class="nav-item" href="{% url 'products_by_type' 'audio' %}">AUDIO</a></li>
+                    </ul>
+            </nav>
 
-            <!--            {% if user.is_authenticated %}-->
-            <!--            <li><a class="navtab" href='#'>{{ user.username }}</a></li>-->
-            <!--            <li><a class="navtab" href="/accounts/profile">Profile</a></li>-->
-            <!--            <li><a class="navtab" href="/accounts/logout">Log Out</a></li>-->
-            <!--            {% else %}-->
-            <!--            <li><a class="navtab" href="/accounts/register">Register</a></li>-->
-            <!--            <li><a class="navtab" href="/accounts/login">Log In</a></li>-->
-            <!--            {% endif %}-->
-            <!--        </ul>-->
-            <!--    </div>    -->
-            <!--</nav>-->
+
+            
             
             <!--BLOG-ABOUT NAVBAR-->
             <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
@@ -72,33 +123,9 @@
             <!--    </div>-->
             <!--</nav>-->
 
-            <div class="logo-align-center"><a href="{% url 'get_index' %}"><img src="{{MEDIA_URL}}images/someneck_logo.png" class="logo"></img></a></div>
-            <hr>
 
-            <!--PRODUCTS NAVBAR-->
-            <nav class="navbar navbar-default">
-                <div class="container text-center">
-                    <div id="navbar" class="navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'acoustic' %}">ACOUSTIC</a></li>
-                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'electric' %}">ELECTRIC</a></li>
-                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'bass' %}">BASS</a></li>
-                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'amplifier' %}">AMPS</a></li>
-                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'effects' %}">EFFECTS</a></li>
-                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'pickup' %}">PICKUPS</a></li>
-                            <li class="navbar-li"><a class="navtab" href="{% url 'products_by_type' 'audio' %}">AUDIO</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
             
-            <hr> {% if messages %}
-            <div class="alert alert-success">
-                <div class="messages">
-                    {% for message in messages %} {{ message }} {% endfor %}
-                </div>
-            </div>
-            {% endif %}
+
 
 
             <div class="row">

@@ -47,8 +47,6 @@ def save_image_from_url(field, url):
         return True
 
     return False
-
-
     
 def scrape_urls_from_collection_page(url, type):
     
@@ -171,82 +169,3 @@ def get_products_from_someneck():
         print('\n' + url_tuple[0].rsplit('/', 1)[-1].replace('-', ' ').title())
         product_details = scrape_product_from_url(url_tuple)
         product_details_list.append(product_details)
-        
-    
-    
-    
-    
-# def get_manufacturer_and_type_from_someneck(): 
-#     product_urls = []
-#     product_details_list = []
-#     type_set = set()
-#     manufacturer_set = set()
-
-#     for type, url in collection_urls.items(): 
-#         product_urls.extend(scrape_urls_from_collection_page(url, type))
-        
-#     for url_tuple in product_urls:
-        
-#         print('\n' + url_tuple[0].rsplit('/', 1)[-1].replace('-', ' ').title())
-#         product_details = scrape_product_from_url(url_tuple)
-        
-#         type_set.add("('" + product_details['type'].upper() + ", '" + product_details['type'].title() + "')")
-#         manufacturer_set.add("('" + product_details['manufacturer'].upper() + ", '" + product_details['manufacturer'].title() + "')")
-        
-#     type_set_list = list(type_set)
-#     for i in range(len(type_set_list)):
-#         print('\n' + type_set_list[i])
-        
-#     print ("\n\n=================================\n\n")
-        
-#     manufacturer_set_list = list(manufacturer_set)
-#     for i in range(len(manufacturer_set_list)):
-#         print('\n' + manufacturer_set_list[i])
-    
- 
-    
-    
-# def get_acoustics_from_someneck(): 
-#     product_urls = []
-#     product_details_list = []
-    
-#     print("\n\nscraping data from https://www.someneckguitars.com\n----------------------------------------------- \n")
-    
-#     url = collection_urls["acoustic"]
-    
-#     product_urls.extend(scrape_urls_from_collection_page(url, 'acoustic'))
-        
-#     for url_tuple in product_urls[:10]:
-        
-#         print('\n' + url_tuple[0].rsplit('/', 1)[-1].replace('-', ' ').title())
-#         product_details = scrape_product_from_url(url_tuple)
-#         product_details_list.append(product_details)
-
-#     print("\nAll products successfully scraped!\n")   
-
-#     return product_details_list
-    
-    
-# def get_single_product_from_someneck():
-#     product_urls = []
-#     product_details_list = []
-    
-#     print("\n\nscraping data from https://www.someneckguitars.com\n----------------------------------------------- \n")
-    
-#     url = collection_urls["acoustic"]
-    
-#     product_urls.extend(scrape_urls_from_collection_page(url, 'acoustic'))
-        
-#     for url_tuple in product_urls[:1]:
-        
-#         print('\n' + url_tuple[0].rsplit('/', 1)[-1].replace('-', ' ').title())
-#         product_details = scrape_product_from_url(url_tuple)
-#         product_details_list.append(product_details)
-        
-        
-        
-
-
-#     print("\nAll products successfully scraped!\n")   
-
-#     return product_details_list

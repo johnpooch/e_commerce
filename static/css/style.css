@@ -23,63 +23,20 @@ select {
   background-repeat: no-repeat;
 }
 
-.logo-align-center {
-  padding-top: 8vh;
-  text-align: center;
+.border-btm {
+  border-bottom: white solid 1px;
 }
 
-.navbar .navbar-header,
-.navbar-collapse {
-    float:none;
-    display:inline-block;
-    vertical-align: top;
-    padding-left: 0;
-    padding-right: 0;
+.border-lft {
+  border-left: white solid 1px;
 }
 
-.navbar {
-  width: 100%;
-}
-
-.navbar-nav {
-    display: inline;
-}
-
-.navbar-li {
-  display: inline-block;
-}
-
-@media (max-width: 768px) {
-    .navbar-collapse  {
-        display: block;
-    }
-}
-
-.nav-top-margin {
-  padding-top: 5vh;
-}
-
-.navtab {
-  color: #FFF;
-    text-decoration: none;
-    padding-left: 20px;
-    font-size: 1.2rem;
-}
-.navtab:hover { 
-  color: #EA1920;
-  text-decoration: none;
-}
-
-.navtab-li {
-  padding-left: 20px;
-}
-
-.navbar-center {
-  width: 800px;
+#featured-heading {
+    background-color: #000;
 }
 
 .content-background-div {
-  background: #1F1F1F;
+  background: #222;
   color: #FFFFFF;
 }
 
@@ -107,5 +64,20 @@ select {
 }
 
 .logo {
-  width: 50%;
+  width: 30%;
+}
+
+.search-bar {
+  background-color: inherit;
+  width: 80%;
+  padding: 2vh;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #9A9A9A;
+}
+
+.search-bar:focus {
+    outline: none;
+
 }
