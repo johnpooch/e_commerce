@@ -41,8 +41,40 @@ select {
 
 .featured-products-section {
   height: 100vh;
-  background-color: black;
+  background-image: url('/static/images/wood_background.jpg');
   color: white;
+}
+
+.featured-products-overlay {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .71);
+  border-top: black solid 1rem;
+}
+
+
+.featured-products-header {
+  margin: 0px;
+  text-align: center;
+  background-color: inherit;
+  position: relative;
+}
+
+.featured-products-header:before, .featured-products-header:after {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 50%;
+    height: 1px;
+    content: '\a0';
+    background-color: #CF3B33;
+}
+.featured-products-header:before {
+    margin-left: -50%;
+    text-align: right;
+}
+
+.featured-products-header-div {
+  padding-top: 3rem;
 }
 
 /* Products ------------------------------------------------------------------------------ */
@@ -52,12 +84,14 @@ select {
     text-decoration: none;
     letter-spacing: 2px;
     font-weight: 400;
-    font-size: 22px;
+    font-size: 1rem;
 }
 
 .product-col {
     width: 100%;
     border: #CF3B33 solid 1px;
+    border-radius: 3%;
+    margin-bottom: 1.3rem;
 }
 
 /* Motto ------------------------------------------------------------------------------------------ */

@@ -113,21 +113,24 @@
     <!--FEATURED PRODUCTS-->
     
     <!--Background Image-->
-    <section class="featured-products-section">
-        <div class="container no-margin-top">
-            <div class="featured-products-body">
-                <div class="row">
-                    {% for product in featured_products %}
-                    <div class="col-sm-3 column-align grow">
-                        {% if product.image %}
-                        <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
-                        <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
-                        <p><span class="boldtext"></span>€ {{ product.price }}</p>
-                        {% else %}
-                        <p><span class="boldtext"></span>Call us for pricing</p>
-                        {% endif %}
+    <section class="featured-products-section background-image">
+        <div class="featured-products-overlay">
+            <div class="featured-products-header-div"><h2 class="featured-products-header">FEATURED PRODUCTS</h2></div>
+            <div class="container no-margin-top">
+                <div class="featured-products-body">
+                    <div class="row">
+                        {% for product in featured_products %}
+                        <div class="col-sm-3 column-align grow">
+                            {% if product.image %}
+                            <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
+                            <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
+                            <p><span class="boldtext"></span>€ {{ product.price }}</p>
+                            {% else %}
+                            <p><span class="boldtext"></span>Call us for pricing</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
