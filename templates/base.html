@@ -95,51 +95,44 @@
         
     </section>
         
-        <div class="container no-margin-top">
+        <!--BLOG-ABOUT NAVBAR-->
+        <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
             
+        <!--    <div class="nav-align-right"></div>-->
             
-            <!--BLOG-ABOUT NAVBAR-->
-            <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
-                
-            <!--    <div class="nav-align-right"></div>-->
-                
-            <!--    <div class="nav-align-right">-->
-            <!--        <ul class="nav nav-pills pull-right mr-auto">-->
+        <!--    <div class="nav-align-right">-->
+        <!--        <ul class="nav nav-pills pull-right mr-auto">-->
+
+        <!--            
+        <!--            <li><a class="navtab" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>-->
+        <!--            <li><a class="navtab" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>-->
+        <!--        </ul>-->
+        <!--    </div>-->
+        <!--</nav>-->
+            
+    <!--FEATURED PRODUCTS-->
     
-            <!--            
-            <!--            <li><a class="navtab" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>-->
-            <!--            <li><a class="navtab" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>-->
-            <!--        </ul>-->
-            <!--    </div>-->
-            <!--</nav>-->
-
-
-
-            <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
-                        {% block sidebar %} {% endblock sidebar %}
-                    </ul>
-                </div>
-                <div class="content">
-                    {% block content %}
-                    {% endblock content %}
+    <!--Background Image-->
+    <section class="featured-products-section">
+        <div class="container no-margin-top">
+            <div class="featured-products-body">
+                <div class="row">
+                    {% for product in featured_products %}
+                    <div class="col-sm-3 column-align grow">
+                        {% if product.image %}
+                        <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
+                        <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
+                        <p><span class="boldtext"></span>€ {{ product.price }}</p>
+                        {% else %}
+                        <p><span class="boldtext"></span>Call us for pricing</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% block form %}
-            {% endblock form %}
         </div>
+    </section>
         
-        
-
-        <!--PRODUCTS-->
-        <div class="container">
-            
-            {% block products %}
-            {% endblock %}
-
-        </div>
-        
-        {% block custom_js %}{% endblock %}
+    {% block custom_js %}{% endblock %}
 </body>
 </html>

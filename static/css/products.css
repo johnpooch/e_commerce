@@ -6,11 +6,6 @@ a:hover {
     text-align: center;
 }
 
-.featured-products-body {
-    background: #000;
-    padding-top: 50px;
-}
-
 .product-col {
     width: 100%;
 }
@@ -34,13 +29,7 @@ a:hover {
     text-align: left;
 }
 
-.product-name {
-    color: #EA1920;
-    text-decoration: none;
-    letter-spacing: 2px;
-    font-weight: 400;
-    font-size: 22px;
-}
+
 
 .product-name:hover {
     text-decoration: none;

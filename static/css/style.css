@@ -25,16 +25,39 @@ select {
 
 /* Home Image ------------------------------------------------------------------------------------- */
 
-.guitar-shop{
+.guitar-shop {
     background-image: url('/static/images/guitar_shop_background_edit.jpeg');
 }
 
-.background-image{
+.background-image {
     width: 100%;
     height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/* Featured products ------------------------------------------------------------------------------ */
+
+.featured-products-section {
+  height: 100vh;
+  background-color: black;
+  color: white;
+}
+
+/* Products ------------------------------------------------------------------------------ */
+
+.product-name {
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-size: 22px;
+}
+
+.product-col {
+    width: 100%;
+    border: #CF3B33 solid 1px;
 }
 
 /* Motto ------------------------------------------------------------------------------------------ */
@@ -152,13 +175,13 @@ select {
   border-left: rgb(224, 39, 39) solid 1px;
 }
 
-#featured-heading {
-    background-color: #000;
+.featured-background-div {
+  background-color: #000;
+  color: white;
 }
 
-.featured-background-div {
-  background: #000;
-  color: #FFFFFF;
+.featured-products-body {
+    padding-top: 50px;
 }
 
 .paginator-div {

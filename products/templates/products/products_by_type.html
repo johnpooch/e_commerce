@@ -6,7 +6,8 @@
 <div products-body>
     <div class="heading heading-lighter heading-collection">
         <hr> 
-        <h2>{{ products.0.type }} /
+        <h2>
+            
             {% if brandquery %}
                 {{ brandquery }}
             {% else %}
@@ -130,33 +131,6 @@
             {% endif %}
             </div>
         {% endif %}
-    </div>
-</div>
-
-<!--FEATURED PRODUCTS-->
-
-<div class="featured-background-div">
-    
-    <div class="container no-margin-top">
-        <div class="featured-products-body">
-            <div class="heading heading-lighter heading-collection">
-                <hr> 
-                <h2 id="featured-heading">FEATURED PRODUCTS</h2>
-            </div>
-            <div class="row">
-                {% for product in featured_products %}
-                <div class="col-sm-3 column-align grow">
-                    {% if product.image %}
-                    <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
-                    <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
-                    <p><span class="boldtext"></span>€ {{ product.price }}</p>
-                    {% else %}
-                    <p><span class="boldtext"></span>Call us for pricing</p>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-        </div>
     </div>
 </div>
 
