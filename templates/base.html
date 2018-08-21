@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     
 
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -31,44 +31,52 @@
 </head>
 
 <body>
-
-    <!--Background Image-->
-    <section class="guitar-shop background-image">
         
-        <!--<a class="navbar-logo" href="#" style="background-image: url({{MEDIA_URL}}images/someneck_logo.png)"></a>-->
-        
+<!--Navbar ---------------------------------------------------------------------------------------->
+    
+    <div id="nav-div">
         <!--Top Navbar - Contact Details, Social Media Icons, My Account-->
         <nav id="top-navbar" class="navbar navbar-expand-md">
             
             <!--Social Media Icons, My Account, Cart-->
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
-                    <li class="icon">
+                    <li class="icon nav-item">
                         <a class="nav-item" href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a>
                     </li>
-                    <li class="icon">
+                    <li class="icon nav-item">
                         <a class="nav-item" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a>
                     </li>
-                    <li class="icon">
+                    <li class="icon nav-item">
                         <a class="nav-item" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a>
                     </li>
-                    <li class="nav-item border-lft">
-                        <a id="my-account" class="nav-link" href="#">MY ACCOUNT <i class="fa fa-chevron-down"></i></a>
-                    </li>
-                    <li class="icon" id="cart-li">
+                    
+                    
+                    <!--User authentication-->
+                    {% if user.is_authenticated %}
+                        <li><a class="nav-link after border-lft" href="{% url 'profile' %}">MY ACCOUNT</a></li>
+                        <li><a class="nav-link after" href="{% url 'logout' %}">LOGOUT</a></li>
+                    {% else %}
+                        <li><a class="nav-link after border-lft" href="{% url 'login' %}">LOGIN</a></li>
+                        <li><a class="nav-link after" href="{% url 'register' %}">REGISTER</a></li>
+                    {% endif %}
+                    
+                    
+                    <li class="icon nav-item" id="cart-li">
                         <a id="cart" href="#"><i class="fa fa-shopping-cart"></i></a>
                     </li>
                 </ul>
             </div>
         </nav>
-                        <!--            {% if user.is_authenticated %}-->
-                        <!--<li><a class="navtab" href='#'>{{ user.username }}</a></li>-->
-                        <!--<li><a class="navtab" href="/accounts/profile">Profile</a></li>-->
-                        <!--<li><a class="navtab" href="/accounts/logout">Log Out</a></li>-->
-                        <!--{% else %}-->
-                        <!--<li><a class="navtab" href="/accounts/register">Register</a></li>-->
-                        <!--<li><a class="navtab" href="/accounts/login">Log In</a></li>-->
-                        <!--{% endif %}-->
+        
+        <!--            {% if user.is_authenticated %}-->
+        <!--<li><a class="navtab" href='#'>{{ user.username }}</a></li>-->
+        <!--<li><a class="navtab" href="/accounts/profile">Profile</a></li>-->
+        <!--<li><a class="navtab" href="/accounts/logout">Log Out</a></li>-->
+        <!--{% else %}-->
+        <!--<li><a class="navtab" href="/accounts/register">Register</a></li>-->
+        <!--<li><a class="navtab" href="/accounts/login">Log In</a></li>-->
+        <!--{% endif %}-->
             
         <!--PRODUCTS NAVBAR-->
         <nav id="bottom-navbar" class="navbar navbar-expand-md">
@@ -91,9 +99,10 @@
                 </ul>
             </div>
         </nav>
-        
-        
-    </section>
+    </div>
+    
+    {% block content %}
+    {% endblock %}
         
         <!--BLOG-ABOUT NAVBAR-->
         <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
@@ -109,32 +118,7 @@
         <!--        </ul>-->
         <!--    </div>-->
         <!--</nav>-->
-            
-    <!--FEATURED PRODUCTS-->
-    
-    <!--Background Image-->
-    <section class="featured-products-section background-image">
-        <div class="featured-products-overlay">
-            <div class="featured-products-header-div"><h2 class="featured-products-header">FEATURED PRODUCTS</h2></div>
-            <div class="container no-margin-top">
-                <div class="featured-products-body">
-                    <div class="row">
-                        {% for product in featured_products %}
-                        <div class="col-sm-3 column-align grow">
-                            {% if product.image %}
-                            <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
-                            <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
-                            <p><span class="boldtext"></span>€ {{ product.price }}</p>
-                            {% else %}
-                            <p><span class="boldtext"></span>Call us for pricing</p>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        
         
     {% block custom_js %}{% endblock %}
 </body>

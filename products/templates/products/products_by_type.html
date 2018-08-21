@@ -1,137 +1,156 @@
 {% extends 'base.html' %} 
 
-{% block products %}
+{% block content %}
 
+<!--Background Image------------------------------------------------------------------------------->
 
-<div products-body>
-    <div class="heading heading-lighter heading-collection">
-        <hr> 
-        <h2>
+<section class="product-by-type-section">
+
+<!--Products Section------------------------------------------------------------------------------->
+    <div class="products-div">
+        <div id="products-container" class="container" style="margin-top: 0px">
             
-            {% if brandquery %}
-                {{ brandquery }}
-            {% else %}
-                ALL
-            {% endif %}
+            <!--Header----------------------------------------------------------------------------->
+            <div class="row heading heading-lighter heading-collection">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <h2>
+                    {% if brandquery %}
+                        {{type|upper}} - {{ brandquery }}
+                    {% else %}
+                        {{type|upper}} - ALL
+                    {% endif %}
+                    </h2>
+                </div>
+
                 
-        </h2>
-    </div>
-    
-    <div class="search-row">
-        <form id="filter-form" method='GET' action=''>
-            <input class="search-bar" type='hidden submit' name='searchquery' placeholder='Search' onfocus="this.placeholder = ''" value="{{ request.GET.searchquery }}" />
+                <!--Search----------------------------------------------------------------------------->
+                <div class="col-sm-4">
+                    <div class="search-div">
+                        <form id="filter-form" method='GET' action=''>
+                            <input class="search-bar" type='hidden submit' name='searchquery' placeholder='Search' onfocus="this.placeholder = ''" value="{{ request.GET.searchquery }}" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="filter-search-div"></div>
             
-        </form>
-    </div>
-    
-
-    <div class="filter-search-div"></div>
-        <div class="row filter-row">
-            
-            <!--SORT-->
-            
-            <div class="col-sm-6 sort-col">
-                <label for="sort-select">Sort by </label>
-                    <select form="filter-form" name="sortquery" id="sort-select" onchange="this.form.submit()">
-                        <option value="0" {% if request.GET.sortquery == '0' %} selected {% endif %}>Recently Added</option>
-                        <option value="1" {% if request.GET.sortquery == '1' %} selected {% endif %}>A-Z</option>
-                        <option value="2" {% if request.GET.sortquery == '2' %} selected {% endif %}>Z-A</option>
-                        <option value="3" {% if request.GET.sortquery == '3' %} selected {% endif %}>Newest to oldest</option>
-                        <option value="4" {% if request.GET.sortquery == '4' %} selected {% endif %}>Oldest to Newest</option>
-                        <option value="5" {% if request.GET.sortquery == '5' %} selected {% endif %}>Price (high to low)</option>
-                        <option value="6" {% if request.GET.sortquery == '6' %} selected {% endif %}>Price (low to high)</option>
+            <div class="row filter-row">
+                
+                <!--Sort -------------------------------------------------------------------------->
+                <div class="col-sm-6 sort-col">
+                    <label for="sort-select">Sort by </label>
+                        <select form="filter-form" name="sortquery" id="sort-select" onchange="this.form.submit()">
+                            <option value="0" {% if request.GET.sortquery == '0' %} selected {% endif %}>Recently Added</option>
+                            <option value="1" {% if request.GET.sortquery == '1' %} selected {% endif %}>A-Z</option>
+                            <option value="2" {% if request.GET.sortquery == '2' %} selected {% endif %}>Z-A</option>
+                            <option value="3" {% if request.GET.sortquery == '3' %} selected {% endif %}>Newest to oldest</option>
+                            <option value="4" {% if request.GET.sortquery == '4' %} selected {% endif %}>Oldest to Newest</option>
+                            <option value="5" {% if request.GET.sortquery == '5' %} selected {% endif %}>Price (high to low)</option>
+                            <option value="6" {% if request.GET.sortquery == '6' %} selected {% endif %}>Price (low to high)</option>
+                        </select>
+                </div>
+        
+                
+                <!--Filter by brand --------------------------------------------------------------->
+                <div class="col-sm-6 filter-brand-col">
+                    <label for="brand-select">Filter by brand </label>
+                    <select form="filter-form" name="brandquery" id="brand-select" onchange="this.form.submit()">
+                            <option value=''>All</option>
+                            {& autoescape on %}
+                        {% for brand in brands %}
+                            <option value={{ brand.manufacturer }} {% if brand.manufacturer == brandquery %} selected {% endif %} >{{ brand.manufacturer|title }}</option>
+                        {% endfor %}
                     </select>
+                </div>
+                
             </div>
-
-            <!--FILTER BY BRAND-->
-            
-            <div class="col-sm-6 filter-brand-col">
-                <label for="brand-select">Filter by brand </label>
-                <select form="filter-form" name="brandquery" id="brand-select" onchange="this.form.submit()">
-                        <option value=''>All</option>
-                        {& autoescape on %}
-                    {% for brand in brands %}
-                        <option value={{ brand.manufacturer }} {% if brand.manufacturer == brandquery %} selected {% endif %} >{{ brand.manufacturer|title }}</option>
+        
+            {% if not products %}
+            <div class="row">
+                <div class="col-sm-10 col-md-9">
+                    <span>There are no products which match your search.</span>
+                </div>
+            </div>
+            {% endif %}
+        
+            <div class="row align-products-left">
+                {% for product in products %}
+                <div class="col-sm-3 column-align grow">
+                    {% if product.image %}
+                    <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
+                    <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
+                    <p><span class="boldtext price-text">€ {{ product.price }}</span</p>
+                        {% else %}
+                            <p><span class="boldtext"></span>Call us for pricing</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        
+            <!--PAGINATOR-->
+            <div class="paginator-div">
+                {% if products.paginator.num_pages > 1 %}
+                    <div class="pagination">
+                        <span class="pagination-span">
+                            {% if products.has_previous %}
+                            <a class="pagination-action pagination-border" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                                <i class="fa fa-angle-double-left"></i>  First
+                            </a>
+                        </span>
+                        <span class="pagination-span">
+                            <a class="pagination-action pagination-border" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                                <i class="fa fa-angle-left"></i>  Previous
+                            </a> 
+                        </span>
+                        
+                        {% endif %} 
+                        
+                    {% for num in products.paginator.page_range %} 
+                
+                        {% if products.number == num %}
+                        <span class="pagination-action pagination-number pagination-current pagination-border" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">  {{ num }}  </span> 
+                        
+                        {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                        <span class="pagination-action pagination-number pagination-border" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">  {{ num }}  </span>
+                        {% endif %}
                     {% endfor %}
-                </select>
-            </div>
-        </div>
-    </div>
-
-    {% if not products %}
-    <div class="row">
-        <div class="col-sm-10 col-md-9">
-            <span>There are no products which match your search.</span>
-        </div>
-    </div>
-    {% endif %}
-
-    <div class="row align-products-left">
-        {% for product in products %}
-        <div class="col-sm-3 column-align grow">
-            {% if product.image %}
-            <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}
-            <a href="{% url 'product_details' product.id %}"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}
-            <p><span class="boldtext price-text">€ {{ product.price }}</span</p>
-                {% else %}
-                    <p><span class="boldtext"></span>Call us for pricing</p>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
-<!--PAGINATOR-->
-    <div class="paginator-div">
-        {% if products.paginator.num_pages > 1 %}
-            <div class="pagination">
-                <span class="pagination-span">
-                    {% if products.has_previous %}
-                    <a class="pagination-action pagination-border" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                        <i class="fa fa-angle-double-left"></i>  First
-                    </a>
-                </span>
-                <span class="pagination-span">
-                    <a class="pagination-action pagination-border" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                        <i class="fa fa-angle-left"></i>  Previous
-                    </a> 
-                </span>
                 
-                {% endif %} 
-                
-            {% for num in products.paginator.page_range %} 
-        
-                {% if products.number == num %}
-                <span class="pagination-action pagination-number pagination-current pagination-border" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">  {{ num }}  </span> 
-                
-                {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
-                <span class="pagination-action pagination-number pagination-border" onclick="window.location.href='?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'">  {{ num }}  </span>
+                    {% if products.has_next %}
+                       
+                        <span class="pagination-span">
+                            <a class="pagination-action pagination-border" href="?page={{ products.next_page_number }}
+                                {% if request.GET.q %}
+                                    &q={{ request.GET.q }}
+                                {% endif %}">
+                                Next  <i class="fa fa-angle-right"></i>
+                            </a>
+                        </span> 
+                        <span class="pagination-span">
+                            <a class="pagination-action pagination-border" href="?page={{ products.paginator.num_pages }}
+                                {% if request.GET.q %}
+                                    &q={{ request.GET.q }}
+                                {% endif %}">
+                                Last  <i class="fa fa-angle-double-right"></i>
+                            </a> 
+                        </span>
+                        
+                    {% endif %}
+                    </div>
                 {% endif %}
-            {% endfor %}
-        
-            {% if products.has_next %}
-               
-                <span class="pagination-span">
-                    <a class="pagination-action pagination-border" href="?page={{ products.next_page_number }}
-                        {% if request.GET.q %}
-                            &q={{ request.GET.q }}
-                        {% endif %}">
-                        Next  <i class="fa fa-angle-right"></i>
-                    </a>
-                </span> 
-                <span class="pagination-span">
-                    <a class="pagination-action pagination-border" href="?page={{ products.paginator.num_pages }}
-                        {% if request.GET.q %}
-                            &q={{ request.GET.q }}
-                        {% endif %}">
-                        Last  <i class="fa fa-angle-double-right"></i>
-                    </a> 
-                </span>
-                
-            {% endif %}
             </div>
-        {% endif %}
+        </div>
     </div>
-</div>
+</section>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $( "#nav-div" ).css({"background-color": "black", "border-bottom": "solid rgba(255, 0, 0, 0.41) 1px"});
+    });
+</script>
+
 
 {% endblock %}

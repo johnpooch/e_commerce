@@ -10,27 +10,6 @@ a:hover {
     width: 100%;
 }
 
-.filter-search-div {
-    text-align: center;
-    
-}
-
-.search-row {
-    text-align: center;
-    padding-bottom: 5vh;
-}
-
-.sort-col {
-    text-align: right;
-    padding-bottom: 5vh;
-}
-
-.filter-brand-col {
-    text-align: left;
-}
-
-
-
 .product-name:hover {
     text-decoration: none;
 }
@@ -82,7 +61,7 @@ hr {
     overflow: hidden;
 }
 .heading h2 {
-    background-color: #111;
+    background-color: inherit;
     margin: 0;
     padding: 0 30px;
     display: inline-block;
@@ -92,8 +71,6 @@ hr {
     letter-spacing: 4px;
     z-index: 9;
     position: relative;
-    background-color: #222;
-
 }
 
 h2 {
