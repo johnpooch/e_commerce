@@ -14,7 +14,7 @@ select {
   border-radius: 3px;
   padding: 10px 40px 10px 10px;
   background-color: transparent;
-  color: black;
+  color: white;
 
   font: 400 11px system-ui;
   font-size: 100%;
@@ -105,6 +105,11 @@ select {
 
 /* Login/register ------------------------------------------------------------------------------------------ */
 
+#upload-container {
+  padding-top: 12rem;
+  width: 50%;
+}
+
 #register-container {
   padding-top: 12rem;
   width: 25%;
@@ -112,7 +117,7 @@ select {
 
 #login-container {
   padding-top: 12rem;
-  width: 25%;
+  width: 35%;
 }
 
 .form-header {
@@ -123,6 +128,7 @@ select {
   background-image: url('/static/images/wood_background.jpg');
   border: 4px black solid;
   border-radius: 1%;
+  background-size: cover;
 }
 
 .login-overlay {
@@ -138,6 +144,53 @@ select {
   padding: .2rem 1rem;
   border-radius: 7%;
   margin-top: 1rem;
+}
+
+.dynamic-form-button {
+  background: inherit;
+  color: white;
+  border: solid 1px red;
+}
+
+.main-image-div > input {
+  background: inherit;
+  border: solid 1px red;
+  color: white;
+  padding: .4em;
+  border-radius: 5px;
+  margin-top: .4em;
+}
+
+.gallery-image-input-div > input {
+  background: inherit;
+  border: solid 1px red;
+  color: white;
+}
+
+.upload-field-row {
+  padding-top: 2rem;
+}
+
+.upload-field-row > div {
+  display: grid;
+}
+
+#upload-button {
+  color: white;
+  background: inherit;
+  border: solid 1px red;
+}
+
+#additional-image-span {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+
+
+.error-msg {
+  display: none;
 }
 
 /* Motto ------------------------------------------------------------------------------------------ */

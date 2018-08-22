@@ -3,33 +3,74 @@
 
 {% block content %}
 
+<!--Background Image------------------------------------------------------------------------------->
 
-<h1> Upload new product </h1>
-<form class="form-horizontal" role="form" action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
-    {{ form | as_bootstrap }}
-    
-    <p>Gallery images: </p>
-    
-    {{ formset.management_form }}
-        {% for form in formset %}
-            <div class="row form-row spacer">
-                <div class="col-4">
-                    <div class="input-group">
-                        {{form}}
-                        <div class="input-group-append">
-                            <button class="btn btn-success add-form-row">+</button>
-                        </div>
+<section class="guitar-shop background-image">
+
+<!--Register Form------------------------------------------------------------------------------------->
+
+    <div id="upload-container" class="container" style="margin-top: 0px">
+        <div class="login-div">
+            <div class="login-overlay">
+                <form class="form-horizontal form-form" role="form" action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" novalidate>
+                    <h3 class="form-header">UPLOAD NEW PRODUCT</h3>
+                    
+                    
+                    {% csrf_token %}
+                    <div class="row upload-field-row">
+                        <div class="col-sm-8">Product Name {{ form.name }}</div>
+                        <div class="col-sm-4">{{ form.manufacturer.label }} {{ form.manufacturer }}</div>
                     </div>
-                </div>
+                    
+                    <div class="row upload-field-row">
+                        <div class="col-sm-6">Year of Manufacture {{ form.year }}</div>
+                        <div class="col-sm-6">{{ form.type.label }} {{ form.type }}</div>
+                    </div>
+                    
+                    <div class="row upload-field-row">
+                        <div class="col-sm-12">{{ form.description.label }} {{ form.description }}</div>
+                    </div>
+                    
+                    <div class="row upload-field-row">
+                        <div class="col-sm-4">{{ form.price.label }} {{ form.price }}</div>
+                        <div class="col-sm-3">Featured Product {{ form.featured }}</div>
+                        <div class="col-sm-5">Main Image <div class="input-group main-image-div">{{ form.image }}</div></div>
+                    </div>
+                    
+                    <hr>
+                    
+                    {{ formset.management_form }}
+                    
+                    <div class="col-6">
+                        <label>Gallery Images</label>
+                    </div>
+                    
+                    {% for form in formset %}
+                        <div class="row form-row spacer">
+                            <div class="col-4">
+                                <div class="input-group gallery-image-input-div">
+                                    {{form.image}}
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success add-form-row dynamic-form-button">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="row upload-field-row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <button id="upload-button" type="submit" class="btn btn-block">Upload</button>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                </form>
             </div>
-        {% endfor %}
-        
-    <div class="col-4">
-        <button type="submit" class="btn btn-block btn-success">Create</button>
+        </div>
     </div>
-</div>
-</form>
+</section>
+
 {% endblock %}
 
 {% block custom_js %}
@@ -43,6 +84,7 @@ function updateElementIndex(el, prefix, ndx) {
     if (el.name) el.name = el.name.replace(id_regex, replacement);
 }
 function cloneMore(selector, prefix) {
+    console.log("clone more function is running")
     var newElement = $(selector).clone(true);
     var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
     newElement.find(':input').each(function() {
@@ -59,7 +101,7 @@ function cloneMore(selector, prefix) {
     var conditionRow = $('.form-row:not(:last)');
     conditionRow.find('.btn.add-form-row')
     .removeClass('btn-success').addClass('btn-danger')
-    .removeClass('add-form-row').addClass('remove-form-row')
+    .removeClass('add-form-row').addClass('remove-form-row dynamic-form-button')
     .html('-');
     return false;
 }
@@ -78,11 +120,13 @@ function deleteForm(prefix, btn) {
     return false;
 }
 $(document).on('click', '.add-form-row', function(e){
+    console.log("add form button is being clicked")
     e.preventDefault();
     cloneMore('.form-row:last', 'form');
     return false;
 });
 $(document).on('click', '.remove-form-row', function(e){
+    console.log("hi")
     e.preventDefault();
     deleteForm('form', $(this));
     return false;

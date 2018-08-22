@@ -11,7 +11,7 @@ class Product(models.Model):
     manufacturer = models.CharField(max_length=50, choices=manufacturers, null=True)
     year = models.IntegerField(choices=year_choices, default=0)
     type =  models.CharField(max_length=10, choices=types, null=True)
-    description = models.TextField()
+    description = models.CharField(max_length=254, default='')
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.FileField(upload_to='images')
     published_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
