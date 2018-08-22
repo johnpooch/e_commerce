@@ -2,67 +2,79 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-sm-10 col-md-9">
-            {% if product.image %}
-                <img src="{{ MEDIA_URL }}{{ product.image }}">
-            {% endif %}
-            <h3>{{ product.name }}</h3>
-            <div class="row">
-                <div class="col-xs-9">
-                    <p>{{ product.description }}</p>
+<!--Background Image------------------------------------------------------------------------------->
+
+<section class="product-details-section" style="background-image: url({{ MEDIA_URL }}{{ product.image }});">
+    
+    <div id="product-details-container" class="container">
+        <div class="details-background">
+            <div class="row details-row">
+                <div class="col-sm-6">
                     
-                    <p><span class="boldtext">Manufacturer:</span> {{ product.manufacturer|title }}</p>
-                    
-                    {% if product.year != 0 %}
-                        <p><span class="boldtext">Year:</span> {{ product.year }}</p>
-                    {% endif %}
-                    <p><span class="boldtext">Type:</span> {{ product.type|title }}</p>
-                    
-                    {% if product.price != 0 %}
-                        <p><span class="boldtext">Price:</span> € {{ product.price }}</p>
-                    {% else %}
-                        <p><span class="boldtext"></span>Call us for pricing</p>
-                    {% endif %}
-                    
-                    <form method="POST" action="/products/add_to_cart">
-                        {% csrf_token %}
-                        <input type="hidden" name="product_id" value='{{product.id}}'/>
-                        <button type="submit" class="btn btn-info">Add to Cart</button>
-                    </form>
-                    
-                    <hr>
-                    
-                    <div class="col-xs-9">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                            {% for i in range %}
-                                <li data-target="#myCarousel" data-slide-to='{{i|add:'1'}}'{% if i == 0 %} class="active"{% endif %}></li>
-                            {% endfor %}
-                            </ol>
-                            <div class="carousel-inner" role="listbox">
-                                {% for image in product_images %}
-                                    <div class="carousel-item {% if image == product_images.0 %}active{% endif %}">
-                                        <img class="d-block img-fluid" src="{{ MEDIA_URL }}{{ image.image }}">
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                             </a>
-                        </div>
+                    <!--Manufacturer-->
+                    <div class="row">
+                        <h5 class="product-details-manufacturer">{{ product.manufacturer|upper }}</h5>
                     </div>
-                    <hr>
+                    
+                    <!--Name-->
+                    <div class="row">
+                        <h3 class="product-details-name">{{ product.name|upper }}</h3>
+                    </div>
+                    
+                    <!--Description-->
+                    <div class="row">
+                        <p class="product-details-description">{{ product.description }}</p>
+                    </div>
+                    
+                    <!--Price-->
+                    <div class="row">
+                        {% if product.price != 0 %}
+                        <h5 class="product-details-price">€ {{ product.price }}</h5>
+                        {% else %}
+                        <h5 class="product-details-price">Call us for pricing</h5>
+                        {% endif %}
+                    </div>
+                    
+                    <!--Cart-->
+                    <div class="row">
+                        <form method="POST" action="/products/add_to_cart">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value='{{product.id}}'/>
+                            <button type="submit" class="btn btn-info add-to-cart-button">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!--Image-->
+                <div class="col-sm-6 product-image-col">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                        {% for i in range %}
+                            <li data-target="#myCarousel" data-slide-to='{{i|add:'1'}}'{% if i == 0 %} class="active"{% endif %}></li>
+                        {% endfor %}
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                            {% for image in product_images %}
+                                <div class="carousel-item {% if image == product_images.0 %}active{% endif %}">
+                                    <img class="d-block img-fluid" src="{{ MEDIA_URL }}{{ image.image }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                         </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+</section>
 
+<script type="text/javascript" src="/static/js/navbarColor.js"></script>
 
 {% endblock %}

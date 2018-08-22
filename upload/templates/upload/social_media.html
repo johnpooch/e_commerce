@@ -2,17 +2,44 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-<div class="row">
-    <div class="col-sm-12 contactform">
-        <h1> Facebook caption form </h1>
-        <form role="form" action="{% url 'social_media' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %} 
-            {{ form | as_bootstrap }}
-            <input type="hidden" name="product_id" value= {{ product.id }}/>
-            <button class="btn btn-lg btn-success" type="submit">Submit</button>
-        </form>
-    </div>
-</div>
 
+<!--Background Image------------------------------------------------------------------------------->
+
+<section class="guitar-shop background-image">
+
+<!--Upload Form------------------------------------------------------------------------------------->
+
+    <div id="social-media-container" class="container" style="margin-top: 0px">
+        <div class="login-div">
+            <div class="login-overlay">
+                <form class="form-horizontal form-form" role="form" action="{% url 'social_media' %}" method="POST" enctype="multipart/form-data">
+                    <h3 class="form-header">POST PRODUCT TO SOCIAL MEDIA</h3>
+                    {% csrf_token %} 
+                    
+                    <div class="row upload-field-row">
+                        <div class="col-sm-3" style="display: block; padding-top: 1rem;">Facebook {{ form.post_to_facebook }}</div>
+                        <div class="col-sm-9">Facebook Caption {{ form.facebook_caption }}</div>
+                    </div>
+                    
+                    <div class="row upload-field-row">
+                        <div class="col-sm-3" style="display: block; padding-top: 1rem;">Twitter {{ form.post_to_twitter }}</div>
+                        <div class="col-sm-9">Facebook Caption {{ form.twitter_caption }}</div>
+                    </div>
+                    
+                    
+                    <input type="hidden" name="product_id" value= {{ product.id }}/>
+                    <div class="row upload-field-row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <button id="upload-button" type="submit" class="btn btn-block">Post</button>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
 
 {% endblock %}

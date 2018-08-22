@@ -6,6 +6,7 @@
 body {
   font-family: 'Fjalla One', sans-serif;
   letter-spacing: .1rem;
+  background-color: black;
 }
 
 select {
@@ -103,16 +104,90 @@ select {
     margin-bottom: 1.3rem;
 }
 
-/* Login/register ------------------------------------------------------------------------------------------ */
+/* Products Details ------------------------------------------------------------------------------- */
+
+.product-details-section {
+  background-image: url('/static/images/wood_background.jpg');
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  position: absolute;
+  z-index: -1;
+}
+
+#product-details-container {
+  padding-top: 10rem;
+  color: white;
+}
+
+.details-background {
+  margin-top: 4rem;
+  background-image: url('/static/images/wood_background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+}
+
+.details-row {
+  padding: 2rem;
+}
+
+.product-image-col {
+  text-align: center;
+}
+
+.product-details-name {
+  color: rgb(224, 39, 39);
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.product-details-manufacturer {
+  color: snow;
+  font-size: 1.5rem;
+  padding-top: 2rem;
+}
+
+.product-details-description {
+  color: white;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+.product-details-year {
+  color: snow;
+  font-family: sans-serif;
+  font-weight: 100;
+  font-size: 1.5rem;
+}
+
+.add-to-cart-button {
+  background-color: inherit;
+  border-color: rgb(224, 39, 39);
+}
+
+.add-to-cart-button:hover {
+  background-color: rgb(224, 39, 39);
+  border-color: rgb(224, 39, 39);
+}
+
+/* Login/register --------------------------------------------------------------------------------- */
 
 #upload-container {
+  padding-top: 10rem;
+  width: 50%;
+  padding-bottom: 4rem;
+}
+
+#social-media-container {
   padding-top: 12rem;
   width: 50%;
 }
 
 #register-container {
   padding-top: 12rem;
-  width: 25%;
+  width: 35%;
 }
 
 #login-container {
@@ -187,7 +262,9 @@ select {
   padding-right: 1rem;
 }
 
-
+#id_manufacturer, #id_image {
+  width: inherit;
+}
 
 .error-msg {
   display: none;

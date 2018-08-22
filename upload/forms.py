@@ -41,9 +41,9 @@ ImageFormset = modelformset_factory(
         
 class SocialMediaForm(forms.Form):
     
-    facebook_caption = forms.CharField(required=False, widget=forms.Textarea)
+    facebook_caption = forms.CharField(max_length=254, required=False)
     post_to_facebook = forms.BooleanField(required=False)
-    twitter_caption = forms.CharField(required=False, widget=forms.Textarea) # MAX LENGTH
+    twitter_caption = forms.CharField(max_length=254, required=False) # MAX LENGTH
     post_to_twitter = forms.BooleanField(required=False)
     
 
