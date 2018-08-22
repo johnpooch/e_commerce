@@ -103,25 +103,41 @@ select {
     margin-bottom: 1.3rem;
 }
 
-/* Login ------------------------------------------------------------------------------------------ */
+/* Login/register ------------------------------------------------------------------------------------------ */
+
+#register-container {
+  padding-top: 12rem;
+  width: 25%;
+}
 
 #login-container {
   padding-top: 12rem;
+  width: 25%;
+}
+
+.form-header {
+  text-align: center;
 }
 
 .login-div {
   background-image: url('/static/images/wood_background.jpg');
-  border: 2px black solid;
+  border: 4px black solid;
   border-radius: 1%;
 }
 
 .login-overlay {
-  background-color: rgba(0, 0, 0, .61);
+  background-color: rgba(0, 0, 0, .51);
 }
 
-.login-form {
+.form-form {
   color: whitesmoke;
-  padding: 2rem;
+  padding: 2rem 3rem;
+}
+
+.form-submit {
+  padding: .2rem 1rem;
+  border-radius: 7%;
+  margin-top: 1rem;
 }
 
 /* Motto ------------------------------------------------------------------------------------------ */
