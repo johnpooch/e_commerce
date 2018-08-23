@@ -1,25 +1,40 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% block content %}
+
+<!--Background Image--------------------------------------------------------------------------->
+
+<div class="container blog-container" style="margin-top: 0px">
+    
+    <h2 id="blog-header">LATEST NEWS</h2>
     {% for post in posts %}
-        <div class="row">
-            <div class="col-md-10 col-sm-9">
-                <h3>{{ post.title }}</h3>
-                <div class="row">
+    <div class="row">
+        <a class="news-link" href="{% url 'post_detail' post.id %}">
+            <div class="col-sm-10 col-sm-offset-1 news-content-col">
+                
+                <!--Image-->
+                <div class="blog-image-row">
                     <img src="{{MEDIA_URL}}{{ post.image }}" class="blog-image">
                 </div>
-                
-                <div class="row">
-                    <div class="col-xs-9">
-                        <p>{{ post.content|truncatewords:30 }}</p>
-                        <p><a href="{% url 'post_detail' post.id %}"  class="btn btn-default">Read more</a></p>
-                        <p><span class="boldtext">Published on:</span> {{ post.published_date }} </p>
-                        <p><span class="boldtext">Views:</span> {{post.views}}</p>
-                        <p><span class="boldtext">Tag:</span> {{ post.tag }}</p>
-                    </div>
+                <!--Date-->
+                <div class="blog-details-row">
+                    <p>{{ post.published_date }}</p>
+                </div>
+                <!--Title-->
+                <div class="blog-title">
+                    <h3>{{ post.title|title }}</h3>
                 </div>
             </div>
-            <hr>
-        </div>
+        </a>
+
+
+        <hr>
+    </div>
     {% endfor %}
+</div>
+    
+<script type="text/javascript" src="/static/js/navbarColor.js"></script>
+<script type="text/javascript" src="/static/js/bodyColor.js"></script>
+    
+    
 {% endblock %}

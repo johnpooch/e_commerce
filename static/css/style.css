@@ -352,6 +352,74 @@ select {
     text-align: left;
 }
 
+/* Blog ------------------------------------------------------------------------------------------- */
+
+#blog-section {
+  
+}
+
+#blog-header {
+  background-color: inherit;
+  margin-bottom: 2rem;  
+}
+
+.blog-container {
+  padding-top: 12rem;
+  color: black;
+}
+
+.news-link {
+  color: inherit;
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  /* ...and now for the proper property */
+  transition:.5s;
+}
+
+.news-link:hover {
+  color: rgb(224, 39, 39);
+}
+
+.news-content-col {
+  padding: 0px;
+  margin-bottom: 4rem;
+  background-color: white;
+}
+
+.blog-content-overlay {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.73);
+}
+
+.blog-image-row {
+  text-align: center;
+}
+
+.blog-image {
+  max-width: 100%;
+  max-height: 800px;
+  vertical-align: bottom; /* <-- fix the vertical gap */
+}
+
+.blog-title {
+  padding-left: 1rem;
+  padding-bottom: 2rem;
+}
+
+.blog-content-row {
+  padding: 0rem 2rem;
+}
+
+.blog-details-row {
+  padding: 1rem;
+  padding-bottom: 0rem;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+}
+
 /* Navbar ----------------------------------------------------------------------------------------- */
 
 #nav-div {
@@ -362,6 +430,7 @@ select {
 #top-navbar {
   background-color: rgba(0, 0, 0, .75);
   padding: 0px;
+  padding-bottom: .5rem;
 }
 
 #top-navbar a {
@@ -438,6 +507,10 @@ select {
   color: white;
 }
 
+.extras-nav-ul {
+  padding-right: 6rem;
+}
+
 /* Logo ------------------------------------------------------------------------------------------- */
 
 .logo {
@@ -456,6 +529,7 @@ select {
 
 .border-lft {
   padding-left: 2rem!important;
+  margin-left: 2rem!important;
   border-left: rgb(224, 39, 39) solid 1px;
 }
 

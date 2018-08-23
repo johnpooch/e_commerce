@@ -37,10 +37,10 @@
     <div id="nav-div">
         <!--Top Navbar - Contact Details, Social Media Icons, My Account-->
         <nav id="top-navbar" class="navbar navbar-expand-md">
-            
-            <!--Social Media Icons, My Account, Cart-->
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
+                    
+                    <!--Social Media Icons, My Account, Cart-->
                     <li class="icon nav-item">
                         <a class="nav-item" href="https://www.facebook.com/Someneckguitars/"><i class="fa fa-facebook-square"></i></a>
                     </li>
@@ -50,6 +50,10 @@
                     <li class="icon nav-item">
                         <a class="nav-item" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a>
                     </li>
+                    
+                    <li><a class="nav-link border-lft" href="{% url 'blog' %}">NEWS</a></li>
+                    <li><a class="nav-link" href="{% url 'about' %}">ABOUT</a></li>
+                    <li><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
                     
                     
                     <!--User authentication-->
@@ -65,6 +69,16 @@
                     <li class="icon nav-item" id="cart-li">
                         <a id="cart" href="#"><i class="fa fa-shopping-cart"></i></a>
                     </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <nav id="top-navbar" class="navbar navbar-expand-md">
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto extras-nav-ul">
+                    
+                    <!--User authentication-->
+
                 </ul>
             </div>
         </nav>
@@ -91,14 +105,10 @@
                     <li><a class="nav-item" href="{% url 'products_by_type' 'effects' %}">EFFECTS</a></li>
                     <li><a class="nav-item" href="{% url 'products_by_type' 'pickup' %}">PICKUPS</a></li>
                     <li><a class="nav-item" href="{% url 'products_by_type' 'audio' %}">AUDIO</a></li>
-                    
-                    <!--<li><a class="nav-sub-item" href="{% url 'blog' %}">Blog</a></li>-->
-                    <!--<li><a class="nav-sub-item" href="{% url 'repair' %}">Repair</a></li>-->
-                    <!--<li><a class="nav-sub-item" href="{% url 'about' %}">About</a></li>-->
-                    <!--<li><a class="nav-sub-item" href="{% url 'contact' %}">Contact</a></li>-->
                 </ul>
-            </div>
+           </div>
         </nav>
+         
     </div>
     
     {% block content %}
