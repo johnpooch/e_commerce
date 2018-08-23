@@ -27,7 +27,7 @@ select {
 /* Home Image ------------------------------------------------------------------------------------- */
 
 .guitar-shop {
-    background-image: url('/static/images/guitar_shop_background_edit.jpeg');
+    background-image: url('/static/images/guitar_shop_background_edit_2.jpeg');
 }
 
 .background-image {
@@ -109,14 +109,27 @@ select {
 .product-details-section {
   background-image: url('/static/images/wood_background.jpg');
   width: 100%;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   position: absolute;
   z-index: -1;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.product-details-background-overlay {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.83);
 }
 
 #product-details-container {
+  margin-top: 0px;
   padding-top: 10rem;
   color: white;
 }
@@ -127,6 +140,13 @@ select {
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
+  border: solid rgb(224, 39, 39) 2px;
+  border-radius: 10px;
+}
+
+.details-overlay {
+  /*background-color: rgba(0, 0, 0, .26);*/
+  border-radius: 10px;
 }
 
 .details-row {
@@ -135,6 +155,11 @@ select {
 
 .product-image-col {
   text-align: center;
+}
+
+.carousel-inner {
+  border: black solid 1px;
+  border-radius: 10px;
 }
 
 .product-details-name {
@@ -162,7 +187,12 @@ select {
   font-size: 1.5rem;
 }
 
+.add-to-cart-row {
+  margin-top: 1.5rem;
+}
+
 .add-to-cart-button {
+  font-size: 1.3rem;
   background-color: inherit;
   border-color: rgb(224, 39, 39);
 }
