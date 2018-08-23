@@ -359,6 +359,7 @@ select {
 }
 
 #blog-header {
+  padding-left: 5rem;
   background-color: inherit;
   margin-bottom: 2rem;  
 }
@@ -387,6 +388,8 @@ select {
   padding: 0px;
   margin-bottom: 4rem;
   background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .blog-content-overlay {
@@ -419,6 +422,32 @@ select {
   margin-top: 1rem;
   margin-bottom: 0rem;
 }
+
+/* News-detail ------------------------------------------------------------------------------------ */
+
+.news-detail-header-row {
+  padding-top: 2rem;
+}
+
+#news-detail-header {
+  background: inherit;
+  font-size: 4rem;
+  border-bottom: solid rgb(224, 39, 39) 3px;
+  padding-bottom: 1rem;
+}
+
+#news-detail-date {
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+#news-detail-content {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  padding: 2rem 0rem;
+}
+
 
 /* Navbar ----------------------------------------------------------------------------------------- */
 

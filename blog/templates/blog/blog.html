@@ -8,8 +8,9 @@
     
     <h2 id="blog-header">LATEST NEWS</h2>
     {% for post in posts %}
-    <div class="row">
-        <a class="news-link" href="{% url 'post_detail' post.id %}">
+    <a class="news-link" href="{% url 'post_detail' post.id %}">
+        <div class="row">
+            <div class="col-sm-1"></div>
             <div class="col-sm-10 col-sm-offset-1 news-content-col">
                 
                 <!--Image-->
@@ -25,11 +26,11 @@
                     <h3>{{ post.title|title }}</h3>
                 </div>
             </div>
-        </a>
+            <div class="col-sm-1"></div>
+        </div>
+    </a>
 
-
-        <hr>
-    </div>
+    
     {% endfor %}
 </div>
     
