@@ -52,7 +52,6 @@
                     </li>
                     
                     <li><a class="nav-link border-lft" href="{% url 'blog' %}">NEWS</a></li>
-                    <li><a class="nav-link" href="{% url 'about' %}">ABOUT</a></li>
                     <li><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
                     
                     
@@ -67,7 +66,7 @@
                     
                     
                     <li class="icon nav-item" id="cart-li">
-                        <a id="cart" href="#"><i class="fa fa-shopping-cart"></i></a>
+                        <a id="cart" href="{% url 'view_cart' %}"><i class="fa fa-shopping-cart"></i></a>
                     </li>
                 </ul>
             </div>
@@ -129,6 +128,10 @@
         <!--    </div>-->
         <!--</nav>-->
         
+        
+        <div class="footer">
+            <!--<img src="/static/images/someneck_banner.jpg"></img>-->
+        </div>
         
     {% block custom_js %}{% endblock %}
 </body>

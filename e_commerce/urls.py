@@ -23,6 +23,7 @@ from contact import urls as contact_urls
 from upload import urls as upload_urls
 from repair import urls as repair_urls
 from accounts import urls as accounts_urls
+from cart import urls as cart_urls
 
 from django.views.static import serve
 from django.conf import settings
@@ -39,5 +40,6 @@ urlpatterns = [
     path('upload/', include(upload_urls)),
     path('repair/', include(repair_urls)),
     path('accounts/', include(accounts_urls)),
+    path('cart/', include(cart_urls)), 
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

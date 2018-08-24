@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load bootstrap_tags %}
+
+{% block content %}
+<!--Background Image--------------------------------------------------------------------------->
+
+<div id="cart-container" class="container">
+    <div class="cart-div">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>CART</h2>
+            </div>
+        </div>
+        {% for item in cart_items %}
+        <div class="row cart-item-row">
+            
+            <!--Image-->
+            <div class="col-sm-3">
+                <img class="cart-item-image" src="{{MEDIA_URL}}{{item.product.image}}"></img>
+            </div>
+            
+            <!--Product Description-->
+            <div class="col-sm-6">
+                <div>
+                    <small>product</small>
+                </div>
+                <hr>
+                
+                <div class="cart-product-name">
+                    <h5>{{ item.product.name }}</h5>
+                </div>  
+                
+                <div class="cart-product-manufacturer">
+                    {{item.product.manufacturer}} | {{ item.product.type }}
+                </div>
+            </div>
+            
+            <!--Price-->
+            <div class="col-sm-2">
+                <div class="cart-subheading">
+                    <small>price</small>
+                </div>
+                <hr>
+                
+                <div>€ {{item.product.price}}</div>
+            </div>
+            
+            <!--Delete-->
+            <div class="col-sm-1">
+                <div style="text-align: center">
+                    <small>options</small>
+                </div>
+                <hr>
+                <form action="{% url 'remove_from_cart' %}" method="POST" style=" display:inline!important;">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ item.product.id }}"/>
+                    <button class="remove-from-cart-button btn btn-info" type="submit" value="delete">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <!--Total-->
+        <div class="row">
+            {% if total > 0 %}
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4 total-and-checkout" style="text-align: right">
+                <div>
+                    <h3>Total:  € {{total}}</h3>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-sm-12 empty-cart">
+                YOUR CART IS EMPTY
+            </div>
+            {% endif %}
+        </div>
+        
+        <!--Continue/Checkout-->
+        <div class="row">
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4 total-and-checkout">
+                <a href="{% url 'get_index' %}" class="btn btn-info checkout-continue-button">Continue Shopping</a>
+                {% if total > 0 %}
+                    <a href="#" class="btn btn-info checkout-continue-button">Checkout</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+    
+<script type="text/javascript" src="/static/js/navbarColor.js"></script>
+<script type="text/javascript" src="/static/js/bodyColor.js"></script>
+    
+    
+{% endblock %}

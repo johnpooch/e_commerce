@@ -1,16 +1,55 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 {% load bootstrap_tags %}
-
 {% block content %}
-<div class="row">
-        <div class="col-sm-12 contactform">
-            <h1> Contact Form </h1>
+
+<!--Background Image--------------------------------------------------------------------------->
+
+<div class="container contact-container" style="margin-top: 0px">
+    
+    <div class="row">
+        <div class="col-sm-6 contact-form-div">
+            <h1> CONTACT US </h1>
             <form role="form" action="{% url 'contact' %}" method="POST">
                 {% csrf_token %}
                 {{ form | as_bootstrap }}
-                <button class="btn btn-lg btn-success" type="submit">Submit</button>
+                <div class="contact-button-div">
+                    <button class="btn btn-lg btn-success contact-button" type="submit">Submit</button>
+                </div>
             </form>
         </div>
-</div>
+        
+        <div class="col-sm-6 contact-details-div">
+            
+            <!--Phone/Email-->
+            <div>
+                <h2 class="contact-header">GET IN TOUCH</h2>
+                <div class="contact-telephone"><i class="fa fa-phone"></i> +353 (0)1 4758545</div>
+                <div><i class="fa fa-envelope"></i> info@someneckguitars.com</div>    
+            </div>
+            
+            <hr class="contact-hr">
+            
+            <!--Map-->
+            <h2 class="contact-header">DROP BY</h2>
+            <div style="padding-bottom: 2rem">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2299.467486926296!2d-6.265649230542946!3d53.34147002390632!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xec833cda4f2b2611!2sSomeNeck+Guitars!5e0!3m2!1sen!2suk!4v1535040360746" width="100%" height="300" frameborder="0" style="border: solid black 1px" allowfullscreen></iframe>
+            </div>
+            
+            <!--Address-->
+            <div>
+                <div>Some Neck Guitars</div>
+                <div>5 Aungier Street</div>    
+                <div>Dublin 2</div>
+                <div>Ireland</div>
+            </div>
 
+        </div>
+        
+    </div>
+</div>
+    
+<script type="text/javascript" src="/static/js/navbarColor.js"></script>
+<script type="text/javascript" src="/static/js/bodyColor.js"></script>
+    
 {% endblock %}

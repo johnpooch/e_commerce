@@ -4,9 +4,9 @@
 
 <!--Background Image--------------------------------------------------------------------------->
 
-<div class="container blog-container" style="margin-top: 0px">
+<div class="container news-container" style="margin-top: 0px">
     
-    <h2 id="blog-header">LATEST NEWS</h2>
+    <h2 id="news-header">Latest News</h2>
     {% for post in posts %}
     <a class="news-link" href="{% url 'post_detail' post.id %}">
         <div class="row">
@@ -15,7 +15,7 @@
                 
                 <!--Image-->
                 <div class="blog-image-row">
-                    <img src="{{MEDIA_URL}}{{ post.image }}" class="blog-image">
+                    <img src="{{ MEDIA_URL }}{{ post.image }}" class="blog-image">
                 </div>
                 <!--Date-->
                 <div class="blog-details-row">

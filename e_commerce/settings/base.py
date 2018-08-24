@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'repair',
     'accounts',
     'upload',
+    'cart',
     
 ]
 
@@ -74,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'products.contexts.get_featured_products',
+                'cart.context.cart_contents',
 
             ],
         },
