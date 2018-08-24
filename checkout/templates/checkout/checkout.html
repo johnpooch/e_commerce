@@ -2,14 +2,29 @@
 {% load static from staticfiles %}
 {% load bootstrap_tags %}
 
+{% block head_js %}
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    Stripe.publishableKey = '{{ publishable }}';
+    //]]>
+</script>
+
+<script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
+
+{% endblock %}
+
+
 {% block content %}
-<!--Background Image--------------------------------------------------------------------------->
+
 
 <div id="cart-container" class="container">
     <div class="cart-div">
         <div class="row">
             <div class="col-sm-12">
-                <h2>CART</h2>
+                <h2>CHECKOUT</h2>
             </div>
         </div>
         {% for item in cart_items %}
@@ -55,7 +70,7 @@
                 <form action="{% url 'remove_from_cart' %}" method="POST" style=" display:inline!important;">
                     {% csrf_token %}
                     <input type="hidden" name="product_id" value="{{ item.product.id }}"/>
-                    <button class="remove-from-cart-button btn btn-info" type="submit" value="delete">Remove</button>
+                    
                 </form>
             </div>
         </div>
@@ -79,16 +94,33 @@
         
         <!--Continue/Checkout-->
         <div class="row">
-            <div class="col-sm-8"></div>
-            <div class="col-sm-4 total-and-checkout">
-                <a href="{% url 'get_index' %}" class="btn btn-info checkout-continue-button">Continue Shopping</a>
-                {% if total > 0 %}
-                    <a href="{% url 'checkout' %}" class="btn btn-info checkout-continue-button">Checkout</a>
-                {% endif %}
-            </div>
+            
         </div>
     </div>
     
+    <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
+        <legend>Payment Details</legend>
+        
+        <div id="credit-card-errors" style="display: none">
+            <div class="alert-message black-message error" id="stripe-error-message"></div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-6">
+                {{ purchase_form | as_bootstrap }}
+            </div>
+        
+            <div class="form-group col-sm-6">
+                {{ payment_form | as_bootstrap }}
+            </div>
+        </div>
+        
+        
+        {% csrf_token %}
+        
+        <div class="form-group col-sm-12">
+            <button class="remove-from-cart-button btn btn-info" name="commit" type="submit">Submit Payment</button>
+        </div>
+    </form>
 
 </div>
     
