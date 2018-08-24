@@ -556,6 +556,10 @@ select {
   padding-top: .2rem;
 }
 
+.cart-number-span {
+  font-size: 1rem;
+}
+
 .dropdown-li {
   height: 0px;
 }

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages 
 from .forms import MakePaymentForm, PurchaseForm
-from .models import PurchaseLineItem
+from .models import Purchase, PurchaseLineItem
 from django.conf import settings
 from django.utils import timezone
 from products.models import Product
@@ -50,7 +50,7 @@ def checkout(request):
             if customer.paid:
                 messages.error(request, "You have successfully paid.")
                 request.session['cart'] = {}
-                return redirect(reverse('get_index'))
+                return redirect(reverse('confirmation'))
                 
             else: 
                 messages.error(request, "Unable to take payment")
@@ -64,3 +64,8 @@ def checkout(request):
         purchase_form = PurchaseForm()
         
     return render(request, "checkout/checkout.html", { 'purchase_form': purchase_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE })
+    
+def confirmation(request):
+    cart = request.session.pop('cart', {})
+    billing_details = Purchase.objects.latest('id')
+    return render(request, "checkout/confirmation.html", {'billing_details':billing_details})

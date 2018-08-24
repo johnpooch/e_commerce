@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Someneck Clone</title>
+    <title>Some Neck Guitars</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -69,7 +69,11 @@
                     
                     
                     <li class="icon nav-item" id="cart-li">
-                        <a id="cart" href="{% url 'view_cart' %}"><i class="fa fa-shopping-cart"></i></a>
+                        <a id="cart" href="{% url 'view_cart' %}"><i class="fa fa-shopping-cart"></i>
+                        {% if cart_items %} 
+                        <span class="cart-number-span">{{ cart_items|length }}</span>
+                        {% endif %}
+                        </a>
                     </li>
                 </ul>
             </div>

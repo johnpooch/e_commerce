@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block content %}
+
+<div id="cart-container" class="container">
+    <div class="cart-div">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>CONGRATULATIONS</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Your purchase is on the way</h3>
+            </div>
+        </div>
+        
+        <!--Your order details-->
+        <div class="row">
+            <div class="col-sm-12 empty-cart">
+                YOUR ORDER DETAILS
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/navbarColor.js"></script>
+<script type="text/javascript" src="/static/js/bodyColor.js"></script>
+
+{% endblock %}
