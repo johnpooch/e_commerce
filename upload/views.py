@@ -9,12 +9,12 @@ from .forms import UploadForm, ImagesForm, ImageFormset, SocialMediaForm
 from .post_to_social import twitter_post_status, facebook_post_status
 from products.models import Product, ProductImage
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import user_passes_test
 
 # DO ALL OF THESE IMPORTS NEED TO BE HERE?
 
+@user_passes_test(lambda u: u.is_superuser)
 def upload(request):
-
-
     formset = ImageFormset(queryset=ProductImage.objects.none()) 
     form = UploadForm(request.POST, request.FILES)
 
@@ -38,8 +38,8 @@ def upload(request):
         'formset': formset,
     })
 
+@user_passes_test(lambda u: u.is_superuser)
 def social_media(request):
-
     product = Product.objects.all().order_by('-id')[0]
     form = SocialMediaForm(request.POST)
     if request.method == 'POST':
