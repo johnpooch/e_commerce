@@ -41,6 +41,48 @@
         </div>
     </div>
 </div>
+
+<hr>
+
+<div class="container news-detail-news-container">
+    <div class="news-detail-news-area">
+        <!--Header-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="home-news-header-div"><h2 class="featured-products-header">MORE NEWS</h2></div>
+            </div>
+        </div>
+        
+        <!--News-->
+        <div class="row">
+            {% for news_item in news_items %}
+            
+            <div class="col-sm-4 news-grow">
+                <a href="{% url 'post_detail' news_item.id %}" class="news-link">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <img class="news-item-image" src="{{ MEDIA_URL }}{{ news_item.image }}"></img>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5 class="featured-products-header">{{ news_item.title|upper }}</h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-sm-12 see-all-news-col">
+                <span><a href="{% url 'blog' %}">SEE ALL NEWS</a></span>
+            </div>
+        </div>
+        
+    </div>
+</div>
     
 <script type="text/javascript" src="/static/js/navbarColor.js"></script>
 <script type="text/javascript" src="/static/js/bodyColor.js"></script>

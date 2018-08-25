@@ -6,6 +6,68 @@
     
     <section class="guitar-shop background-image"></section>
     
+    <!--News  ------------------------------------------------------------------------------------->
+    
+    <section class="home-news-section">
+        
+        <div class="container home-news-container">
+            <div class="home-news-area">
+                <!--Header-->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="home-news-header-div"><h2 class="featured-products-header">NEWS</h2></div>
+                    </div>
+                </div>
+                
+                <!--News-->
+                <div class="row">
+                    {% for news_item in news_items %}
+                    
+                    <div class="col-sm-4 news-grow">
+                        <a href="{% url 'post_detail' news_item.id %}" class="news-link">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <img class="news-item-image" src="{{ MEDIA_URL }}{{ news_item.image }}"></img>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h5 class="featured-products-header">{{ news_item.title|upper }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 see-all-news-col">
+                        <span><a href="{% url 'blog' %}">SEE ALL NEWS</a></span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!--<div class="container no-margin-top">-->
+        <!--    <div class="featured-products-body">-->
+        <!--        <div class="row">-->
+        <!--            {% for product in featured_products %}-->
+        <!--            <div class="col-sm-3 column-align grow">-->
+        <!--                {% if product.image %}-->
+        <!--                <a href="{% url 'product_details' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image }}" class ="product-col"></a> {% endif %}-->
+        <!--                <a href="{% url 'product_details' product.id %}" class="product-link"><span class="product-name">{{ product.name|upper }}</span></a> {% if product.price != 0 %}-->
+        <!--                <p><span class="boldtext"></span>€ {{ product.price }}</p>-->
+        <!--                {% else %}-->
+        <!--                <p><span class="boldtext"></span>Call us for pricing</p>-->
+        <!--                {% endif %}-->
+        <!--            </div>-->
+        <!--            {% endfor %}-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+    </section>
         
     <!--Featured Products ------------------------------------------------------------------------->
     

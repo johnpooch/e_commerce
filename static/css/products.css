@@ -84,11 +84,3 @@ hr {
     text-align: left;
 }
 
-.grow {
-  transition: height 0.5s;
-  -webkit-transition: height 0.5s;
-}
-.grow:hover {
-    transition: all .2s ease;
-    transform: scale(1.1);
-}
