@@ -1,3 +1,4 @@
+from django.conf import settings
 import bs4 as bs
 from urllib.request import urlopen
 from urllib import parse
@@ -14,6 +15,8 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
 import requests
+import os
+import boto3
 
 
 
@@ -42,7 +45,18 @@ def save_image_from_url(field, url):
         img_temp.flush()
 
         img_filename = parse.urlsplit(url).path[1:]
+        
+        print(img_filename)
+        
         field.save(img_filename, File(img_temp), save = True)
+        
+        # FOR UPLOADING TO AWS
+        s3 = boto3.resource('s3')
+        s3.Bucket('e-commerce-johnpooch').put_object(Key="media/images/" + img_filename, Body=r.content)
+        
+        # FOR UPLOADING TO LOCAL
+        # with open(settings.MEDIA_ROOT + "/images/" + img_filename, "wb") as f:
+        #     f.write(r2.content)
 
         return True
 
@@ -125,6 +139,7 @@ def scrape_product_from_url(url_tuple):
     product_price_currency = price_currency['content']
     
     gallery_images = []
+    
     
     for image_element in soup.findAll("meta", {"property": "og:image"}):
         gallery_images.append(image_element["content"])

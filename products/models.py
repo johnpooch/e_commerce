@@ -13,7 +13,7 @@ class Product(models.Model):
     type =  models.CharField(max_length=10, choices=types, null=True)
     description = models.CharField(max_length=500, default='')
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    image = models.FileField(upload_to='images')
+    image = models.FileField(max_length=254, upload_to='images')
     published_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
     featured = models.BooleanField(default = False)
     
@@ -23,4 +23,4 @@ class Product(models.Model):
     # This is to allow for multiple images 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='product_images', on_delete=models.CASCADE)
-    image = models.FileField(upload_to='images')
+    image = models.FileField(max_length=254, upload_to='images')
