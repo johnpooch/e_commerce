@@ -61,9 +61,10 @@ select {
 
 .featured-products-header {
   margin: 0px;
-  text-align: center;
   background-color: inherit;
   position: relative;
+  font-size: 3rem;
+  border-bottom: rgb(224, 39, 39) 5px solid;
 }
 
 .featured-products-header-div {
@@ -207,7 +208,7 @@ select {
 
 .add-to-cart-button {
   font-size: 1.3rem;
-  background-color: inherit;
+  background-color: rgba(0, 0, 0, .5);
   border-color: rgb(224, 39, 39);
 }
 
@@ -234,29 +235,49 @@ select {
   width: 35%;
 }
 
-#login-container {
+.form-section {
+  background-color: rgb(241, 241, 242);
+  min-height: 100vh;
+}
+
+#form-container {
   padding-top: 12rem;
-  width: 35%;
+}
+
+.form-col {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+}
+
+.form-form {
+  padding: 2rem 3rem;
+}
+
+.form-form input {
+  border: 1px solid rgb(224, 39, 39);
+  border-radius: 5px;
+  padding: .4rem;
+  margin-bottom: 1rem;
+}
+
+.form-alternative {
+  text-align: center;
+  padding: 1rem;
 }
 
 .form-header {
   text-align: center;
 }
 
-.login-div {
-  background-image: url('/static/images/wood_background.jpg');
-  border: 4px black solid;
-  border-radius: 1%;
-  background-size: cover;
-}
-
 .login-overlay {
   background-color: rgba(0, 0, 0, .51);
 }
 
-.form-form {
-  color: whitesmoke;
-  padding: 2rem 3rem;
+.form-submit-div {
+  text-align: center;
 }
 
 .form-submit {
@@ -267,13 +288,17 @@ select {
 
 .dynamic-form-button {
   background: inherit;
-  color: white;
-  border: solid 1px red;
+  color: black;
+  border: solid 1px rgb(224, 39, 39);
+}
+
+.spacer {
+  margin-bottom: 1rem;
 }
 
 .main-image-div > input {
   background: inherit;
-  border: solid 1px red;
+  border: solid 1px rgb(224, 39, 39);
   color: white;
   padding: .4em;
   border-radius: 5px;
@@ -282,8 +307,7 @@ select {
 
 .gallery-image-input-div > input {
   background: inherit;
-  border: solid 1px red;
-  color: white;
+  border: solid 1px rgb(224, 39, 39);
 }
 
 .upload-field-row {
@@ -295,9 +319,8 @@ select {
 }
 
 #upload-button {
-  color: white;
   background: inherit;
-  border: solid 1px red;
+  border: solid 1px rgb(224, 39, 39);
 }
 
 #additional-image-span {
@@ -624,7 +647,7 @@ select {
 }
 
 .cart-div {
-  margin-top: 4rem;
+  margin: 4rem 0rem;
   padding: 2rem;
   background: white;
   border-radius: 10px;
@@ -738,7 +761,7 @@ select {
 /*Home News --------------------------------------------------------------------------------------- */
 
 .home-news-container {
-  padding-top: 6rem!important;
+  padding-top: 8%;;
 }
 
 .home-news-area {
@@ -756,6 +779,11 @@ select {
 .home-news-header-div { 
   color: black;
   padding-bottom: 2rem;
+}
+
+.home-news-header {
+  font-size: 3rem;
+  border-bottom: rgb(224, 39, 39) 5px solid;
 }
 
 .news-grow {
@@ -779,4 +807,179 @@ select {
   text-align: right;
   padding-top: 2rem;
   padding-right: 4rem;
+}
+
+.more-news-header {
+  text-align: center;
+}
+
+
+
+
+
+/* MEDIA QUERY PHONE ============================================================================== */
+
+@media only screen and (min-width: 768px) {
+  /* tablet/desktop */
+  
+  #phone-nav-bar, #phone-product-details-image-row,  #phone-add-to-cart-price {
+    display: none!important;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  /* phones */
+  
+  /* Navbar -------------------------------------------------------------------------------------- */
+  
+  #nav-div, .sort-col, .filter-brand-col, .hide-mobile {
+    display: none!important;
+  }
+  
+  #phone-nav-bar {
+    background: black;
+  }
+  
+  #phone-nav-logo {
+    max-height: 40px;
+  }
+  
+  .nav-link {
+    color: white!important;
+    padding-left: 1rem!important;
+  }
+  #nav-link-headings {
+    color: rgba(255, 255, 255, 0.34);
+    padding-left: 0rem;
+  }
+  
+  /* Home News ------------------------------------------------------------------------------------ */
+  
+  .home-news-section {
+    height: inherit;
+  }
+  .home-news-container {
+    padding-bottom: 2rem;
+  }
+  
+  .see-all-news-col {
+    padding-top: 0rem;
+  }
+  
+  /* Products ------------------------------------------------------------------------------------- */
+  
+  #products-container {
+    padding-top: 0rem;
+  } 
+  
+  .search-div {
+    padding-top: 1rem;
+    text-align: center;
+    display: inherit;
+  }
+  
+  .pagination-number {
+    width: auto!important;
+  }
+  
+  /* Product Details ------------------------------------------------------------------------------ */
+  
+  #product-details-container {
+    padding-top: 0rem;
+    padding-bottom: 2rem;
+  }
+  
+  #phone-product-details-image-row {
+    padding: 2rem 0rem;
+  }
+  
+  #desktop-add-to-cart, #desktop-add-to-cart, #desktop-product-details-image-col {
+    display: none;
+  }
+  
+  .product-details-name {
+    font-size: 2rem;
+  }
+  
+  .prodict-details-price {
+    font-size: 1.2rem;
+  }
+  
+  .details-background {
+    margin-top: 2rem;
+  }
+  
+  .carousel-inner {
+    border: solid black 2px;
+    box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+  }
+  
+  .add-to-cart-button {
+    margin-right: 1.5rem;
+  }
+  
+  /* News ----------------------------------------------------------------------------------------- */
+  
+  #news-header {
+    padding-left: 0rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0rem;
+  }
+  
+  .news-item-image {
+    margin-bottom: .5rem;
+  }
+  
+  .news-grow {
+    padding-bottom: 1rem;
+    margin: 1rem;
+  }
+  
+  /* News Details --------------------------------------------------------------------------------- */
+  
+  .news-container {
+    padding-top: 0rem;
+  }
+  
+  #news-detail-header {
+    font-size: 3rem;
+  }
+  
+  /* Contact -------------------------------------------------------------------------------------- */
+  
+  .contact-container {
+    padding-top: 2rem;
+    color: black;
+    padding-bottom: 4rem;
+  }
+  
+  /* Login ---------------------------------------------------------------------------------------- */
+  
+  #form-container {
+    padding: 2rem;
+  }
+  
+  /* Cart ------------------------------------------------------------------------------------------ */
+  
+  #cart-container {
+    padding: 2rem 1rem;
+  }
+  
+  .cart-div {
+    margin-top: 0rem;
+  }
+  
+  .cart-item-image {
+    margin-bottom: 2rem;
+  }
+  
+  .cart-price-div {
+    margin-bottom: 1rem;
+  }
+  
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
 }

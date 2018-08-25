@@ -6,26 +6,32 @@
 
 <!--Background Image------------------------------------------------------------------------------->
 
-<section class="guitar-shop background-image">
+<section class="form-section">
 
 <!--Login Form------------------------------------------------------------------------------------->
 
-    <div id="login-container" class="container" style="margin-top: 0px">
-        <div class="login-div">
-            <div class="login-overlay">
+    <div id="form-container" class="container" style="margin-top: 0px">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 form-col">
                 <form class="form-form" method="POST">
                     <h3 class="form-header">LOGIN</h3>
                     {% csrf_token %}
                     {{ form | as_bootstrap }}
-                    <div>
+                    <div class="form-submit-div">
                         <input class="form-submit" type="submit" value="Login"/>
                     </div>
-                    
                 </form>
+                <div class="form-alternative">
+                    <small>Dont have an account? <a href="{% url 'register' %}">Register</a></small>
+                </div>
             </div>
         </div>
+        
     </div>
 
 </section>
+
+<script type="text/javascript" src="/static/js/navbarColor.js"></script>
 
 {% endblock content %}

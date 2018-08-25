@@ -95,13 +95,13 @@
                     <div class="pagination">
                         <span class="pagination-span">
                             {% if products.has_previous %}
-                            <a class="pagination-action pagination-border" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                                <i class="fa fa-angle-double-left"></i>  First
+                            <a class="pagination-action pagination-border hide-mobile" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                                <i class="fa fa-angle-double-left "></i><span class="hide-mobile">  First</span>
                             </a>
                         </span>
                         <span class="pagination-span">
                             <a class="pagination-action pagination-border" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
-                                <i class="fa fa-angle-left"></i>  Previous
+                                <i class="fa fa-angle-left"></i><span class="hide-mobile">  Previous</span>
                             </a> 
                         </span>
                         
@@ -124,15 +124,15 @@
                                 {% if request.GET.q %}
                                     &q={{ request.GET.q }}
                                 {% endif %}">
-                                Next  <i class="fa fa-angle-right"></i>
+                                <span class="hide-mobile">Next  </span><i class="fa fa-angle-right"></i>
                             </a>
                         </span> 
-                        <span class="pagination-span">
+                        <span class="pagination-span hide-mobile">
                             <a class="pagination-action pagination-border" href="?page={{ products.paginator.num_pages }}
                                 {% if request.GET.q %}
                                     &q={{ request.GET.q }}
                                 {% endif %}">
-                                Last  <i class="fa fa-angle-double-right"></i>
+                                <span>Last  </span><i class="fa fa-angle-double-right"></i>
                             </a> 
                         </span>
                         

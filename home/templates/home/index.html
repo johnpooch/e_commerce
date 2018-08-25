@@ -8,14 +8,14 @@
     
     <!--News  ------------------------------------------------------------------------------------->
     
-    <section class="home-news-section">
+    <section class="home-news-section" style="background-image: url({{ MEDIA_URL }}images/wall_texture.jpeg)">
         
         <div class="container home-news-container">
             <div class="home-news-area">
                 <!--Header-->
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="home-news-header-div"><h2 class="featured-products-header">NEWS</h2></div>
+                    <div class="col-sm-3">
+                        <div class="home-news-header-div"><h2 class="home-news-header">NEWS</h2></div>
                     </div>
                 </div>
                 
@@ -32,7 +32,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h5 class="featured-products-header">{{ news_item.title|upper }}</h2>
+                                    <h5>{{ news_item.title|upper }}</h2>
                                 </div>
                             </div>
                         </a>
@@ -74,8 +74,13 @@
     <section class="featured-products-section background-image">
         <!--Black overlay-->
         <div class="featured-products-overlay">
-            <div class="featured-products-header-div"><h2 class="featured-products-header">FEATURED PRODUCTS</h2></div>
             <div class="container no-margin-top">
+                <!--Header-->
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="featured-products-header-div"><h2 class="featured-products-header">FEATURED PRODUCTS</h2></div>
+                    </div>
+                </div>
                 <div class="featured-products-body">
                     <div class="row">
                         {% for product in featured_products %}

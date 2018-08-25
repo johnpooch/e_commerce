@@ -24,13 +24,40 @@
                             <h3 class="product-details-name">{{ product.name|upper }}</h3>
                         </div>
                         
+                        <!-- Image (Phone Only) -->
+                        <div id="phone-product-details-image-row" class="row">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                {% for i in range %}
+                                    <li data-target="#myCarousel" data-slide-to='{{i|add:'1'}}'{% if i == 0 %} class="active"{% endif %}></li>
+                                {% endfor %}
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    {% for image in product_images %}
+                                        <div class="carousel-item {% if image == product_images.0 %}active{% endif %}">
+                                            <img class="d-block img-fluid" src="{{ MEDIA_URL }}{{ image.image }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                 </a>
+                            </div>
+                        </div>
+                        
+                        
                         <!--Description-->
                         <div class="row">
                             <p class="product-details-description">{{ product.description }}</p>
                         </div>
                         
-                        <!--Price-->
-                        <div class="row">
+                        <!--Desktop Price-->
+                        <div id="desktop-add-to-cart" class="row">
                             {% if product.price != 0 %}
                             <h5 class="product-details-price">€ {{ product.price }}</h5>
                             {% else %}
@@ -38,8 +65,9 @@
                             {% endif %}
                         </div>
                         
-                        <!--Cart-->
-                        <div class="row add-to-cart-row">
+                        <!--Desktop Cart-->
+                        {% if product.price != 0 %}
+                        <div id="desktop-add-to-cart" class="row add-to-cart-row">
                             <div class="col-sm-3" style="padding-left: 0px">
                                 
                                 <form method="POST" action="{% url 'add_to_cart' %}">
@@ -53,10 +81,29 @@
                                 <span style="vertical-align: -webkit-baseline-middle">OR CALL US +353 (0)1 4758545</span>
                             </div>
                         </div>
+                        {% endif %}
+                        
+                        <!--Phone cart and price-->
+                        <div id="phone-add-to-cart-price">
+                            {% if product.price != 0 %}
+                            <form method="POST" action="{% url 'add_to_cart' %}" style="display: inline-block">
+                                {% csrf_token %}
+                                <input type="hidden" name="quantity" value='1'/>
+                                <input type="hidden" name="product_id" value='{{product.id}}'/>
+                                <button type="submit" class="btn btn-info add-to-cart-button">ADD TO CART</button>
+                            </form>
+                            {% endif %}
+                            
+                            {% if product.price != 0 %}
+                            <span class="product-details-price">€ {{ product.price }}</span>
+                            {% else %}
+                            <span class="product-details-price">Call us for pricing</span>
+                            {% endif %}
+                        </div>
                     </div>
                     
                     <!--Image-->
-                    <div class="col-sm-6 product-image-col">
+                    <div class="col-sm-6 product-image-col" id="desktop-product-details-image-col">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                             {% for i in range %}

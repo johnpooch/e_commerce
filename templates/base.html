@@ -40,6 +40,7 @@
         
 <!--Navbar ---------------------------------------------------------------------------------------->
     
+    <!--Desktop Nav-------------------------------------------------------------------------------->
     <div id="nav-div">
         <!--Top Navbar - Contact Details, Social Media Icons, My Account-->
         <nav id="top-navbar" class="navbar navbar-expand-md">
@@ -92,16 +93,7 @@
             </div>
         </nav>
         
-        <!--            {% if user.is_authenticated %}-->
-        <!--<li><a class="navtab" href='#'>{{ user.username }}</a></li>-->
-        <!--<li><a class="navtab" href="/accounts/profile">Profile</a></li>-->
-        <!--<li><a class="navtab" href="/accounts/logout">Log Out</a></li>-->
-        <!--{% else %}-->
-        <!--<li><a class="navtab" href="/accounts/register">Register</a></li>-->
-        <!--<li><a class="navtab" href="/accounts/login">Log In</a></li>-->
-        <!--{% endif %}-->
-            
-        <!--PRODUCTS NAVBAR-->
+        <!--Products-->
         <nav id="bottom-navbar" class="navbar navbar-expand-md">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul class="navbar-nav mr-auto">
@@ -117,26 +109,50 @@
                 </ul>
            </div>
         </nav>
-         
     </div>
+    
+    <!--Phone Nav-------------------------------------------------------------------------------->
+    
+    <nav id="phone-nav-bar" class="navbar navbar-expand-md navbar-dark navbar-fixed-top">
+        <div class="container-fluid">
+            <button id="phone-nav-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <a class="navbar-brand" href="{% url 'get_index' %}"> <img id="phone-nav-logo" src="{% static 'images/someneck_logo.png' %}"></a>
+            
+            <div class="collapse navbar-collapse " id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" style="padding: 1rem 0rem">
+                    
+                    <li class="nav-item" id="nav-link-headings">PRODUCTS</li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'products_by_type' 'electric' %}">ELECTRIC</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'products_by_type' 'bass' %}">BASS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'products_by_type' 'amplifier' %}">AMPS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'products_by_type' 'effects' %}">EFFECTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'products_by_type' 'pickup' %}">PICKUPS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'products_by_type' 'audio' %}">AUDIO</a></li>
+                    
+                    <li class="nav-item" id="nav-link-headings">THE SHOP</li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'blog' %}">NEWS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
+                    
+                    <li class="nav-item" id="nav-link-headings">ACCOUNT</li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">MY ACCOUNT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">LOGOUT</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">LOGIN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">REGISTER</a></li>
+                    {% endif %}
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
     
     {% block content %}
     {% endblock %}
-        
-        <!--BLOG-ABOUT NAVBAR-->
-        <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded">-->
-            
-        <!--    <div class="nav-align-right"></div>-->
-            
-        <!--    <div class="nav-align-right">-->
-        <!--        <ul class="nav nav-pills pull-right mr-auto">-->
-
-        <!--            
-        <!--            <li><a class="navtab" href="https://twitter.com/Someneckguitars"><i class="fa fa-twitter-square"></i></a></li>-->
-        <!--            <li><a class="navtab" href="https://www.instagram.com/someneck"><i class="fa fa-instagram"></i></a></li>-->
-        <!--        </ul>-->
-        <!--    </div>-->
-        <!--</nav>-->
         
         
         <div class="footer">
