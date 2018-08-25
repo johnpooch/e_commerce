@@ -94,10 +94,16 @@
         
         <!--Continue/Checkout-->
         <div class="row">
-            
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4 total-and-checkout">
+                {% if total == 0 %}
+                <a href="{% url 'get_index' %}" class="btn btn-info checkout-continue-button">Continue Shopping</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     
+    {% if total > 0 %}
     <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
         <legend>Payment Details</legend>
         
@@ -121,6 +127,7 @@
             <button class="remove-from-cart-button btn btn-info" name="commit" type="submit">Submit Payment</button>
         </div>
     </form>
+    {% endif %}
 
 </div>
     
