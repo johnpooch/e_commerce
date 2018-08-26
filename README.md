@@ -63,22 +63,22 @@ Code in action:
 ## Automatic posting to Twitter and Facebook
 One of the features in this project is the ability to automatically post a product to Facebook and Twitter when uploading a product. This means that the shop owner can more easily manage the social media of the shop. Dummy Twitter and Facebook accounts were made to demonstrate the feature.
 
-Twitter account with no posts - pre-upload:
+#### Twitter account with no posts - pre-upload:
 <img src="/source/images/Screen Shot 2018-08-26 at 11.54.52.png?raw=true"/>
 
-Facebook account with no posts - pre-upload:
+#### Facebook account with no posts - pre-upload:
 <img src="/source/images/Screen Shot 2018-08-26 at 11.55.35.png?raw=true"/>
 
-Upload form:
+#### Upload form:
 <img src="/source/images/Screen Shot 2018-08-26 at 12.02.10 (2).png?raw=true"/>
 
-Social media form:
+#### Social media form:
 <img src="/source/images/Screen Shot 2018-08-26 at 12.05.17.png?raw=true"/>
 
-Twitter after upload:
+#### Twitter after upload:
 <img src="/source/images/Screen Shot 2018-08-26 at 12.06.12.png?raw=true"/>
 
-Facebook after upload: 
+#### Facebook after upload: 
 <img src="/source/images/Screen Shot 2018-08-26 at 12.10.18.png?raw=true"/>
 
 
