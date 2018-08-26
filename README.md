@@ -1,25 +1,29 @@
 [![Build Status](https://travis-ci.org/johnpooch/e_commerce.svg)](https://travis-ci.org/johnpooch/e_commerce)
 
-# Some Neck Guitars E-Commerce Website
+# E-Commerce Vintage Guitar Shop
 
-### Introduction to Diplomacy
-Diplomacy is a popular strategy board game released in 1959 by Allan B. Calhamer. The game is set in early 1900s Europe. Diplomacy is known for it's emphasis on negotiation, alliance, and betrayal. Unlike many other strategy board games, Diplomacy does not rely on dice rolling or other random elements. All players write down their orders and at the end of each negotiation phase, all of the orders are processed simultaneously. Typically the game is played by seven players, each controlling one country. Variations of the game allow for fewer players. Variations of the game board also exist. 
+### About Some Neck Guitars
+Some Neck Guitars is a guitar shop in Dublin which specialises in vintage and used guitars. The shop also sells amplifiers, effects pedals, pickups, and audio processing units.
 
 ### Motivations Behind the Project
-This project is designed to be an easy-to-use used browser-based version of Diplomacy which features real-time communication between players and a minimalist user interface which allows players to comfortably study the board while engaging in communications or issuing orders.
+This project is designed to be a redesign of the current Some Neck Guitars website (https://www.someneckguitars.com). The current Some Neck Guitar website was built using Shopify. The design of the website is a little lacklustre and there are a number of features which would be expected from an E-commerce site that are missing from the site. This project represents an improved design for the site and includes a number of features which are not in the original site.
 
 ### Project Stack Overview
-This project is built using HTML5, CSS, JavaScript (AJAX and jQuery), Python3, Flask, and Mongo DB (PyMongo). The code is tested using the Python unittest framework. The logic behind the order processing is done using object oriented programming principles. Real time communication between players is achieved using the flask_socketio library.
+This project is built using HTML5, CSS, JavaScript (jQuery), Python3, and Django2. The website uses the Django default SQLite3 database for local development. PostgreSQL is used for production development. The site is hosted using Heroku and the media files for the Heroku version are stored using AWS S3. The code is tested using the Django test library. 
+
+The site accesses the Facebook and Twitter APIs to allow the shop owner to post to Facebook and Twitter automatically when uploading a new product. This is done using facebook-sdk 2.0.0 and twython 3.7.0.
+
+The products on the site were scraped directly from the original Some Neck website. This was done using Beautiful Soup 4.
+
+Payments are handled using Stripe.
+
+The site is mobile-responsive. This was done using Bootstrap 4.
 
 ### Live Version
-The project is in a unfinished state. The project is not ready for real-world play-testing and some core functionality is incomplete. 
+ 
+This website is not used by Some Neck Guitars. The site was created purely for educational purposes. Please don't give real credentials in the checkout and accounts sections as the site is not fully secure.
 
-Live version of the game: http://johnpooch-diplomacy.herokuapp.com/initialise
-
-Note -- to automatically sign in and populate the game with opponents, enter the following link after initialising the game:
-http://johnpooch-diplomacy.herokuapp.com/populate
-
-Game Rules: https://www.wizards.com/avalonhill/rules/diplomacy.pdf
+Live version: http://johnpooch-diplomacy.herokuapp.com/initialise
 
 ## Getting Started
 
@@ -39,42 +43,82 @@ or if you're using Cloud9:
 $ sudo pip3 install -r requirements.txt
 ```
 
-The code relies on a Mongo database. To create a Mongo database consult the mLab documentation: https://docs.mlab.com/
-
-Once you have created a Mongo database, create an environment variable for the Mongo URI. You will also need to create a secret key. You can generate a random secret key here: https://randomkeygen.com/
+You should now be able to run the site locally. There will be no products on the site.
 
 ```
-$ export MONGO_URI=<INSERT MONGO URI HERE>
-$ export SECRET_KEY="<INSERT KEY HERE>"
-```
-
-You should now be able to run the game locally:
-
-```
-$ python3 run.py
+$ python3 manage.py runserver $IP:<PORT>
 ```
 
 ### Running the tests
 
-At present, the project only features automated tests which test the logic behind processing orders. To carry out the automated tests, run the following:
+To carry out the automated tests:
 
 ```
-$ python3 test_order.py
+$ python3 manage.py test
 ```
 
-## General Comments / What I've Learned From This Project So Far
+## Issues with the original website
 
-### Using Flask and Mongo to Build Turn-Based Board Games in the Browser
+##### Original website has a lacklustre design
+The design of the original website is somewhat dull. There are large areas with monochrome and textureless backgrounds. 
 
-I have found that using Flask and Mongo to build a turn-based borad game in the browser has emphasised a number of advantages and disadvantages surrounding the two technologies.
+A large proportion of the navbar is occupied by a banner showing the number of items in the cart and the total value of the cart items. Because of the value of the products, most users on the site would not be making purchases directly from the site. As such, this banner is unnecessarily large.
 
-Advantages
+###### Solution
+Textured backgrounds, borders, shadows, responsiveness, and other stylistic elements were used in this project to bring life to the website. The design of the site is a work in progress. 
 
-Disadvantages
+##### Original website does not have users/accounts
+Returning customers cannot create accounts on the site. This means that users can't save products which they like or comment on products, etc. 
+
+###### Solution
+This project has a users and accounts. The functionality of the users/accounts system has not been fully developed.
+
+##### Original website has defunct blog section
+While the original website has a blog section, the blog has only one post which was posted in 2015. The shop is regularly visited by internationally renowned musicians. The shop also carry out repairs on rare guitars. If the shop posted to its blog about how to maintain rare guitars or about celebrities visiting the shop, this could result in greater traffic to the website.
+
+###### Solution
+This project has a re-designed blog/news section which included more posts and is more appealing to read.
+
+##### Original website does not have a search feature
+The original Some Neck Guitars website does not have a search feature. The website has around 400 products on it. As such it can be difficult to determine whether the shop has the specific product you're be looking for. The website has a 'sort by' feature which orders the products, and a 'filter by brand' feature which displays only products of a given manufacturer. A search bar is a more intuitive way of filtering products.
+
+###### Solution
+This project features a search bar. The search bar can be used in conjunction with the 'sort by' and 'filter by' features. 
+
+##### 'Sort by' options are not intuitive
+On the original site, the 'sort by' options are not intuitive. 
+
+The 'Newest to Oldest' option orders the products by the date at which they were uploaded to the site. Given that the shop specialises in vintage and used guitars, it would make more sense to order the products by the year of manufacturing. This would allow users to look at older guitars or newer guitars.
+
+The 'Best Selling' option is redundant because the products on the site are unique.
+
+###### Solution
+In this project, the 'Newest to Oldest' option orders the products by the year of manufacturing. Another option called recently added is included to see products that habve been recently added to the page. The 'Best Selling' feature is removed. 
+
+##### Original website contact and about pages are virtually identical
+The 'contact us' and 'about' pages on the original website are almost identical. The only difference between the two pages is that the 'contact us' page features a Google map. This creates the impression of the website being unprofessional. 
+
+###### Solution
+This project doesn't have an 'about' page at present. In the future an 'about' page will be added which will be entirely separate from the 'contact us' page.
+
+##### Original website doesn't have a browser image
+The original website does not have an image in the browser tab. This is a simple feature to implement which improves the appearance of the site.
+
+###### Solution
+In this project the profile image of the Some Neck Facebook page was used as a browser icon.
 
 ## Current Issues
 
-The project has a large number of issues which need to be resolved before the project is ready for play-testing.
+The project has a number of issues which could not be resolved because of time constraints.
+
+##### Cluttered navbar
+The navbar on the site is a bit cluttered especially on smaller displays. By using collapsable lists, the navbar could be cleaner. 
+
+##### Missing footer section
+The page does not have a footer section. This section should feature a mini navbar and contact details. The section could also include links to social media. 
+
+##### Confirmation page is unfinished
+After making a purchase, users are redirected to a confirmation page. This page is unfinished. When the page is finished it should present the user with the product(s) that have just been purchased as well as the billing details of the purchase so that the user can review the details of the purchase.
 
 ## Future Development Plans
 
@@ -82,23 +126,13 @@ xxx
 
 ## Built With
 
-* [Flask](http://flask.pocoo.org/) - The flask web framework
-* [PyMongo](https://api.mongodb.com/python/current/) - Used to work with Mongo data base
-* [Flask-SocketIO](https://flask-socketio.readthedocs.io/en/latest/) - Used for real-time communication between players
-
+* [Django](https://www.djangoproject.com/) - The Django web framework.
+* [AWS S3](https://console.aws.amazon.com/s3/) - Used to store media for Heroku version. 
+* [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) - Used to scrape original Some Neck Website.
+* [Stripe](https://stripe.com/gb) - Used to handle payments.
 
 ## Acknowledgments
 
-* Corey Schafer's video series on working with Flask: https://www.youtube.com/watch?v=MwZwr5Tvyxo&list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
-* Pretty Printed's video series on working with SocketIO in Flask: https://www.youtube.com/watch?v=RdSrkkrj3l4&t=6s
-
-Original website doesn't have an image in the browser tab
-
-Original website des not have dynamic filtering
-
-Contact and about on original page are basically the same thing. redundant
-
-Why should a user want to order guitars alphabetically or Z-A?
-
+* Sentdex's video series on working with Beautiful Soup: https://www.youtube.com/watch?v=aIPqt-OdmS0
 
 
