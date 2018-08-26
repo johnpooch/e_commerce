@@ -15,7 +15,7 @@ select {
   border-radius: 3px;
   padding: 10px 40px 10px 10px;
   background-color: transparent;
-  color: white;
+  color: black!important ;
 
   font: 400 11px system-ui;
   font-size: 100%;
@@ -300,7 +300,7 @@ select {
 .main-image-div > input {
   background: inherit;
   border: solid 1px rgb(224, 39, 39);
-  color: white;
+  color: black;
   padding: .4em;
   border-radius: 5px;
   margin-top: .4em;
