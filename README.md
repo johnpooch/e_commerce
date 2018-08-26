@@ -56,7 +56,7 @@ $ python3 manage.py test
 ## Scraping from original Some Neck website
 A total of 313 products, including prices, descriptions, images, manufacturer, etc., were scraped from the original Some Neck website using Beautiful Soup 4. This functionality is conatined within products/scrape.py and could be run in the django command shell using one function call. The code worked through every page of products on the website and was able to handle pagination. 
 
-![alt text](/static/images/screenshots/Screen Shot 2018-08-25 at 15.12.49.png?raw=true)
+![alt text](/source/images/Screen Shot 2018-08-25 at 15.12.49.png?raw=true)
 
 ## Automatic posting to Twitter and Facebook
 One of the features in this project is the ability to automatically post a product to Facebook and Twitter when uploading a product. This means that the shop owner can more easily manage the social media of the shop. 
