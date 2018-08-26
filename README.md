@@ -83,38 +83,6 @@ Facebook after upload:
 
 
 
-
-## Apps
-
-#### Home
-
-The Home App renders the index.html template, which in turn calls the base.html template to present a full webpage with navbar, content and footer.
-
-#### Accounts
-
-The Accounts App is used for full user authentication. When users first visit the website they have two options under 'My Account' - Register if they have no account or Log In if they do. Once Registered/Logged in they can view their own profile that will display their username and email address they used to register with. The two options under 'My Account will then change to Profile or Log Out. It is possible for users to Subscribe to a monthly magazine - once clicked the subscribe function is called within the views.py in the Accounts App which connects with Stripe payments and if the card details are entered correctly into the form it will take a monthly payment from the user.
-
-#### Products/Categories
-
-These Apps display the Products that have been added via Django's admin panel
-
-#### Search
-
-The Search App uses a simple Python function to search through all the products & render the results.html page which displays them
-
-#### Payments/Cart
-
-The Cart App stores the size, quantity and price of all products selected and disaplays a basket total. The Payments App then renders a form for a one-off Stripe payment.
-
-#### Contact
-
-The Contact App is used when the 'Contact Us' link is clicked. The anchor link's href attribute points to the URL 'contact'. From the top level urls.py the 'contact' function is called from the views.py in the Contacts App. This renders the contact.html page which displays the form which has been defined in forms.py within the Contact App. Once the user fills the form in, the 'contact' function is called which checks if the form is valid. If the form is valid, an automatic email is sent to the user acknowledging reciept of the enquiry and a copy of the enquiry is emailed to the website owner - the user is re-directed back to index.html and a styled Django message appears at the top acknowledging receipt.
-
-#### Blog
-
-blogposts.html displays all blog posts that have been created, either via Django's admin panel or via the form in blogpostform.html. A post consists of a title, content image and tag. The words are truncated to show only 30 words on the main screen so users must click into the blog post to read the entire thing (postdetail.html) Users must be logged in to create or edit posts.
-django-disqus must be pip-installed to manage comments on blogposts as well as Pillow, which facilitates upload of images. 
-
 ## Issues with the original website
 
 #### Original website has a lacklustre design
