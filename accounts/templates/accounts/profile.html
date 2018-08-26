@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
-
+{% load static from staticfiles %}
 {% block content %}
 
-<h3>Profile</h3>
+<div class="container news-container" style="margin-top: 0px">
 
-<p>You are logged in as:</p>
+    <div class="row">
+        <div class="col-sm-12 news-content-col">
 
-<p>{{user.username}}</p>
-<p>{{user.email}}</p>
+            <!--Title-->
+            <div class="container">
+                <div id="news-detail-content" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <p>You are logged in as {{ user.username }}</p>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-{% endblock content %}
+<script type="text/javascript" src="/static/js/navbarColor.js"></script>
+<script type="text/javascript" src="/static/js/bodyColor.js"></script>
+    
+    
+{% endblock %}

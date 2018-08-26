@@ -573,6 +573,26 @@ select {
   padding-right: 2rem;
 }
 
+.underline {
+  position: relative;
+}
+
+.underline::after {
+  background-color: rgb(224, 39, 39);
+  content: "";
+  width: 0;
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  transition: width 0.35s ease 0s;
+  position: absolute;
+}
+
+.underline:hover::after {
+  width: 100%;
+}
+
+
 #bottom-navbar {
   background-color: rgba(0, 0, 0, .75);
   padding: 0px;

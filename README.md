@@ -19,7 +19,7 @@ The products on the site were scraped directly from the original Some Neck websi
  
 This website is not used by Some Neck Guitars. The site was created purely for educational purposes. Please don't give real credentials in the checkout and accounts sections as the site is not fully secure.
 
-Live version: http://johnpooch-diplomacy.herokuapp.com/initialise
+Live version: https://e-commerce-johnpooch.herokuapp.com/
 
 ## Getting Started
 
@@ -148,6 +148,9 @@ Originally, the news section was intended to be a blog. Half way through develop
 
 #### Confirmation page is unfinished
 After making a purchase, users are redirected to a confirmation page. This page is unfinished. When the page is finished it should present the user with the product(s) that have just been purchased as well as the billing details of the purchase so that the user can review the details of the purchase.
+
+#### Contact Form doesn't work
+The contact form exists and is styled but the form doesn't get submitted anywhere.
 
 #### Dark Appearance
 The design of the 'product_by_type' pages rely on dark background textures. I feel that this makes the page less appealing to look at and makes the information harder to read. A brighter background texture would imporve these pages.
