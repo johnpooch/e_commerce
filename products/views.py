@@ -25,7 +25,6 @@ def search(request, products):
             )
     else:
         products = products.order_by('-published_date')
-        print("hello")
             
     query = request.GET.get("sortquery")
     
