@@ -13,7 +13,7 @@ This project is built using HTML5, CSS, JavaScript (jQuery), Python3, and Django
 
 The site accesses the Facebook and Twitter APIs to allow the shop owner to post to Facebook and Twitter automatically when uploading a new product. This is done using facebook-sdk 2.0.0 and twython 3.7.0.
 
-The products on the site were scraped directly from the original Some Neck website. This was done using Beautiful Soup 4. Payments are handled using Stripe. The site is mobile-responsive. This was done using Bootstrap 4.
+The products on the site were scraped directly from the original Some Neck website. This was done using Beautiful Soup 4. Payments are handled using Stripe. The site is mobile-responsive. 
 
 ### Live Version
  
@@ -23,7 +23,7 @@ Live version: https://e-commerce-johnpooch.herokuapp.com/
 
 ## Getting Started
 
-Follow these instructions to run the game locally. 
+Follow these instructions to run the site locally. 
 
 ### Installation
 
@@ -103,7 +103,7 @@ This project has a users and accounts. The functionality of the users/accounts s
 While the original website has a blog section, the blog has only one post which was posted in 2015. The shop is regularly visited by internationally renowned musicians. The shop also carry out repairs on rare guitars. If the shop posted to its blog about how to maintain rare guitars or about celebrities visiting the shop, this could result in greater traffic to the website.
 
 ###### Solution
-This project has a re-designed blog/news section which included more posts and is more appealing to read.
+This project has a re-designed blog/news section which includes more posts and is more appealing to read.
 
 #### Original website does not have a search feature
 The original Some Neck Guitars website does not have a search feature. The website has around 400 products on it. As such it can be difficult to determine whether the shop has the specific product you're be looking for. The website has a 'sort by' feature which orders the products, and a 'filter by brand' feature which displays only products of a given manufacturer. A search bar is a more intuitive way of filtering products.
@@ -169,7 +169,7 @@ At present, the shop owner can only post new products to Facebook and Twitter. T
 #### Dynamic Search
 A dynamic search feature which presents search results in real time would be a good feature to add. This would probably rely on AJAX. 
 
-#### Messaging system shop
+#### Messaging system
 A feature whereby users could contact the shop in real time would be useful. This would also use AJAX. 
 
 #### Accounts features
