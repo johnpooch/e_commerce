@@ -18,10 +18,8 @@ from django.urls import include, path
 from home import urls as home_urls
 from products import urls as products_urls
 from blog import urls as blog_urls
-from about import urls as about_urls
 from contact import urls as contact_urls
 from upload import urls as upload_urls
-from repair import urls as repair_urls
 from accounts import urls as accounts_urls
 from cart import urls as cart_urls
 from checkout import urls as checkout_urls
@@ -36,10 +34,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include(products_urls)),
     path('blog/', include(blog_urls)),
-    path('about/', include(about_urls)),
     path('contact/', include(contact_urls)),
     path('upload/', include(upload_urls)),
-    path('repair/', include(repair_urls)),
     path('accounts/', include(accounts_urls)),
     path('cart/', include(cart_urls)), 
     path('checkout/', include(checkout_urls)), 
