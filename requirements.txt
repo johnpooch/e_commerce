@@ -33,4 +33,4 @@ social-auth-app-django==2.1.0
 social-auth-core==1.7.0
 stripe==2.6.0
 twython==3.7.0
-urllib3==1.23
+urllib3==1.26.5
